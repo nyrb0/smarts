@@ -1,0 +1,25 @@
+.header {
+  font-size: 18px;
+  .topHeader {
+    background: #013047;
+    padding: 14px 0 9px 0;
+    .topInner {
+      max-width: 1361px;
+      margin: 0 auto;
+      .contact {
+        gap: 14px;
+        display: flex;
+        align-items: center;
+        &:first-child {
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+  .bottomHeader {
+    max-width: 1361px;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
