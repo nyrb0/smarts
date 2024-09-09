@@ -1,22 +1,25 @@
 @import url(./reset.css);
 
 body {
-  font-size: 20px;
+    font-size: 20px;
+    height: 2000px;
+    background-color: #9f9f9f;
 }
 
 .container {
-  max-width: 1361px;
-  margin: 0 auto;
+    max-width: 1361px;
+    margin: 0 auto;
 }
 
 .df {
-  display: flex;
+    display: flex;
 }
 .dfc {
-  display: flex;
+    display: flex;
+    justify-content: center;
 }
 .dfca {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

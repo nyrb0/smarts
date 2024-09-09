@@ -1,3 +1,40 @@
 .select {
     border-radius: 1px solid;
+    margin: 0 5px;
+    .selected {
+        width: 210px;
+        .inner {
+            .categoty {
+                border-radius: 12px;
+                padding: 15px 18px;
+                border: 2px solid #fff;
+                width: 100%;
+                font-weight: 400;
+                font-size: 24px;
+                font-family: var(--poppinsFont);
+                display: flex;
+                justify-content: space-between;
+                background: rgba(217, 217, 217, 0.1);
+            }
+        }
+        position: relative;
+        .options {
+            position: absolute;
+            top: 65px;
+            margin-top: 5px;
+            width: 100%;
+            padding: 15px 18px;
+            border: 2px solid #fff;
+            border-radius: 12px;
+            background: rgba(217, 217, 217, 0.1);
+
+            .values {
+                padding: 10px 0;
+                text-align: center;
+                font-size: 16px;
+                font-family: var(--poppinsFont);
+                cursor: pointer;
+            }
+        }
+    }
 }
