@@ -1,0 +1,21 @@
+.filters {
+    width: 413px;
+    height: 1474px;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.04);
+    // 0 10px 50px 0 rgba(0, 0, 0, 0.07);
+    background: #fff;
+    border-radius: 12px;
+    padding: 28px 10px 0 10px;
+    .wrapper {
+        padding-left: 70px;
+        .name {
+            .fil {
+                font-family: var(--poppinsFont);
+                color: #2a2a2a;
+                font-weight: 600;
+                font-size: 24px;
+                margin-left: 32px;
+            }
+        }
+    }
+}

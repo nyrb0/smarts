@@ -13,6 +13,8 @@
         }
     }
     .lineSort {
+        margin: 0 10px;
+        border-radius: 15px;
         background: rgba(1, 48, 71, 0.85);
         backdrop-filter: blur(7.5px);
         height: 120px;
@@ -25,6 +27,16 @@
                 width: 210px;
                 height: 61px;
             }
+        }
+    }
+    .content {
+        justify-content: space-between;
+        margin-top: 80px;
+        .smarts {
+            display: grid;
+            grid-template-columns: repeat(2, 2fr);
+            gap: 16px; /* Промежуток между элементами */
+            justify-items: center;
         }
     }
 }

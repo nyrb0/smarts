@@ -1,6 +1,6 @@
 {
-    "phones": {
-        "iphones": [
+    "iphone": {
+        "iphone": [
             {
                 "id": 20,
                 "name": "Iphone 16 pro max",
@@ -500,6 +500,90 @@
                 "battery": 2716,
                 "ios": 17.5,
                 "screen": "1125x2436"
+            }
+        ]
+    },
+    "papular": {
+        "phone": [
+            {
+                "id": 20,
+                "name": "Iphone 16 pro max",
+                "image": {
+                    "url": "https://nanoreview.net/common/images/phone/apple-iphone-16-pro-max-mini@2x.jpeg"
+                },
+                "level": 16,
+                "isImproved": 4,
+                "price": {
+                    "rub": 120000,
+                    "usd": 1300,
+                    "som": 110000
+                },
+                "processor": "Apple A18 Pro",
+                "camera": "4 (48 MP + 12 MP + 48 MP)",
+                "weigth": 225,
+                "battery": 4676,
+                "ios": "18",
+                "screen": "2796х1290"
+            },
+            {
+                "id": 21,
+                "name": "Iphone 16 pro",
+                "image": {
+                    "url": "https://nanoreview.net/common/images/phone/apple-iphone-16-pro-mini@2x.jpeg"
+                },
+                "isImproved": 3,
+                "level": 16,
+                "price": {
+                    "rub": 110000,
+                    "usd": 1200,
+                    "som": 150000
+                },
+                "processor": "Apple A18 Pro",
+                "camera": "4 (48 MP + 12 MP + 48 MP)",
+                "weigth": 225,
+                "battery": 3577,
+                "ios": "18",
+                "screen": "2556×1179"
+            },
+            {
+                "id": 22,
+                "name": "Iphone 16 plus",
+                "image": {
+                    "url": "https://nanoreview.net/common/images/phone/apple-iphone-16-pro-mini@2x.jpeg"
+                },
+                "isImproved": 3,
+                "level": 16,
+                "price": {
+                    "rub": 110000,
+                    "usd": 1200,
+                    "som": 105000
+                },
+                "processor": "Apple A18 Bionic",
+                "camera": "4 (48 MP + 12 MP + 48 MP)",
+                "weigth": 203,
+                "battery": 3577,
+                "ios": "18",
+                "screen": "2556×1179"
+            },
+            {
+                "id": 23,
+                "name": "Iphone 16",
+                "image": {
+                    "url": "https://nanoreview.net/common/images/phone/apple-iphone-16-pro-mini@2x.jpeg"
+                },
+                "isImproved": 1,
+                "level": 16,
+                "price": {
+                    "rub": 100000,
+                    "usd": 1150,
+                    "som": 90000
+                },
+                "processor": "Apple A18 Pro",
+                "camera": "4 (48 MP + 12 MP + 48 MP)",
+                "weigth": 225,
+                "battery": 3577,
+                "ios": "18",
+                "screen": "1217x2638"
             }
         ]
     }

@@ -1,5 +1,5 @@
 export interface IphoneArr {
-    iphones: Iphone[];
+    iphone: Iphone[];
 }
 
 export interface Iphone {

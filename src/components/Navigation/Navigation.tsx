@@ -2,6 +2,7 @@ import navStyle from '@/styles/componentsModules/Navigation.module.scss';
 import Button from '@/UI/Button/Button';
 import Logo from '@/icons/mobilelo 2.png';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const Navigation = () => {
     const navList: string[] = [
@@ -10,6 +11,7 @@ const Navigation = () => {
         'Customer Support',
         'Explore More',
     ];
+    const navLink: string[] = ['/', '/about', '/custumer', '/more'];
     return (
         <nav className={navStyle.nav}>
             <div className={navStyle.icon}>
@@ -17,8 +19,10 @@ const Navigation = () => {
             </div>
             <ul>
                 <span>
-                    {navList.map(l => (
-                        <li key={l}>{l}</li>
+                    {navList.map((l, i) => (
+                        <Link href={navLink[i]} key={l}>
+                            {l}
+                        </Link>
                     ))}
                 </span>
             </ul>

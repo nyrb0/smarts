@@ -1,8 +1,52 @@
-.block {
-    background-color: #fff;
-    width: 442px;
-    height: 724px;
-    border: 1px solid #e8e8e8;
-    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.04);
-    border-radius: 20px;
+.blocks {
+    .block {
+        background-color: #fff;
+        padding: 28px 33px;
+        width: 380px;
+        height: 650px;
+        border: 1px solid #e8e8e8;
+        box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.04);
+        border-radius: 20px;
+        .image {
+            .img {
+            }
+        }
+        .info {
+            margin-top: 45px;
+            .model {
+                font-family: var(--poppinsFont);
+                color: red;
+                font-weight: 400;
+                font-size: 28px;
+                color: #2a2a2a;
+            }
+            .price {
+                margin-top: 23px;
+                font-family: var(--poppinsFont);
+                font-weight: 600;
+                font-size: 32px;
+                color: #2a2a2a;
+            }
+            & ul {
+                margin-top: 23px;
+                list-style-type: disc; /* Использует стандартные точки */
+                padding-left: 20px;
+                line-height: 30px;
+                li {
+                    font-family: var(--poppinsFont);
+                    font-weight: 400;
+                    font-size: 20px;
+                    color: #7d7d7d;
+                }
+            }
+        }
+        .buy {
+            margin-top: 40px;
+            justify-content: space-between;
+            .buyBtn {
+                width: 205px;
+                height: 60px;
+            }
+        }
+    }
 }
