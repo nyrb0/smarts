@@ -11,7 +11,12 @@ const Navigation = () => {
         'Customer Support',
         'Explore More',
     ];
-    const navLink: string[] = ['/', '/about', '/custumer', '/more'];
+    const navLink: string[] = [
+        '/page',
+        '/page/about',
+        '/page/custumer',
+        'page//more',
+    ];
     return (
         <nav className={navStyle.nav}>
             <div className={navStyle.icon}>

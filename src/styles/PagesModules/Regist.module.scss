@@ -1,0 +1,23 @@
+.reg {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+    .container {
+        width: 500px;
+        height: 679px;
+        align-items: center;
+        .left {
+            margin-right: 50px;
+        }
+        .right {
+            .input {
+                margin: 24px 0;
+            }
+        }
+    }
+
+    form {
+    }
+}

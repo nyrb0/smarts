@@ -1,12 +1,12 @@
 import styles from '@/styles/componentsModules/Block.module.scss';
-import { Iphone, IphoneArr } from '@/types/Phones/TypePhone';
+import { Phone } from '@/types/Phones/TypePhone';
 import Button from '@/UI/Button/Button';
 import Image from 'next/image';
 import { FC } from 'react';
 import call from '@/icons/call.png';
 
 interface BlockI {
-    data: Iphone | null;
+    data: Phone | null;
 }
 
 const Block: FC<BlockI> = ({ data: teh }) => {
@@ -45,7 +45,6 @@ const Block: FC<BlockI> = ({ data: teh }) => {
                                 Buy now
                             </Button>
                         </div>
-
                         <Image src={call} alt='telephone' />
                     </div>
                 </div>

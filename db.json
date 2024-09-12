@@ -1,6 +1,6 @@
 {
     "iphone": {
-        "iphone": [
+        "phone": [
             {
                 "id": 20,
                 "name": "Iphone 16 pro max",
@@ -503,10 +503,10 @@
             }
         ]
     },
-    "papular": {
+    "popular": {
         "phone": [
             {
-                "id": 20,
+                "id": 100,
                 "name": "Iphone 16 pro max",
                 "image": {
                     "url": "https://nanoreview.net/common/images/phone/apple-iphone-16-pro-max-mini@2x.jpeg"
@@ -526,47 +526,7 @@
                 "screen": "2796х1290"
             },
             {
-                "id": 21,
-                "name": "Iphone 16 pro",
-                "image": {
-                    "url": "https://nanoreview.net/common/images/phone/apple-iphone-16-pro-mini@2x.jpeg"
-                },
-                "isImproved": 3,
-                "level": 16,
-                "price": {
-                    "rub": 110000,
-                    "usd": 1200,
-                    "som": 150000
-                },
-                "processor": "Apple A18 Pro",
-                "camera": "4 (48 MP + 12 MP + 48 MP)",
-                "weigth": 225,
-                "battery": 3577,
-                "ios": "18",
-                "screen": "2556×1179"
-            },
-            {
-                "id": 22,
-                "name": "Iphone 16 plus",
-                "image": {
-                    "url": "https://nanoreview.net/common/images/phone/apple-iphone-16-pro-mini@2x.jpeg"
-                },
-                "isImproved": 3,
-                "level": 16,
-                "price": {
-                    "rub": 110000,
-                    "usd": 1200,
-                    "som": 105000
-                },
-                "processor": "Apple A18 Bionic",
-                "camera": "4 (48 MP + 12 MP + 48 MP)",
-                "weigth": 203,
-                "battery": 3577,
-                "ios": "18",
-                "screen": "2556×1179"
-            },
-            {
-                "id": 23,
+                "id": 101,
                 "name": "Iphone 16",
                 "image": {
                     "url": "https://nanoreview.net/common/images/phone/apple-iphone-16-pro-mini@2x.jpeg"
@@ -584,6 +544,69 @@
                 "battery": 3577,
                 "ios": "18",
                 "screen": "1217x2638"
+            },
+            {
+                "id": 102,
+                "name": "Samsung Galaxy S24 Ultra",
+                "image": {
+                    "url": "https://nanoreview.net/common/images/phone/samsung-galaxy-s24-ultra-mini@2x.jpeg"
+                },
+                "isImproved": 3,
+                "level": 22,
+                "price": {
+                    "rub": 120000,
+                    "usd": 13000,
+                    "som": 120000
+                },
+                "processor": "Qualcomm Snapdragon 8 Gen 3 (for Galaxy)",
+                "camera": "4 (200 MP + 50 MP + 12 MP + 12 MP)",
+                "weigth": 232,
+                "battery": 5000,
+                "ios": null,
+                "android": "Android 14",
+                "screen": "1440x3088"
+            },
+            {
+                "id": 103,
+                "name": "Xiaomi Poco C40",
+                "image": {
+                    "url": "https://nanoreview.net/common/images/phone/xiaomi-poco-c40-mini@2x.jpeg"
+                },
+                "isImproved": 1,
+                "level": 2,
+                "price": {
+                    "rub": 120000,
+                    "usd": 13000,
+                    "som": 120000
+                },
+                "processor": "JLQ JR510",
+                "camera": "2 (13 MP + 2 MP)",
+                "weigth": 232,
+                "battery": 6000,
+                "ios": null,
+                "android": "Android 11",
+                "screen": "1440x3088"
+            },
+            {
+                "id": 104,
+                "name": "MediaTek Dimensity 1080",
+                "image": {
+                    "url": "https://nanoreview.net/common/images/phone/samsung-galaxy-a34-5g-mini@2x.jpeg"
+                },
+                "isImproved": 1,
+                "level": 1,
+                "price": {
+                    "rub": 60000,
+                    "usd": 450,
+                    "som": 60000
+                },
+                "processor": "MediaTek Dimensity 1080",
+                "camera": "3 (48 MP + 8 MP + 5 MP)",
+                "weigth": 199,
+                "battery": 6000,
+                "ios": null,
+                "android": "Android 14",
+                "screen": "1080x2340"
             }
         ]
     }

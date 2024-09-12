@@ -1,8 +1,11 @@
 export interface IphoneArr {
-    iphone: Iphone[];
+    iphone: Phone[];
+}
+export interface PopularArr {
+    phone: Phone[];
 }
 
-export interface Iphone {
+export interface Phone {
     id: number;
     name: string;
     image: Image;
@@ -13,8 +16,9 @@ export interface Iphone {
     camera: string;
     weigth: number;
     battery: number;
-    ios: any;
+    ios?: any;
     screen: string;
+    android: string;
 }
 
 export interface Image {

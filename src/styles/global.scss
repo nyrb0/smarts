@@ -2,7 +2,7 @@
 
 body {
     font-size: 20px;
-    height: 2000px;
+
     background-color: #dad7d7;
 }
 
@@ -22,4 +22,9 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+input {
+    border: none;
+    outline: none;
 }

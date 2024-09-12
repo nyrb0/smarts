@@ -2,6 +2,7 @@ import Headers from '@/components/Headers/Headers';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import '../styles/global.scss';
+import { useRouter } from 'next/router';
 
 // const geistSans = localFont({
 //   src: "./fonts/GeistVF.woff",
@@ -34,10 +35,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang='en'>
-            <body className={`${poppins.variable}`}>
-                <Headers />
-                {children}
-            </body>
+            <body className={`${poppins.variable}`}>{children}</body>
         </html>
     );
 }
