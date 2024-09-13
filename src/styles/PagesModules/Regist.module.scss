@@ -14,10 +14,54 @@
         .right {
             .input {
                 margin: 24px 0;
+                position: relative;
+                .err {
+                    font-family: var(--poppinsFont), sans-serif;
+                    font-weight: 600;
+                    color: red;
+                    font-size: 10px;
+                    position: absolute;
+                    top: 37px;
+                    left: 10px;
+                    opacity: 0.8;
+                }
             }
         }
-    }
-
-    form {
+        form {
+            font-family: var(--poppinsFont), sans-serif;
+            .have {
+                font-weight: 700;
+                font-size: 16px;
+                color: #0d6dfd;
+                cursor: pointer;
+            }
+            .btn {
+                margin-top: 19px;
+                border-radius: 26px;
+                width: 300px;
+                height: 64px;
+                background: #8314c7;
+                font-weight: 700;
+                font-size: 20px;
+                color: #fff;
+            }
+        }
+        .withSocial {
+            font-family: var(--poppinsFont), sans-serif;
+            text-align: center;
+            font-weight: 700;
+            font-size: 18px;
+            color: #282727;
+            margin: 19px 0;
+        }
+        .socials {
+            display: flex;
+            justify-content: center;
+            .s {
+                margin-right: 25px;
+                width: 50px;
+                height: 100%;
+            }
+        }
     }
 }
