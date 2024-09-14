@@ -4,11 +4,12 @@ import Image from 'next/image';
 import phone from '@/icons/bigPhone.png';
 import CusSelect from '@/UI/Select/CusSelect';
 import Button from '@/UI/Button/Button';
-import { IphoneArr, Phone, PopularArr } from '@/types/Phones/TypePhone';
+import { IphoneArr, Phone, PopularArr } from '@/types/Phones/TypePhone.types';
 import Block from '@/components/Block/Block';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Filter from '@/components/Filters/Filter';
+import Cookies from 'js-cookie';
 
 export default function Home() {
     const [data, setData] = useState<null | IphoneArr>(null);
@@ -43,6 +44,7 @@ export default function Home() {
         getData();
         // getPopular();
     }, [selected]);
+    console.log(Cookies.get('userData1'));
 
     const changeSel = (s: string) => {
         setSelected(s);

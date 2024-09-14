@@ -1,5 +1,5 @@
 import styles from '@/styles/componentsModules/Block.module.scss';
-import { Phone } from '@/types/Phones/TypePhone';
+import { Phone } from '@/types/Phones/TypePhone.types';
 import Button from '@/UI/Button/Button';
 import Image from 'next/image';
 import { FC } from 'react';

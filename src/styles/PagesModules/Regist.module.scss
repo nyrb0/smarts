@@ -12,6 +12,18 @@
             margin-right: 50px;
         }
         .right {
+            .welcome {
+                font-family: var(--poppinsFont), sans-serif;
+                font-weight: 700;
+                font-size: 32px;
+                color: #0d6dfd;
+                text-align: center;
+                & span {
+                    font-weight: 700;
+                    font-size: 24px;
+                    color: #f90;
+                }
+            }
             .input {
                 margin: 24px 0;
                 position: relative;

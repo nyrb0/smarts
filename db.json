@@ -609,5 +609,28 @@
                 "screen": "1080x2340"
             }
         ]
-    }
+    },
+    "user": [
+        {
+            "id": "af6e",
+            "name": "knsjbv",
+            "userName": "sdjvf",
+            "lastName": "jsvv",
+            "password": "vbsjvbds"
+        },
+        {
+            "id": "677f",
+            "name": "qwertyas",
+            "lastName": "qwertyas",
+            "password": "qwertyas",
+            "userName": "qwertyas"
+        },
+        {
+            "id": "d022",
+            "name": "Нурболот",
+            "lastName": "Кадыров",
+            "password": "qwerty_as",
+            "userName": "ny1bo"
+        }
+    ]
 }
