@@ -2,13 +2,18 @@ import { FC, ReactNode } from 'react';
 import s from './Button.module.scss';
 interface ButtonI {
     children: ReactNode;
-    style: { border: number; background: string };
+    style: { border: number; background: string; color?: string; line?: string };
 }
 
 const Button: FC<ButtonI> = ({ children, style }) => {
     return (
         <button
-            style={{ borderRadius: style.border, background: style.background }}
+            style={{
+                borderRadius: style.border,
+                background: style.background,
+                color: style.color || 'white',
+                border: style.line || '1px solid black',
+            }}
             className={s.btn}
         >
             {children}

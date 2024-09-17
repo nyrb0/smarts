@@ -2,12 +2,14 @@
 
 body {
     font-size: 20px;
-
-    background-color: #dad7d7;
+    font-family: var(--InterFont);
+    font-weight: 400;
+    background-color: #fff;
+    color: #000;
 }
 
 .container {
-    max-width: 1361px;
+    max-width: 1120px;
     margin: 0 auto;
 }
 
@@ -22,6 +24,15 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.dfa {
+    display: flex;
+    align-items: center;
+}
+.dfba {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 input {

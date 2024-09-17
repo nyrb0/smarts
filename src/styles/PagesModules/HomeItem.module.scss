@@ -1,0 +1,72 @@
+.warning {
+    font-size: 16px;
+    font-weight: 700;
+    color: red;
+    text-align: center;
+}
+
+.itemPhone {
+    .containerBlock {
+        display: flex;
+        justify-content: space-between;
+
+        .info {
+            width: 536px;
+            height: 112px;
+            color: #000000;
+            .namePhone {
+                font-weight: 700;
+                font-size: 40px;
+            }
+            .price {
+                margin-top: 24px;
+                font-weight: 500;
+                font-size: 32px;
+                letter-spacing: 0.03em;
+            }
+            .color {
+                gap: 20px 0;
+                & span {
+                    font-weight: 400;
+                    margin-right: 24px;
+                }
+            }
+            .storage {
+                margin-top: 24px;
+                display: flex;
+                justify-content: space-between;
+            }
+            .moreInformation {
+                margin-top: 24px;
+                .itemInfo {
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr);
+                    gap: 10px;
+                    font-size: 14px;
+                    .img {
+                        margin-right: 8px;
+                    }
+                    .item {
+                        padding: 0 8px;
+                        width: 168px;
+                        height: 64px;
+                        background-color: #f4f4f4;
+                        border-radius: 7px;
+                        .charec {
+                        }
+                    }
+                }
+                .desc {
+                    margin: 24px 0 32px 0;
+                }
+                .btns {
+                    justify-content: space-between;
+                    .btn {
+                        width: 260px;
+                        height: 56px;
+                    }
+                }
+            }
+        }
+    }
+}

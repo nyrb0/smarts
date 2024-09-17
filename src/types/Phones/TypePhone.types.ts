@@ -6,7 +6,7 @@ export interface PopularArr {
 }
 
 export interface Phone {
-    id: number;
+    id: string;
     name: string;
     image: Image;
     level: number;

@@ -1,0 +1,13 @@
+.cart {
+    justify-content: space-between;
+    .name {
+        font-size: 18px;
+        font-weight: 700;
+    }
+    .count {
+        & button {
+            background-color: transparent;
+            font-weight: 700;
+        }
+    }
+}

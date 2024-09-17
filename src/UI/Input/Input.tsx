@@ -5,9 +5,16 @@ interface InputI {
     value: string;
     placeholder: string;
     type?: string;
+    required?: boolean;
 }
 
-const Input: FC<InputI> = ({ onChange, value, placeholder, type = 'text' }) => {
+const Input: FC<InputI> = ({
+    onChange,
+    value,
+    placeholder,
+    type = 'text',
+    required = false,
+}) => {
     const onChangeInput = (v: ChangeEvent<HTMLInputElement>) => {
         onChange(v.target.value);
     };
@@ -18,6 +25,7 @@ const Input: FC<InputI> = ({ onChange, value, placeholder, type = 'text' }) => {
             type={type}
             value={value}
             placeholder={placeholder}
+            required={required}
         />
     );
 };

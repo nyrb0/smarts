@@ -9,11 +9,10 @@ import Block from '@/components/Block/Block';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Filter from '@/components/Filters/Filter';
-import Cookies from 'js-cookie';
 
-export default function Home() {
-    const [data, setData] = useState<null | IphoneArr>(null);
-    const [popular, setPopular] = useState<PopularArr | null>(null);
+const Home = () => {
+    const [data, setData] = useState<null | Phone[]>(null);
+    const [popular, setPopular] = useState<Phone[] | null>(null);
     const [selectModelPhone, setSelectModelPhone] = useState();
     const brand1 = ['Iphone', 'Huawei', 'Samsung', 'Redmi', 'Pixel'];
     const brand = {
@@ -24,7 +23,6 @@ export default function Home() {
         pixel: 'Pixel',
         popular: 'popular',
     };
-
     const brands = Object.keys(brand);
 
     const [selected, setSelected] = useState<string>('popular');
@@ -39,40 +37,28 @@ export default function Home() {
     //     const data = await res.data;
     //     setPopular(data);
     // }
-
     useEffect(() => {
         getData();
         // getPopular();
     }, [selected]);
-    console.log(Cookies.get('userData1'));
 
     const changeSel = (s: string) => {
         setSelected(s);
     };
-    console.log(popular);
 
     return (
         <main className={styles.home}>
             <div className='container'>
                 <div className={`${styles.globalNews} df`}>
-                    <h1 className={styles.text}>
-                        Your Destination for Cutting-Edge Mobile Devices
-                    </h1>
+                    <h1 className={styles.text}>Your Destination for Cutting-Edge Mobile Devices</h1>
                     <Image className={styles.img} src={phone} alt='iphone' />
                 </div>
             </div>
             <div className={`${styles.lineSort} dfca`}>
                 <div className={`${styles.selectsSorts} container `}>
-                    <CusSelect
-                        sel={selected}
-                        values={brands}
-                        changes={changeSel}
-                        text={'Brand'}
-                    />
+                    <CusSelect sel={selected} values={brands} changes={changeSel} text={'Brand'} />
                     <div className={styles.btn}>
-                        <Button style={{ background: '#219EBC', border: 12 }}>
-                            Search
-                        </Button>
+                        <Button style={{ background: '#219EBC', border: 12 }}>Search</Button>
                     </div>
                 </div>
             </div>
@@ -81,13 +67,10 @@ export default function Home() {
                     <Filter />
                 </span>
                 <span className={`${styles.smarts} dfc`}>
-                    {/* {data
-                        ? data.phone.map(teh => (
-                              <Block data={teh} key={teh.id} />
-                          ))
-                        : null} */}
+                    {data ? data.map(teh => <Block data={teh} key={teh.id} />) : null}
                 </span>
             </div>
         </main>
     );
-}
+};
+export default Home;

@@ -1,7 +1,7 @@
 'use client';
 import StRegis from '@/styles/PagesModules/Regist.module.scss';
 import Input from '@/UI/Input/Input';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import imgRegis from '@/icons/RegisImg.jpg';
 import twich from '@/icons/twitch.png';
@@ -11,6 +11,7 @@ import Cookies from 'js-cookie';
 import { usersType } from '@/types/User/User.types';
 import user from '../store/user/user';
 import { useRouter } from 'next/navigation';
+import { isValidUsername } from '../constant/isValid';
 
 const Regis = () => {
     const [users, setUsers] = useState<usersType[]>([]);
@@ -27,22 +28,23 @@ const Regis = () => {
     const [errName, setErrName] = useState('');
     const [errLastName, setErrLastName] = useState('');
     const [errPass, setErrPass] = useState('');
+    const [errUserName, setErrUserName] = useState('');
 
     // Регистрация
     const changeName = (v: string) => {
-        setName(v);
+        setName(v.toLocaleLowerCase());
     };
     const changeLastName = (v: string) => {
-        setLastName(v);
+        setLastName(v.toLocaleLowerCase());
     };
     const changePassWord1 = (v: string) => {
-        setPassword1(v);
+        setPassword1(v.toLocaleLowerCase());
     };
     const changePassWord2 = (v: string) => {
-        setPassword2(v);
+        setPassword2(v.toLocaleLowerCase());
     };
     const changeUserName = (v: string) => {
-        setUserName(v);
+        setUserName(v.toLocaleLowerCase());
     };
     const clearAllValueData = () => {
         setPassword1('');
@@ -74,6 +76,8 @@ const Regis = () => {
             });
             if (data.ok) {
                 clearAllValueData();
+                router.push('/page');
+                Cookies.set('userData1', userData.name);
             }
         } catch (err) {
             console.log(err);
@@ -94,10 +98,11 @@ const Regis = () => {
             const userFind = data.find(use => use.userName === userName);
             if (userFind && password1 === userFind.password) {
                 console.log('Вход выполнен');
-                Cookies.set('userData1', JSON.stringify(userFind));
+                Cookies.set('userData1', userFind.userName);
                 router.push('/page');
             } else {
                 console.log('Нету такого пользователя');
+                setErrPass('Нету такого пользователя');
             }
         } catch (err) {
             console.log(err);
@@ -112,24 +117,30 @@ const Regis = () => {
         } else {
             setErrName('');
         }
-        if (name.length >= 30 || name.length <= 6) {
+        if (name.length >= 30) {
             setName('');
-            setErrName(
-                '**Длина строки должны быть не больше 30 и не меньше 6**'
-            );
+            setErrName('**Длина строки должны быть не больше 30**');
             return;
         } else {
             setErrName('');
         }
-        if (lastName.length >= 30 || lastName.length <= 6) {
-            setErrLastName(
-                '**Длина строки должны быть не больше 30 и не меньше 6**'
-            );
+        if (lastName.length >= 30) {
+            setErrLastName('**Длина строки должны быть не больше 30**');
             setLastName('');
             return;
         } else {
             setErrLastName('');
         }
+        if (!isValidUsername(userName)) {
+            setErrUserName('Как минимум символ должен содержать один символ');
+            return;
+        } else if (!userName.length) {
+            setErrUserName('пусто');
+            return;
+        } else {
+            setErrUserName('');
+        }
+
         if (password1 !== password2) {
             setErrPass('**Пароли не совпадают!!**');
             setPassword1('');
@@ -141,6 +152,8 @@ const Regis = () => {
             setPassword1('');
             setPassword2('');
             return;
+        } else {
+            setErrPass('');
         }
         toSendServerData();
     };
@@ -150,6 +163,13 @@ const Regis = () => {
         setPassword1('');
         setPassword1(e.target.value);
     };
+    useEffect(() => {
+        const isAuthUser = Cookies.get('userData1');
+        if (isAuthUser) {
+            router.push('/page');
+            return;
+        }
+    }, []);
 
     const social = [twich, instagram, facebook];
     return (
@@ -187,7 +207,7 @@ const Regis = () => {
                                     onChange={changeUserName}
                                     value={userName}
                                 />
-                                <div className={StRegis.err}>{errName}</div>
+                                <div className={StRegis.err}>{errUserName}</div>
                             </div>
                             <div className={StRegis.input}>
                                 <Input

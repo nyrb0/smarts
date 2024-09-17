@@ -4,6 +4,8 @@ import Button from '@/UI/Button/Button';
 import Image from 'next/image';
 import { FC } from 'react';
 import call from '@/icons/call.png';
+import Link from 'next/link';
+import styled from 'styled-components';
 
 interface BlockI {
     data: Phone | null;
@@ -11,8 +13,9 @@ interface BlockI {
 
 const Block: FC<BlockI> = ({ data: teh }) => {
     // console.log(data);
+
     return (
-        <div className={styles.blocks}>
+        <Link href={`/page/${teh?.id}`} className={styles.blocks}>
             {teh && (
                 <div key={teh.id} className={styles.block}>
                     <div className={`${styles.image} dfc`}>
@@ -49,7 +52,7 @@ const Block: FC<BlockI> = ({ data: teh }) => {
                     </div>
                 </div>
             )}
-        </div>
+        </Link>
     );
 };
 

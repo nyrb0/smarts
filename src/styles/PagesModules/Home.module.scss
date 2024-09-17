@@ -35,7 +35,7 @@
         .smarts {
             display: grid;
             grid-template-columns: repeat(2, 2fr);
-            gap: 16px; /* Промежуток между элементами */
+            gap: 16px;
             justify-items: center;
         }
     }
