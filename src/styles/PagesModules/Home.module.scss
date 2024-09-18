@@ -1,21 +1,8 @@
 .home {
-    .globalNews {
-        align-items: center;
-        justify-content: space-around;
-
-        .text {
-            opacity: 0.9;
-            max-width: 562px;
-            font-weight: 600;
-            color: #2a2a2a;
-            font-size: 58px;
-            font-family: var(--poppinsFont), sans-serif;
-        }
-    }
     .lineSort {
         margin: 0 10px;
         border-radius: 15px;
-        background: rgba(1, 48, 71, 0.85);
+        background: #f6f6f6;
         backdrop-filter: blur(7.5px);
         height: 120px;
 
@@ -30,13 +17,16 @@
         }
     }
     .content {
+        width: 100%;
         justify-content: space-between;
-        margin-top: 80px;
         .smarts {
             display: grid;
-            grid-template-columns: repeat(2, 2fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 16px;
             justify-items: center;
+            @media screen and (max-width: 1169px) {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
     }
 }

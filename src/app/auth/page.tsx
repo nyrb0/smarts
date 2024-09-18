@@ -76,7 +76,7 @@ const Regis = () => {
             });
             if (data.ok) {
                 clearAllValueData();
-                router.push('/page');
+                router.push('/home');
                 Cookies.set('userData1', userData.name);
             }
         } catch (err) {
@@ -99,7 +99,7 @@ const Regis = () => {
             if (userFind && password1 === userFind.password) {
                 console.log('Вход выполнен');
                 Cookies.set('userData1', userFind.userName);
-                router.push('/page');
+                router.push('/home');
             } else {
                 console.log('Нету такого пользователя');
                 setErrPass('Нету такого пользователя');
@@ -186,11 +186,7 @@ const Regis = () => {
                         </div>
                         <form onSubmit={sendDataServer}>
                             <div className={StRegis.input}>
-                                <Input
-                                    placeholder={'Имя'}
-                                    onChange={changeName}
-                                    value={name}
-                                />
+                                <Input placeholder={'Имя'} onChange={changeName} value={name} />
                                 <div className={StRegis.err}>{errName}</div>
                             </div>
                             <div className={StRegis.input}>
@@ -210,11 +206,7 @@ const Regis = () => {
                                 <div className={StRegis.err}>{errUserName}</div>
                             </div>
                             <div className={StRegis.input}>
-                                <Input
-                                    placeholder={'Пароль'}
-                                    onChange={changePassWord1}
-                                    value={password1}
-                                />
+                                <Input placeholder={'Пароль'} onChange={changePassWord1} value={password1} />
                                 <div className={StRegis.err}>{errPass}</div>
                             </div>
                             <div className={StRegis.input}>
@@ -225,27 +217,17 @@ const Regis = () => {
                                 />
                                 <div className={StRegis.err}>{errPass}</div>
                             </div>
-                            <p
-                                className={StRegis.have}
-                                onClick={() => signInAndRegis(true)}
-                            >
+                            <p className={StRegis.have} onClick={() => signInAndRegis(true)}>
                                 Have account?
                             </p>
                             <button type='submit' className={StRegis.btn}>
                                 Registration
                             </button>
                         </form>
-                        <div className={StRegis.withSocial}>
-                            Registration With
-                        </div>
+                        <div className={StRegis.withSocial}>Registration With</div>
                         <div className={StRegis.socials}>
                             {social.map((s, i) => (
-                                <Image
-                                    key={i}
-                                    src={s}
-                                    alt='соц. сети'
-                                    className={StRegis.s}
-                                />
+                                <Image key={i} src={s} alt='соц. сети' className={StRegis.s} />
                             ))}
                         </div>
                     </div>
@@ -265,17 +247,10 @@ const Regis = () => {
                                 <div className={StRegis.err}>{errPass}</div>
                             </div>
                             <div className={StRegis.input}>
-                                <Input
-                                    placeholder={'Пароль'}
-                                    onChange={changePassWord1}
-                                    value={password1}
-                                />
+                                <Input placeholder={'Пароль'} onChange={changePassWord1} value={password1} />
                                 <div className={StRegis.err}>{errPass}</div>
                             </div>
-                            <p
-                                className={StRegis.have}
-                                onClick={() => signInAndRegis(false)}
-                            >
+                            <p className={StRegis.have} onClick={() => signInAndRegis(false)}>
                                 Not have account?
                             </p>
                             <button type='submit' className={StRegis.btn}>
@@ -285,12 +260,7 @@ const Regis = () => {
                         <div className={StRegis.withSocial}>Sign in with</div>
                         <div className={StRegis.socials}>
                             {social.map((s, i) => (
-                                <Image
-                                    key={i}
-                                    src={s}
-                                    alt='соц. сети'
-                                    className={StRegis.s}
-                                />
+                                <Image key={i} src={s} alt='соц. сети' className={StRegis.s} />
                             ))}
                         </div>
                     </div>

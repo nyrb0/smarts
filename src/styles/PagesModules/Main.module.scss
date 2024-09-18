@@ -1,0 +1,29 @@
+.main {
+    .topPhones {
+        background: linear-gradient(95deg, #211c24 0%, #211c24 100%);
+        width: 100%;
+        height: 632px;
+        justify-content: space-around;
+        .text {
+            font-weight: 100;
+            font-size: 96px;
+            line-height: 75%;
+            letter-spacing: -0.01em;
+            color: #fff;
+            & span {
+                font-weight: 700;
+            }
+            .quote {
+                font-weight: 500;
+                font-size: 18px;
+                line-height: 133%;
+                color: #909090;
+                margin-top: 24px;
+            }
+        }
+        .btn {
+            width: 191px;
+            height: 56px;
+        }
+    }
+}

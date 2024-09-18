@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 const Navigation = () => {
     const navList: string[] = ['Home', 'About Us', 'Contact Us', 'Blog'];
-    const navLink: string[] = ['/page', '/page/about', '/page/custumer', 'page//more'];
+    const navLink: string[] = ['/home', '/page/about', '/page/custumer', 'page/more'];
     return (
         <nav className={navStyle.nav}>
             <ul className='df'>

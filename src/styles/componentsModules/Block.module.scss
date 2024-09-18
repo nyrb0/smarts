@@ -1,51 +1,35 @@
 .blocks {
-    .block {
-        background-color: #fff;
-        padding: 28px 33px;
-        width: 380px;
-        height: 650px;
-        border: 1px solid #e8e8e8;
-        box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.04);
-        border-radius: 20px;
-        .image {
-            .img {
-            }
+    background: hsl(0, 0%, 96%);
+    border-radius: 9px;
+    .inner {
+        padding: 24px 10px;
+        width: 266px - 16px;
+        height: 450px;
+        .like {
+            margin-bottom: 16px;
+            justify-content: flex-end;
         }
-        .info {
-            margin-top: 45px;
-            .model {
-                font-family: var(--poppinsFont);
-                color: red;
-                font-weight: 400;
-                font-size: 28px;
-                color: #2a2a2a;
-            }
-            .price {
-                margin-top: 23px;
-                font-family: var(--poppinsFont);
-                font-weight: 600;
-                font-size: 32px;
-                color: #2a2a2a;
-            }
-            & ul {
-                margin-top: 23px;
-                list-style-type: disc; /* Использует стандартные точки */
-                padding-left: 20px;
-                line-height: 30px;
-                li {
-                    font-family: var(--poppinsFont);
-                    font-weight: 400;
-                    font-size: 20px;
-                    color: #7d7d7d;
-                }
-            }
+        .name {
+            padding-top: 16px;
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 150%;
+            text-align: center;
+            color: var(--main-black);
         }
-        .buy {
-            margin-top: 40px;
-            justify-content: space-between;
-            .buyBtn {
-                width: 205px;
-                height: 60px;
+        .price {
+            padding-top: 16px;
+            font-weight: 600;
+            font-size: 24px;
+            letter-spacing: 0.03em;
+            text-align: center;
+            color: var(--main-black);
+        }
+        .btn {
+            margin: 15px 0 0 0;
+            & span {
+                width: 188px;
+                height: 48px;
             }
         }
     }

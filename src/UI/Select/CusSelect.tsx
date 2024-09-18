@@ -23,14 +23,9 @@ const CusSelect: FC<CusSelI> = ({ values, text, changes, sel }) => {
         <div className={st.select}>
             <div className={`${st.selected}`}>
                 <div className={st.inner}>
-                    <div
-                        className={st.categoty}
-                        onClick={() => setOpen(prev => !prev)}
-                    >
+                    <div className={st.categoty} onClick={() => setOpen(prev => !prev)}>
                         <div>{sel ? sel : text}</div>
-                        <div>
-                            {open ? <IoIosArrowUp /> : <IoIosArrowDown />}
-                        </div>
+                        <div>{open ? <IoIosArrowUp /> : <IoIosArrowDown />}</div>
                     </div>
                 </div>
                 {open && (
@@ -38,11 +33,7 @@ const CusSelect: FC<CusSelI> = ({ values, text, changes, sel }) => {
                         {open &&
                             values.length &&
                             values.map(v => (
-                                <div
-                                    key={v}
-                                    className={st.values}
-                                    onClick={() => clickOptions(v)}
-                                >
+                                <div key={v} className={st.values} onClick={() => clickOptions(v)}>
                                     {v}
                                 </div>
                             ))}

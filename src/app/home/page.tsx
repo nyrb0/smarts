@@ -9,6 +9,7 @@ import Block from '@/components/Block/Block';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Filter from '@/components/Filters/Filter';
+import Select from '@/UI/Select/Select Filter/Select';
 
 const Home = () => {
     const [data, setData] = useState<null | Phone[]>(null);
@@ -48,23 +49,11 @@ const Home = () => {
 
     return (
         <main className={styles.home}>
-            <div className='container'>
-                <div className={`${styles.globalNews} df`}>
-                    <h1 className={styles.text}>Your Destination for Cutting-Edge Mobile Devices</h1>
-                    <Image className={styles.img} src={phone} alt='iphone' />
-                </div>
-            </div>
-            <div className={`${styles.lineSort} dfca`}>
-                <div className={`${styles.selectsSorts} container `}>
-                    <CusSelect sel={selected} values={brands} changes={changeSel} text={'Brand'} />
-                    <div className={styles.btn}>
-                        <Button style={{ background: '#219EBC', border: 12 }}>Search</Button>
-                    </div>
-                </div>
-            </div>
+            <div className={styles.topPhones}></div>
+
             <div className={`${styles.content} df container`}>
                 <span>
-                    <Filter />
+                    <Select onChange={changeSel} selected={selected} name={'Brand'} values={brands}></Select>
                 </span>
                 <span className={`${styles.smarts} dfc`}>
                     {data ? data.map(teh => <Block data={teh} key={teh.id} />) : null}

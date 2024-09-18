@@ -92,7 +92,7 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
 
     return (
         <>
-            <Modal isOpen={warningTime}>
+            <Modal isOpen={warningTime} visibleX={false}>
                 <div className={style.warning}>{warning}</div>
             </Modal>
             <div className={style.itemPhone}>

@@ -65,9 +65,11 @@ const Headers: FC<HeaderI> = observer(() => {
             </div>
             <hr />
             <Modal isOpen={cartModal} close={closeModalCart}>
-                {cartProducts.productStorage.map(p => (
-                    <Cart data={p} key={p.id} />
-                ))}
+                {cartProducts.productStorage.length ? (
+                    cartProducts.productStorage.map(p => <Cart data={p} key={p.id} />)
+                ) : (
+                    <div className={styles.notLength}>Вы еще не выбрали</div>
+                )}
             </Modal>
         </header>
     );

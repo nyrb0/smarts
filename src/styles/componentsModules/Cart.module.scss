@@ -5,9 +5,23 @@
         font-weight: 700;
     }
     .count {
+        font-size: 18px;
         & button {
+            font-size: 24px;
             background-color: transparent;
-            font-weight: 700;
+            &:last-child {
+                font-size: 20px;
+            }
         }
+    }
+    .price {
+        font-size: 20px;
+        font-weight: 500;
+    }
+    .x {
+        opacity: 0.6;
+        font-size: 16px;
+        margin-left: 20px;
+        cursor: pointer;
     }
 }

@@ -1,0 +1,18 @@
+.select {
+    width: 256px;
+    height: 48px;
+    position: relative;
+    .out {
+        .name {
+            font-weight: 500;
+            font-size: 18px;
+            color: var(--main-black);
+        }
+        justify-content: space-between;
+    }
+    .inner {
+        .single {
+            padding: 5px 0;
+        }
+    }
+}

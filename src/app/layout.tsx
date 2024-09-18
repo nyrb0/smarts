@@ -22,6 +22,7 @@ const poppins = localFont({
         { path: './fonts/Inter_18pt-Regular.woff2', weight: '400' },
         { path: './fonts/Inter_18pt-Bold.woff2', weight: '700' },
         { path: './fonts/Poppins-Medium.woff2', weight: '500' },
+        { path: './fonts/Inter_24pt-Thin.woff2', weight: '100' },
     ],
     variable: '--InterFont',
 });
@@ -38,7 +39,10 @@ export default function RootLayout({
 }>) {
     return (
         <html lang='en'>
-            <body className={`${poppins.variable}`}>{children}</body>
+            <body className={`${poppins.variable}`}>
+                <Headers />
+                {children}
+            </body>
         </html>
     );
 }

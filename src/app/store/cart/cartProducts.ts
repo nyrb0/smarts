@@ -17,5 +17,9 @@ class CartProducts {
             this.productStorage.push(p);
         }
     }
+    deleteProduct(p: Phone) {
+        const theDelete = this.productStorage.filter(pro => pro.id !== p.id);
+        this.productStorage = theDelete;
+    }
 }
 export default new CartProducts();

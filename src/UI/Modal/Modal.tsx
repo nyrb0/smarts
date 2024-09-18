@@ -6,9 +6,10 @@ interface ModalI {
     isOpen: boolean;
     close?: () => void;
     children: ReactNode;
+    visibleX?: boolean;
 }
 
-const Modal: FC<ModalI> = observer(({ isOpen, close, children }) => {
+const Modal: FC<ModalI> = observer(({ isOpen, close, children, visibleX = true }) => {
     return (
         <>
             {isOpen && (
@@ -20,9 +21,11 @@ const Modal: FC<ModalI> = observer(({ isOpen, close, children }) => {
                     // }}
                 >
                     <div className={styleModal.content}>
-                        <div className={styleModal.close} onClick={close}>
-                            X
-                        </div>
+                        {visibleX && (
+                            <div className={styleModal.close} onClick={close}>
+                                X
+                            </div>
+                        )}
                         {children}
                     </div>
                 </div>

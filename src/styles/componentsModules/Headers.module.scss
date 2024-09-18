@@ -1,5 +1,5 @@
 .header {
-    padding: 16px 0;
+    margin-top: 16px;
     height: 88px;
     .inner {
         width: 100%;
@@ -48,5 +48,10 @@
     .cart {
         color: black;
         font-weight: 400;
+    }
+    .notLength {
+        font-size: 20px;
+        font-weight: 700;
+        text-align: center;
     }
 }
