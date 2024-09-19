@@ -1,0 +1,28 @@
+.profile {
+    .head {
+        position: relative;
+        .header {
+            width: 100%;
+            height: 180px;
+        }
+        .avatar {
+            position: absolute;
+            bottom: -100px;
+            left: 72px;
+            .image {
+                position: relative;
+                .me {
+                    width: 180px;
+                    height: 180px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                }
+                .camera {
+                    position: absolute;
+                    bottom: 20px;
+                    right: 40px;
+                }
+            }
+        }
+    }
+}

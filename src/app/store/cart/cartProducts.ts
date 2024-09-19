@@ -8,11 +8,7 @@ class CartProducts {
     }
 
     addToProduct(p: Phone) {
-        if (!this.productStorage.length) {
-            this.productStorage.push(p);
-            return;
-        }
-        const isSimilar = this.productStorage.find(p => p.id === p.id);
+        const isSimilar = this.productStorage.some(p => p.id !== p.id);
         if (!isSimilar) {
             this.productStorage.push(p);
         }

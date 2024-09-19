@@ -1,0 +1,30 @@
+.review {
+    height: 1000px;
+    .text {
+        color: var(--main-black);
+        font-weight: 500;
+        font-size: 24px;
+    }
+    .allResults {
+        margin-top: 48px;
+        .block {
+            border-radius: 15px;
+            background: #fafafa;
+            width: 184px;
+            .inner {
+                padding: 32px 0;
+                .reviewNum {
+                    font-weight: 500;
+                    font-size: 56px;
+                }
+
+                .lengthReview {
+                    font-weight: 500;
+                    font-size: 15px;
+                    line-height: 107%;
+                    text-align: center;
+                }
+            }
+        }
+    }
+}

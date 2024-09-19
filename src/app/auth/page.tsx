@@ -14,6 +14,12 @@ import { useRouter } from 'next/navigation';
 import { isValidUsername } from '../constant/isValid';
 
 const Regis = () => {
+    const router = useRouter();
+    const isAuthUser = Cookies.get('userData1');
+    if (isAuthUser) {
+        router.push('/page');
+        return;
+    }
     const [users, setUsers] = useState<usersType[]>([]);
 
     // Validation
@@ -58,8 +64,6 @@ const Regis = () => {
         setHaveAcc(isHave);
     };
 
-    const router = useRouter();
-
     // Запросы на бэк
     const toSendServerData = async () => {
         const userData = {
@@ -99,7 +103,7 @@ const Regis = () => {
             if (userFind && password1 === userFind.password) {
                 console.log('Вход выполнен');
                 Cookies.set('userData1', userFind.userName);
-                router.push('/home');
+                router.push('/');
             } else {
                 console.log('Нету такого пользователя');
                 setErrPass('Нету такого пользователя');
@@ -163,13 +167,6 @@ const Regis = () => {
         setPassword1('');
         setPassword1(e.target.value);
     };
-    useEffect(() => {
-        const isAuthUser = Cookies.get('userData1');
-        if (isAuthUser) {
-            router.push('/page');
-            return;
-        }
-    }, []);
 
     const social = [twich, instagram, facebook];
     return (

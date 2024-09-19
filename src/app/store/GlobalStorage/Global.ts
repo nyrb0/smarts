@@ -1,7 +1,7 @@
 import { makeAutoObservable } from 'mobx';
 
 class Global {
-    selecred: string = '';
+    selecred: string = 'popular';
 
     constructor() {
         makeAutoObservable(this);

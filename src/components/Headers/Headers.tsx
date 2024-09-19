@@ -1,9 +1,15 @@
 'use client';
-
+// styles
 import styles from '@/styles/componentsModules/Headers.module.scss';
+
+// modules
 import Image from 'next/image';
-import Navigation from '../Navigation/Navigation';
 import { FC, useState } from 'react';
+import { useRouter } from 'next/navigation';
+
+// components
+import Modal from '@/UI/Modal/Modal';
+import Navigation from '../Navigation/Navigation';
 import Search from '@/UI/Search/Search';
 
 // State Global
@@ -15,12 +21,16 @@ import Cart from '../Cart/Cart';
 import cartIcon from '@/icons/user/cart.png';
 import likeIcon from '@/icons/user/like.png';
 import userIcon from '@/icons/user/user.png';
-import Modal from '@/UI/Modal/Modal';
+import { IoIosArrowDown } from 'react-icons/io';
+import { IoIosArrowUp } from 'react-icons/io';
 
 interface HeaderI {}
 
 const Headers: FC<HeaderI> = observer(() => {
     const [searchValue, setSearchValue] = useState<string>('');
+    const [openProfileMenu, setOpenProfileMenu] = useState(false);
+
+    const router = useRouter();
 
     const changesHandler = (value: string) => {
         setSearchValue(value);
@@ -33,9 +43,13 @@ const Headers: FC<HeaderI> = observer(() => {
         setCartModal(true);
     };
 
+    const openMenu = () => {
+        setOpenProfileMenu(prev => !prev);
+    };
+
     // const iconsHeaderArray = [cartIcon, likeIcons, useIcon];
     return (
-        <header className={`${styles.header}  `}>
+        <header className={`${styles.header}`}>
             <div className={'container'}>
                 <div className={`${styles.inner}  `}>
                     <div className={styles.logoType}>cyber</div>
@@ -55,10 +69,13 @@ const Headers: FC<HeaderI> = observer(() => {
                             </span>
                         </span>
                         <span>
-                            <Image src={likeIcon} alt='cartIcon' />
+                            <Image src={likeIcon} alt='like icon' />
                         </span>
-                        <span>
-                            <Image src={userIcon} alt='cartIcon' />
+                        <span className='dfa'>
+                            <Image src={userIcon} alt='profile' onClick={() => router.push('/profile')} />
+                            <div className={styles.arrow} onClick={openMenu}>
+                                {openProfileMenu ? <IoIosArrowUp /> : <IoIosArrowDown />}
+                            </div>
                         </span>
                     </div>
                 </div>

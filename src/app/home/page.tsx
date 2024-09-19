@@ -10,8 +10,10 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Filter from '@/components/Filters/Filter';
 import Select from '@/UI/Select/Select Filter/Select';
+import { observer } from 'mobx-react-lite';
+import Global from '../store/GlobalStorage/Global';
 
-const Home = () => {
+const Home = observer(() => {
     const [data, setData] = useState<null | Phone[]>(null);
     const [popular, setPopular] = useState<Phone[] | null>(null);
     const [selectModelPhone, setSelectModelPhone] = useState();
@@ -26,10 +28,10 @@ const Home = () => {
     };
     const brands = Object.keys(brand);
 
-    const [selected, setSelected] = useState<string>('popular');
+    const selected = Global;
 
     async function getData() {
-        const res = await axios(`http://localhost:3000/${selected}`);
+        const res = await axios(`http://localhost:3000/${selected.selecred}`);
         const data = await res.data;
         setData(data);
     }
@@ -41,10 +43,10 @@ const Home = () => {
     useEffect(() => {
         getData();
         // getPopular();
-    }, [selected]);
+    }, [selected.selecred]);
 
     const changeSel = (s: string) => {
-        setSelected(s);
+        selected.setSelected(s);
     };
 
     return (
@@ -53,13 +55,20 @@ const Home = () => {
 
             <div className={`${styles.content} df container`}>
                 <span>
-                    <Select onChange={changeSel} selected={selected} name={'Brand'} values={brands}></Select>
+                    <Select
+                        onChange={changeSel}
+                        selected={selected.selecred}
+                        name={'Brand'}
+                        values={brands}
+                    ></Select>
                 </span>
                 <span className={`${styles.smarts} dfc`}>
                     {data ? data.map(teh => <Block data={teh} key={teh.id} />) : null}
                 </span>
             </div>
+
+            <div className={styles.review}></div>
         </main>
     );
-};
+});
 export default Home;

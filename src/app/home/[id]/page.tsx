@@ -16,6 +16,9 @@ import cartProducts from '@/app/store/cart/cartProducts';
 import { observer } from 'mobx-react-lite';
 import Modal from '@/UI/Modal/Modal';
 
+import Cookies from 'js-cookie';
+import Review from '@/components/Review/Review';
+
 interface PageGlobalDinamic {
     params: {
         id: string;
@@ -84,6 +87,8 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
     const activeStorageSet = (index: number) => {
         setActiveStorage(index);
     };
+
+    console.log(Cookies.get('userData1'));
 
     useEffect(() => {
         getDataDinamic();
@@ -200,10 +205,10 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
                                 </div>
                             </div>
                             <div className={style.desc}>
-                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolores architecto
-                                vel accusamus cumque. Tempora esse vitae odit sed sapiente? Aspernatur
-                                provident magni asperiores officia magnam. Labore, quae, aperiam iusto
-                                consectetur repellat totam rerum similique nemo.
+                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolores architecto vel
+                                accusamus cumque. Tempora esse vitae odit sed sapiente? Aspernatur provident magni
+                                asperiores officia magnam. Labore, quae, aperiam iusto consectetur repellat totam rerum
+                                similique nemo.
                             </div>
                             <div className={`${style.btns} df`}>
                                 <div className={style.btn}>
@@ -236,6 +241,9 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
                         </div>
                     </div>
                 </div>
+            </div>
+            <div className={style.review}>
+                <Review />
             </div>
         </>
     );
