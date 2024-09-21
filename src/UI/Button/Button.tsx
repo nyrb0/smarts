@@ -3,11 +3,14 @@ import s from './Button.module.scss';
 interface ButtonI {
     children: ReactNode;
     style: { border: number; background: string; color?: string; line?: string };
+    onClick?: () => void;
+    type?: 'button' | 'submit' | 'reset';
 }
 
-const Button: FC<ButtonI> = ({ children, style }) => {
+const Button: FC<ButtonI> = ({ children, style, onClick, type = 'button' }) => {
     return (
         <button
+            onClick={onClick}
             style={{
                 borderRadius: style.border,
                 background: style.background,
@@ -15,6 +18,7 @@ const Button: FC<ButtonI> = ({ children, style }) => {
                 border: style.line || '1px solid black',
             }}
             className={s.btn}
+            type={type}
         >
             {children}
         </button>

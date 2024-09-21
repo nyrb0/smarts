@@ -3,12 +3,12 @@ import { makeAutoObservable } from 'mobx';
 import Cookies from 'js-cookie';
 
 class User {
-    userData: usersType | null = null;
+    userData: string | null = null;
     constructor() {
         const storedData = Cookies.get('userData1');
         if (storedData) {
             try {
-                this.userData = JSON.parse(storedData);
+                this.userData = storedData;
             } catch (err) {
                 console.log('Ошибка при парсинге', err);
             }

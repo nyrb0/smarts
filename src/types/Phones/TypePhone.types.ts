@@ -20,6 +20,7 @@ export interface Phone {
     screen: string;
     android: string;
     review?: ReviewCount[];
+    comments: Comments[];
 }
 
 export interface Image {
@@ -35,4 +36,9 @@ export interface Price {
 export interface ReviewCount {
     category: string;
     votes: number;
+}
+export interface Comments {
+    user: string;
+    comment: string;
+    votesStars: number;
 }

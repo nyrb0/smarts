@@ -1,23 +1,35 @@
 'use client';
+// styles
 import style from '@/styles/PagesModules/HomeItem.module.scss';
-import { Phone } from '@/types/Phones/TypePhone.types';
-import Button from '@/UI/Button/ButtonStorage/Button';
-import Btn from '@/UI/Button/Button';
+
+// types
+import { Phone, ReviewCount } from '@/types/Phones/TypePhone.types';
+
+// modules
 import Image from 'next/image';
-import { FC, useEffect, useState } from 'react';
-import styled from 'styled-components';
+import { ChangeEvent, FC, useEffect, useState } from 'react';
+import Cookies from 'js-cookie';
+
+// img
 import CPUicon from '@/icons/characteristic/Screensize.png';
 import CameraIcon from '@/icons/characteristic/smartphone-rotate-2-svgrepo-com 2 (2).png';
 import FrontCamera from '@/icons/characteristic/smartphone-rotate-2-svgrepo-com 2 (3).png';
 import BatteryIcon from '@/icons/characteristic/smartphone-rotate-2-svgrepo-com 2 (4).png';
 
+// componnents
+import Btn from '@/UI/Button/Button';
+import Button from '@/UI/Button/ButtonStorage/Button';
+import styled from 'styled-components';
+
 // Global state
 import cartProducts from '@/app/store/cart/cartProducts';
 import { observer } from 'mobx-react-lite';
-import Modal from '@/UI/Modal/Modal';
+import user from '@/app/store/user/user';
 
-import Cookies from 'js-cookie';
+// UI
+import Modal from '@/UI/Modal/Modal';
 import Review from '@/components/Review/Review';
+import { Rating } from '@mui/material';
 
 interface PageGlobalDinamic {
     params: {
@@ -28,6 +40,17 @@ type CircleColorsType = {
     color: string;
 };
 
+const CircleColors = styled.div<CircleColorsType>`
+    background: ${props => props.color};
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    margin-right: 8px;
+    &:hover {
+        outline: 1.3px solid black;
+    }
+`;
+
 const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
     const [data, setData] = useState<Phone | null>(null);
     const [chooseColors, setChooseColors] = useState<string>('');
@@ -36,33 +59,16 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
     const [warningTime, setWarningTime] = useState<boolean>(false);
     const [activeStorage, setActiveStorage] = useState<null | number>(null);
 
-    async function getDataDinamic() {
-        try {
-            const res = await fetch(`http://localhost:3000/iphone/${id}`);
-            const jsonData = await res.json();
-            setData(jsonData);
-        } catch (err) {
-            throw new Error('Error server backEnd:');
-        }
-    }
+    const [reviewCategory, setReviewCategory] = useState();
 
-    const CircleColors = styled.div<CircleColorsType>`
-        background: ${props => props.color};
-        border-radius: 50%;
-        width: 32px;
-        height: 32px;
-        margin-right: 8px;
-        &:hover {
-            outline: 1.3px solid black;
-        }
-    `;
+    const [stars, setStars] = useState(0);
+    const [nextStart, setNextStars] = useState(false);
+
+    const [commentValue, setCommentValue] = useState('');
+    const userAboutData = user.userData;
 
     const colors = ['black', 'purple', 'red', 'yellow', 'white'];
     const storages = ['128', '256', '512', '1024'];
-
-    // const chooseHandler = (s: string) => {
-    //     setChooseColors(prev => [...prev, s]);
-    // };
 
     const warningFunc = (theWarning: string, ms: number) => {
         setWarningTime(true);
@@ -88,21 +94,87 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
         setActiveStorage(index);
     };
 
-    console.log(Cookies.get('userData1'));
+    const changeValueComment = (e: ChangeEvent<HTMLInputElement>) => {
+        setCommentValue(e.target.value);
+    };
 
-    const postComment = async (data: { comment: { comment: string; votesStars: string; user: string } }) => {
-        const res = fetch('http://localhost:3000/iphone', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ comment: data }),
+    async function getDataDinamic() {
+        try {
+            const res = await fetch(`http://localhost:3000/iphone/${id}`);
+            const jsonData = await res.json();
+            setData(jsonData);
+        } catch (err) {
+            throw new Error('Error server backEnd:');
+        }
+    }
+
+    const closeStars = () => {
+        setStars(0);
+        setNextStars(false);
+    };
+
+    const postComment = async (
+        dataCom: { comment: { comment: string; votesStars: number; user: string | null } },
+        starsStatic?: ReviewCount[]
+    ) => {
+        try {
+            if (!data?.comments) throw new Error('Ошибка при получение предыдущих данных');
+            fetch(`http://localhost:3000/iphone/${id}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    comments: [...data?.comments, dataCom.comment],
+                    review: starsStatic,
+                }),
+            }).then(res => {
+                if (!res.ok) {
+                    throw new Error(`Ошибка сервера ${res.status}`);
+                } else {
+                    closeStars();
+                    setCommentValue('');
+                }
+            });
+        } catch (e) {
+            throw e;
+        }
+    };
+
+    const handleRating = (event: React.SyntheticEvent<Element, Event>, newValue: number | null) => {
+        if (newValue) {
+            setStars(newValue);
+        }
+    };
+    const nextToStart = () => {
+        if (!commentValue.length) return null;
+        setNextStars(true);
+    };
+    const toParseCategory = (s: number) => {
+        const stars = s - 1;
+        return data?.review?.map((d, i) => {
+            if (i === stars) {
+                return { category: d.category, votes: d.votes + 1 };
+            }
+            return d;
         });
+    };
+    const toServerComment = (e: any) => {
+        e.preventDefault();
+        if (userAboutData && stars === 0 && commentValue.length) {
+            warningFunc('Пожалуйста поставьте отзыв от 1 до 5', 1000);
+            return;
+        }
+        postComment(
+            { comment: { user: userAboutData || null, votesStars: stars, comment: commentValue } },
+            toParseCategory(stars)
+        );
     };
 
     useEffect(() => {
         getDataDinamic();
-    }, []);
+    }, [id]);
+
     if (!data) return;
 
     return (
@@ -252,10 +324,53 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
                     </div>
                 </div>
             </div>
+            <Modal isOpen={nextStart} visibleX close={closeStars}>
+                <div className={`${style.rating} dfc`}>
+                    <div>
+                        <div className={style.stars}>Оцените от 1 до 5:</div>
+                        <div className='dfc'>
+                            <Rating name='simple-controlled' value={stars} onChange={handleRating} />
+                        </div>
+                        <div className={style.btn}>
+                            <form onSubmit={toServerComment}>
+                                <Btn
+                                    style={{
+                                        background: 'transparent',
+                                        color: 'black',
+                                        border: 6,
+                                    }}
+                                    type='submit'
+                                >
+                                    Отправить
+                                </Btn>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </Modal>
             <div className={`${style.review} container`}>
                 <Review dataAboutRev={data.review} />
                 <div className={style.comment}>
-                    <input type='text' placeholder='Оставь комментарии' />
+                    <input
+                        type='text'
+                        placeholder='Оставь комментарии'
+                        onChange={changeValueComment}
+                        value={commentValue}
+                    />
+                    <div className={`dfc`}>
+                        <span className={style.btn}>
+                            <Btn
+                                style={{
+                                    background: 'transparent',
+                                    color: 'black',
+                                    border: 6,
+                                }}
+                                onClick={nextToStart}
+                            >
+                                Отправить
+                            </Btn>
+                        </span>
+                    </div>
                 </div>
             </div>
         </>

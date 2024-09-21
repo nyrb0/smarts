@@ -71,6 +71,15 @@
         }
     }
 }
+.rating {
+    .stars {
+        margin-bottom: 20px;
+        font-weight: 600;
+    }
+    & .btn {
+        margin-top: 10px;
+    }
+}
 
 .review {
     height: 1000px;
@@ -83,6 +92,10 @@
             padding: 24px 16px;
             font-weight: 400;
             font-size: 14px;
+        }
+        .btn {
+            margin-top: 20px;
+            width: 200px;
         }
     }
 }
