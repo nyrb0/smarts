@@ -1,17 +1,39 @@
 import styleReview from '@/styles/componentsModules/Review.module.scss';
+import ProgressBar from '../ProgressBar/ProgressBar';
+import { ReviewCount } from '@/types/Phones/TypePhone.types';
+import { FC } from 'react';
 
-const Review = () => {
+interface ReviewI {
+    dataAboutRev?: ReviewCount[];
+}
+
+const Review: FC<ReviewI> = ({ dataAboutRev }) => {
+    const totalVotes: number = dataAboutRev?.reduce((total, item) => total + item.votes, 0) || 0;
+
     return (
-        <div className={`${styleReview.review} container`}>
+        <div className={`${styleReview.review} `}>
             <div className={styleReview.text}>Reviews</div>
-            <div className={styleReview.allResults}>
+            <div className={`${styleReview.allResults} df`}>
                 <div className={`${styleReview.block}   dfca`}>
                     <div className={styleReview.inner}>
                         <div className={styleReview.reviewNum}>4.8</div>
-                        <div className={styleReview.lengthReview}>of 125 reviews</div>
+                        <div className={styleReview.lengthReview}>of {totalVotes} reviews</div>
                     </div>
                 </div>
-                <div className={styleReview.static}>fjbshb</div>
+                <div className={styleReview.static} style={{ width: '100%' }}>
+                    {dataAboutRev?.map(d => (
+                        <div className={`${styleReview.reviewItem} dfa`} key={d.category}>
+                            <span className={styleReview.cate}>{d.category}</span>
+                            <span className={styleReview.line}>
+                                <ProgressBar
+                                    progress={Number(((d.votes / totalVotes) * 100).toFixed(2)) || 0}
+                                    color='#ffb547;'
+                                />
+                            </span>
+                            <span className={styleReview.count}>{d.votes}</span>
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
     );

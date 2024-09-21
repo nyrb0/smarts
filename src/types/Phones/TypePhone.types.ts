@@ -19,6 +19,7 @@ export interface Phone {
     ios?: any;
     screen: string;
     android: string;
+    review?: ReviewCount[];
 }
 
 export interface Image {
@@ -29,4 +30,9 @@ export interface Price {
     rub: number;
     usd: number;
     som: number;
+}
+
+export interface ReviewCount {
+    category: string;
+    votes: number;
 }

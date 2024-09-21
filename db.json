@@ -18,7 +18,15 @@
             "weigth": 225,
             "battery": 4676,
             "ios": "18",
-            "screen": "2796х1290"
+            "screen": "2796х1290",
+            "review": [
+                { "category": "Отличное", "votes": 39 },
+                { "category": "Средний", "votes": 50 },
+                { "category": "Ниже среднего", "votes": 21 },
+                { "category": "Нормально", "votes": 94 },
+                { "category": "Плохо", "votes": 81 }
+            ],
+            "comment": [{ "comment": null, "votesStars": null, "user": null }]
         },
         {
             "id": "21",

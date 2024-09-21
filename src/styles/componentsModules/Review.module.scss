@@ -1,5 +1,4 @@
 .review {
-    height: 1000px;
     .text {
         color: var(--main-black);
         font-weight: 500;
@@ -23,6 +22,27 @@
                     font-size: 15px;
                     line-height: 107%;
                     text-align: center;
+                }
+            }
+            margin-right: 60px;
+        }
+        .static {
+            .reviewItem {
+                font-weight: 500;
+                color: var(--main-black);
+                font-size: 18px;
+                .cate {
+                    width: 120px;
+                }
+                .line {
+                    width: 100%;
+                }
+                margin-bottom: 24px;
+                &:last-child {
+                    margin-bottom: 0;
+                }
+                .count {
+                    width: 30px;
                 }
             }
         }

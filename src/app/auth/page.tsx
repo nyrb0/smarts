@@ -187,19 +187,11 @@ const Regis = () => {
                                 <div className={StRegis.err}>{errName}</div>
                             </div>
                             <div className={StRegis.input}>
-                                <Input
-                                    placeholder={'**Фамилия**'}
-                                    onChange={changeLastName}
-                                    value={lastName}
-                                />
+                                <Input placeholder={'**Фамилия**'} onChange={changeLastName} value={lastName} />
                                 <div className={StRegis.err}>{errLastName}</div>
                             </div>
                             <div className={StRegis.input}>
-                                <Input
-                                    placeholder={'Имя пользователя'}
-                                    onChange={changeUserName}
-                                    value={userName}
-                                />
+                                <Input placeholder={'Имя пользователя'} onChange={changeUserName} value={userName} />
                                 <div className={StRegis.err}>{errUserName}</div>
                             </div>
                             <div className={StRegis.input}>
@@ -207,11 +199,7 @@ const Regis = () => {
                                 <div className={StRegis.err}>{errPass}</div>
                             </div>
                             <div className={StRegis.input}>
-                                <Input
-                                    placeholder={'Повторите пароль'}
-                                    onChange={changePassWord2}
-                                    value={password2}
-                                />
+                                <Input placeholder={'Повторите пароль'} onChange={changePassWord2} value={password2} />
                                 <div className={StRegis.err}>{errPass}</div>
                             </div>
                             <p className={StRegis.have} onClick={() => signInAndRegis(true)}>
@@ -236,11 +224,7 @@ const Regis = () => {
                         </div>
                         <form onSubmit={getUsersData}>
                             <div className={StRegis.input}>
-                                <Input
-                                    placeholder={'Имя пользователя'}
-                                    onChange={changeUserName}
-                                    value={userName}
-                                />
+                                <Input placeholder={'Имя пользователя'} onChange={changeUserName} value={userName} />
                                 <div className={StRegis.err}>{errPass}</div>
                             </div>
                             <div className={StRegis.input}>

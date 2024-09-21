@@ -90,6 +90,16 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
 
     console.log(Cookies.get('userData1'));
 
+    const postComment = async (data: { comment: { comment: string; votesStars: string; user: string } }) => {
+        const res = fetch('http://localhost:3000/iphone', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ comment: data }),
+        });
+    };
+
     useEffect(() => {
         getDataDinamic();
     }, []);
@@ -242,8 +252,11 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
                     </div>
                 </div>
             </div>
-            <div className={style.review}>
-                <Review />
+            <div className={`${style.review} container`}>
+                <Review dataAboutRev={data.review} />
+                <div className={style.comment}>
+                    <input type='text' placeholder='Оставь комментарии' />
+                </div>
             </div>
         </>
     );
