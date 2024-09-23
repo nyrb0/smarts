@@ -22,19 +22,19 @@
       "review": [
         {
           "category": "Отличное",
-          "votes": 0
-        },
-        {
-          "category": "Средний",
-          "votes": 5
-        },
-        {
-          "category": "Ниже среднего",
           "votes": 4
         },
         {
+          "category": "Средний",
+          "votes": 0
+        },
+        {
+          "category": "Ниже среднего",
+          "votes": 0
+        },
+        {
           "category": "Нормально",
-          "votes": 3
+          "votes": 1
         },
         {
           "category": "Плохо",
@@ -43,24 +43,32 @@
       ],
       "comments": [
         {
+          "id": "1727020944668-3729",
           "user": "ny1bo",
-          "votesStars": 3,
-          "comment": "fs s sd f"
+          "votesStars": 5,
+          "comment": "jvbsfbvhsbvhsdbfv",
+          "date": {
+            "day": 22,
+            "month": 8,
+            "year": 2024,
+            "hours": 22,
+            "minutes": 2,
+            "second": 23
+          }
         },
         {
+          "id": "1727022352145-2600",
           "user": "ny1bo",
-          "votesStars": 2,
-          "comment": "vsdvfsdvd"
-        },
-        {
-          "user": "ny1bo",
-          "votesStars": 3,
-          "comment": "sfvsdvsfd"
-        },
-        {
-          "user": "ny1bo",
-          "votesStars": 4,
-          "comment": "fvsvdfvdf"
+          "votesStars": 5,
+          "comment": " b     b b  bb b ",
+          "date": {
+            "day": 22,
+            "month": 8,
+            "year": 2024,
+            "hours": 22,
+            "minutes": 25,
+            "second": 51
+          }
         }
       ]
     },

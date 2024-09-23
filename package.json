@@ -1,37 +1,38 @@
 {
-  "name": "p",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "@emotion/react": "^11.13.3",
-    "@emotion/styled": "^11.13.0",
-    "@mui/material": "^6.1.1",
-    "axios": "^1.7.7",
-    "framer-motion": "^11.5.4",
-    "js-cookie": "^3.0.5",
-    "json-server": "^1.0.0-beta.2",
-    "mobx": "^6.13.2",
-    "mobx-react-lite": "^4.0.7",
-    "next": "14.2.8",
-    "react": "^18",
-    "react-dom": "^18",
-    "react-icons": "^5.3.0",
-    "sass": "^1.78.0",
-    "styled-components": "^6.1.13"
-  },
-  "devDependencies": {
-    "@types/js-cookie": "^3.0.6",
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "eslint": "^8",
-    "eslint-config-next": "14.2.8",
-    "typescript": "^5"
-  }
+    "name": "p",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint"
+    },
+    "dependencies": {
+        "@emotion/react": "^11.13.3",
+        "@emotion/styled": "^11.13.0",
+        "@mui/material": "^6.1.1",
+        "axios": "^1.7.7",
+        "framer-motion": "^11.5.4",
+        "js-cookie": "^3.0.5",
+        "json-server": "^1.0.0-beta.2",
+        "mobx": "^6.13.2",
+        "mobx-react-lite": "^4.0.7",
+        "next": "14.2.8",
+        "react": "^18",
+        "react-dom": "^18",
+        "react-icons": "^5.3.0",
+        "sass": "^1.78.0",
+        "styled-components": "^6.1.13",
+        "uuid": "^10.0.0"
+    },
+    "devDependencies": {
+        "@types/js-cookie": "^3.0.6",
+        "@types/node": "^20",
+        "@types/react": "^18",
+        "@types/react-dom": "^18",
+        "eslint": "^8",
+        "eslint-config-next": "14.2.8",
+        "typescript": "^5"
+    }
 }

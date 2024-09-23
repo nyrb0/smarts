@@ -1,0 +1,57 @@
+.comment {
+    background: #fafafa;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    padding: 24px 16px;
+    width: 100%;
+
+    .left {
+        margin-right: 19px;
+        .photo {
+            & img {
+                border-radius: 50%;
+                width: 56px;
+                height: 56px;
+                object-fit: cover;
+            }
+        }
+    }
+
+    .right {
+        width: 100%;
+        .head {
+            display: flex;
+            justify-content: space-between;
+            .userName {
+                font-weight: 700;
+                font-size: 17px;
+                line-height: 141%;
+                color: var(--main-black);
+            }
+            .date {
+                text-align: right;
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 114%;
+                opacity: 0.2;
+                color: var(--main-black);
+            }
+        }
+
+        .rating {
+            margin-top: 8px;
+        }
+        .theComment {
+            font-weight: 500;
+            font-size: 15px;
+            line-height: 160%;
+            color: #7e7e7e;
+        }
+        .delete {
+            display: flex;
+            justify-content: flex-end;
+        }
+    }
+    .inner {
+    }
+}

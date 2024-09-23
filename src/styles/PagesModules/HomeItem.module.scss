@@ -82,7 +82,6 @@
 }
 
 .review {
-    height: 1000px;
     .comment {
         margin-top: 72px;
         & input {
@@ -98,4 +97,18 @@
             width: 200px;
         }
     }
+}
+
+.thank {
+    & img {
+        width: 60px;
+        height: 60px;
+        object-fit: contain;
+    }
+}
+
+.commentItems {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column-reverse;
 }

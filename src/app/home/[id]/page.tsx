@@ -3,7 +3,7 @@
 import style from '@/styles/PagesModules/HomeItem.module.scss';
 
 // types
-import { Phone, ReviewCount } from '@/types/Phones/TypePhone.types';
+import { Comments, Phone, ReviewCount } from '@/types/Phones/TypePhone.types';
 
 // modules
 import Image from 'next/image';
@@ -15,11 +15,13 @@ import CPUicon from '@/icons/characteristic/Screensize.png';
 import CameraIcon from '@/icons/characteristic/smartphone-rotate-2-svgrepo-com 2 (2).png';
 import FrontCamera from '@/icons/characteristic/smartphone-rotate-2-svgrepo-com 2 (3).png';
 import BatteryIcon from '@/icons/characteristic/smartphone-rotate-2-svgrepo-com 2 (4).png';
+import Mark from '@/image/gif/mark ok.gif';
 
 // componnents
 import Btn from '@/UI/Button/Button';
 import Button from '@/UI/Button/ButtonStorage/Button';
 import styled from 'styled-components';
+import Comment from '@/components/comment/Comment';
 
 // Global state
 import cartProducts from '@/app/store/cart/cartProducts';
@@ -30,6 +32,7 @@ import user from '@/app/store/user/user';
 import Modal from '@/UI/Modal/Modal';
 import Review from '@/components/Review/Review';
 import { Rating } from '@mui/material';
+import { generateId } from '@/app/constant/generateId';
 
 interface PageGlobalDinamic {
     params: {
@@ -58,8 +61,7 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
     const [warning, setWarning] = useState('');
     const [warningTime, setWarningTime] = useState<boolean>(false);
     const [activeStorage, setActiveStorage] = useState<null | number>(null);
-
-    const [reviewCategory, setReviewCategory] = useState();
+    const [thank, setThank] = useState<boolean>(false);
 
     const [stars, setStars] = useState(0);
     const [nextStart, setNextStars] = useState(false);
@@ -69,6 +71,8 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
 
     const colors = ['black', 'purple', 'red', 'yellow', 'white'];
     const storages = ['128', '256', '512', '1024'];
+
+    const date = new Date();
 
     const warningFunc = (theWarning: string, ms: number) => {
         setWarningTime(true);
@@ -98,6 +102,13 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
         setCommentValue(e.target.value);
     };
 
+    const thankUser = (ms: number) => {
+        setThank(true);
+        setTimeout(() => {
+            setThank(false);
+        }, ms);
+    };
+
     async function getDataDinamic() {
         try {
             const res = await fetch(`http://localhost:3000/iphone/${id}`);
@@ -113,10 +124,7 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
         setNextStars(false);
     };
 
-    const postComment = async (
-        dataCom: { comment: { comment: string; votesStars: number; user: string | null } },
-        starsStatic?: ReviewCount[]
-    ) => {
+    const postComment = async (dataCom: { comment: Comments }, starsStatic?: ReviewCount[]) => {
         try {
             if (!data?.comments) throw new Error('Ошибка при получение предыдущих данных');
             fetch(`http://localhost:3000/iphone/${id}`, {
@@ -134,6 +142,8 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
                 } else {
                     closeStars();
                     setCommentValue('');
+                    getDataDinamic();
+                    thankUser(1500);
                 }
             });
         } catch (e) {
@@ -146,12 +156,14 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
             setStars(newValue);
         }
     };
+
     const nextToStart = () => {
         if (!commentValue.length) return null;
         setNextStars(true);
     };
+
     const toParseCategory = (s: number) => {
-        const stars = s - 1;
+        const stars = 5 - s;
         return data?.review?.map((d, i) => {
             if (i === stars) {
                 return { category: d.category, votes: d.votes + 1 };
@@ -166,14 +178,48 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
             return;
         }
         postComment(
-            { comment: { user: userAboutData || null, votesStars: stars, comment: commentValue } },
+            {
+                comment: {
+                    id: generateId(),
+                    user: userAboutData || null,
+                    votesStars: stars,
+                    comment: commentValue,
+                    date: {
+                        day: date.getDate(),
+                        month: date.getMonth(),
+                        year: date.getFullYear(),
+                        hours: date.getHours(),
+                        minutes: date.getMinutes(),
+                        second: date.getSeconds(),
+                    },
+                },
+            },
             toParseCategory(stars)
         );
     };
 
+    const deleteComent = async (c: string) => {
+        try {
+            const filterComment = await data?.comments.filter(f => f.id !== c);
+            const res = await fetch(`http://localhost:3000/iphone/${id}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ comments: filterComment }),
+            });
+            if (res.ok) {
+                console.log('Успешно выполнено:', res);
+                getDataDinamic();
+            }
+        } catch (e) {
+            throw e;
+        }
+    };
+
     useEffect(() => {
         getDataDinamic();
-    }, [id]);
+    }, []);
 
     if (!data) return;
 
@@ -372,6 +418,21 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
                         </span>
                     </div>
                 </div>
+            </div>
+            <Modal isOpen={thank} visibleX={false}>
+                <div className={`${style.thank} dfc`}>
+                    <div>
+                        <div className='dfc'>
+                            <Image src={Mark} alt='mark' />
+                        </div>
+                        <div className={style.thankText}>Спасибо за ваш отзыв!</div>
+                    </div>
+                </div>
+            </Modal>
+            <div className={`${style.commentItems} container`}>
+                {data.comments?.map((c, i) => (
+                    <Comment com={c} key={i} deleteCom={deleteComent} />
+                ))}
             </div>
         </>
     );

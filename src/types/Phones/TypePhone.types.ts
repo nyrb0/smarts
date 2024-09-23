@@ -38,7 +38,17 @@ export interface ReviewCount {
     votes: number;
 }
 export interface Comments {
-    user: string;
+    id: string;
+    user: string | null;
     comment: string;
     votesStars: number;
+    date: Date;
+}
+export interface Date {
+    month: number;
+    day: number;
+    year: number;
+    hours: number;
+    minutes: number;
+    second: number;
 }

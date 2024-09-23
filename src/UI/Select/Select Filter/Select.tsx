@@ -23,7 +23,7 @@ const Select: FC<CusSelI> = ({ name, children, values, onChange, selected }) => 
         onChange(v);
     };
     const arr = [1, 2, 3, 4, 5];
-    console.log(arr.splice(0, 1));
+
     return (
         <div className={st.select}>
             <div className={`${st.out} dfa`} onClick={() => setOpen(prev => !prev)}>

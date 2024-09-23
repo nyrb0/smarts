@@ -48,25 +48,19 @@ const Home = observer(() => {
     const changeSel = (s: string) => {
         selected.setSelected(s);
     };
-
     return (
         <main className={styles.home}>
             <div className={styles.topPhones}></div>
-
             <div className={`${styles.content} df container`}>
                 <span>
-                    <Select
-                        onChange={changeSel}
-                        selected={selected.selecred}
-                        name={'Brand'}
-                        values={brands}
-                    ></Select>
+                    <Select onChange={changeSel} selected={selected.selecred} name={'Brand'} values={brands}></Select>
                 </span>
                 <span className={`${styles.smarts} dfc`}>
-                    {data ? data.map(teh => <Block data={teh} key={teh.id} />) : null}
+                    {data?.map(teh => (
+                        <Block data={teh} key={teh.id} />
+                    ))}
                 </span>
             </div>
-
             <div className={styles.review}></div>
         </main>
     );

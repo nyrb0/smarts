@@ -25,10 +25,12 @@ const Block: FC<BlockI> = ({ data: teh }) => {
                             <Image src={likeProducts} alt='like procducts' />
                         </div>
                         <div className={`${styles.thePhone} dfc`}>
-                            <Image src={teh.image.url} alt='like procducts' width={150} height={260} />
+                            {teh.image?.url ? (
+                                <Image src={teh.image.url} alt='like procducts' width={150} height={260} />
+                            ) : null}
                         </div>
                         <div className={styles.name}>{teh.name}</div>
-                        <div className={styles.price}>{teh.price.rub}P</div>
+                        <div className={styles.price}>{teh?.price?.rub}P</div>
                         <div className={`${styles.btn} dfc`}>
                             <span>
                                 <Btn
