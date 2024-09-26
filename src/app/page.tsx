@@ -11,9 +11,7 @@ export default function Home() {
                 <div className={`${style.text} `}>
                     <div className={style.name}>
                         IPhone 16 <span>Pro</span>
-                        <div className={style.quote}>
-                            Created to change everything for the better. For everyone
-                        </div>
+                        <div className={style.quote}>Created to change everything for the better. For everyone</div>
                     </div>
                     <div className={style.btn}>
                         <Btn

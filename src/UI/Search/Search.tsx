@@ -6,6 +6,7 @@ interface SearchI {
     value: string;
     onChanges: (v: string) => void;
     placeholder: string;
+    type?: 'search' | 'text';
 }
 
 const StyledComponents = styled.input`
@@ -18,13 +19,13 @@ const StyledComponents = styled.input`
     }
 `;
 
-const Search: FC<SearchI> = ({ value, onChanges, placeholder }) => {
+const Search: FC<SearchI> = ({ value, onChanges, placeholder, type = 'search' }) => {
     const changes = (v: string) => {
         onChanges(v);
     };
     return (
         <StyledComponents
-            type='search'
+            type={type}
             value={value}
             onChange={(e: ChangeEvent<HTMLInputElement>) => changes(e.target.value)}
             placeholder={placeholder}

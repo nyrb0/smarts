@@ -4,7 +4,6 @@
     border-radius: 10px;
     padding: 24px 16px;
     width: 100%;
-
     .left {
         margin-right: 19px;
         .photo {
@@ -50,6 +49,9 @@
         .delete {
             display: flex;
             justify-content: flex-end;
+        }
+        .userDel {
+            display: none;
         }
     }
     .inner {

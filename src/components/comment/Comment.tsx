@@ -21,9 +21,10 @@ import { months } from '@/app/constant/month';
 interface CommentI {
     com: Comments;
     deleteCom: (c: string) => void;
+    userCommnent: string | undefined;
 }
 
-const Comment: FC<CommentI> = ({ com, deleteCom }) => {
+const Comment: FC<CommentI> = ({ com, deleteCom, userCommnent }) => {
     const deleteComment = (c: string) => {
         console.log(c);
         deleteCom(c);
@@ -49,7 +50,7 @@ const Comment: FC<CommentI> = ({ com, deleteCom }) => {
                     <Rating name='read-only' value={com.votesStars} readOnly />
                 </div>
                 <div className={commentS.theComment}>{com.comment}</div>
-                <div className={commentS.delete}>
+                <div className={`${commentS.delete} ${com.user === userCommnent ? null : commentS.userDel}`}>
                     <MdDelete style={{ opacity: 0.4 }} onClick={() => deleteComment(com.id)} />
                 </div>
             </div>

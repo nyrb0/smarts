@@ -16,10 +16,12 @@ import { isValidUsername } from '../constant/isValid';
 const Regis = () => {
     const router = useRouter();
     const isAuthUser = Cookies.get('userData1');
-    if (isAuthUser) {
-        router.push('/page');
-        return;
-    }
+    useEffect(() => {
+        if (isAuthUser) {
+            router.push('/page');
+        }
+    }, [isAuthUser]);
+
     const [users, setUsers] = useState<usersType[]>([]);
 
     // Validation
@@ -81,7 +83,7 @@ const Regis = () => {
             if (data.ok) {
                 clearAllValueData();
                 router.push('/home');
-                Cookies.set('userData1', userData.name);
+                Cookies.set('userData1', userData.userName);
             }
         } catch (err) {
             console.log(err);
@@ -103,7 +105,7 @@ const Regis = () => {
             if (userFind && password1 === userFind.password) {
                 console.log('Вход выполнен');
                 Cookies.set('userData1', userFind.userName);
-                router.push('/');
+                router.push('/home');
             } else {
                 console.log('Нету такого пользователя');
                 setErrPass('Нету такого пользователя');
@@ -225,7 +227,7 @@ const Regis = () => {
                         <form onSubmit={getUsersData}>
                             <div className={StRegis.input}>
                                 <Input placeholder={'Имя пользователя'} onChange={changeUserName} value={userName} />
-                                <div className={StRegis.err}>{errPass}</div>
+                                <div className={StRegis.err}>{errUserName}</div>
                             </div>
                             <div className={StRegis.input}>
                                 <Input placeholder={'Пароль'} onChange={changePassWord1} value={password1} />

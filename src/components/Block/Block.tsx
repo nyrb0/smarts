@@ -1,28 +1,61 @@
+'use client';
+
 import styles from '@/styles/componentsModules/Block.module.scss';
 import { Phone } from '@/types/Phones/TypePhone.types';
 import Btn from '@/UI/Button/Button';
 import Image from 'next/image';
-import { FC } from 'react';
-import call from '@/icons/call.png';
+import { FC, useEffect, useState } from 'react';
 import Link from 'next/link';
 
 // icons
 import likeProducts from '@/icons/likeProducts.png';
+import { usersType } from '@/types/User/User.types';
+import { observer } from 'mobx-react-lite';
+import user from '@/app/store/user/user';
 
 interface BlockI {
     data: Phone | null;
 }
 
 const Block: FC<BlockI> = ({ data: teh }) => {
-    // console.log(data);
+    const [data, setData] = useState<usersType[]>();
+
+    // const savedResursUser = async () => {
+    //     try {
+    //         await fetch('http://localhost:3000/user', {
+    //             method: 'PATCH',
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //             },
+    //             body: JSON.stringify([user.userAllFullData]),
+    //         });
+    //     } catch (err) {
+    //         throw console.log(err);
+    //     }
+    // };
+
+    const setServerUser = async (theData: Phone) => {
+        await user.search(theData);
+        // await savedResursUser();
+    };
+
+    const savedGet = async () => {
+        const res = await fetch('/api/user');
+        const d = await res.json();
+        setData(d);
+    };
+
+    useEffect(() => {
+        savedGet();
+    }, []);
 
     return (
-        <Link href={`/home/${teh?.id}`} className={styles.blocks}>
+        <div className={styles.blocks}>
             {teh && (
                 <div key={teh.id} className={styles.block}>
                     <div className={styles.inner}>
                         <div className={`${styles.like} df`}>
-                            <Image src={likeProducts} alt='like procducts' />
+                            <Image src={likeProducts} alt='like procducts' onClick={() => setServerUser(teh)} />
                         </div>
                         <div className={`${styles.thePhone} dfc`}>
                             {teh.image?.url ? (
@@ -46,8 +79,8 @@ const Block: FC<BlockI> = ({ data: teh }) => {
                     </div>
                 </div>
             )}
-        </Link>
+        </div>
     );
 };
 
-export default Block;
+export default observer(Block);

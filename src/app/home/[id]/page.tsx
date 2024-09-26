@@ -1,4 +1,5 @@
 'use client';
+
 // styles
 import style from '@/styles/PagesModules/HomeItem.module.scss';
 
@@ -68,6 +69,7 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
 
     const [commentValue, setCommentValue] = useState('');
     const userAboutData = user.userData;
+    const userCookie = Cookies.get('userData1');
 
     const colors = ['black', 'purple', 'red', 'yellow', 'white'];
     const storages = ['128', '256', '512', '1024'];
@@ -431,7 +433,7 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
             </Modal>
             <div className={`${style.commentItems} container`}>
                 {data.comments?.map((c, i) => (
-                    <Comment com={c} key={i} deleteCom={deleteComent} />
+                    <Comment com={c} key={i} deleteCom={deleteComent} userCommnent={userCookie} />
                 ))}
             </div>
         </>
