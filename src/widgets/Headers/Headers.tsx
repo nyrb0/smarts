@@ -8,19 +8,19 @@ import { FC, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 // components
-import Modal from '@/UI/Modal/Modal';
-import Navigation from '../Navigation/Navigation';
-import Search from '@/UI/Search/Search';
+import Modal from '@/shared/UI/Modal/Modal';
+import Navigation from './components/Navigation/Navigation';
+import Search from '@/shared/UI/Search/Search';
 
 // State Global
 import cartProducts from '@/app/store/cart/cartProducts';
 import { observer } from 'mobx-react-lite';
-import Cart from '../Cart/Cart';
+import Cart from './components/Cart/Cart';
 
 // Icons imports
-import cartIcon from '@/icons/user/cart.png';
-import likeIcon from '@/icons/user/like.png';
-import userIcon from '@/icons/user/user.png';
+import cartIcon from '@/shared/icons/user/cart.png';
+import likeIcon from '@/shared/icons/user/like.png';
+import userIcon from '@/shared/icons/user/user.png';
 import { IoIosArrowDown } from 'react-icons/io';
 import { IoIosArrowUp } from 'react-icons/io';
 
@@ -64,9 +64,7 @@ const Headers: FC<HeaderI> = observer(() => {
                     <div className={`${styles.usersOption} dfba`}>
                         <span>
                             <Image src={cartIcon} alt='cartIcon' onClick={openModalCart} />
-                            <span className={`${styles.cartCount} dfca`}>
-                                {cartProducts.productStorage.length}
-                            </span>
+                            <span className={`${styles.cartCount} dfca`}>{cartProducts.productStorage.length}</span>
                         </span>
                         <span>
                             <Image src={likeIcon} alt='like icon' />

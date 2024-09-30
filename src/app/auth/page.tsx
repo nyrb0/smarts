@@ -1,17 +1,29 @@
 'use client';
+
+// styles
 import StRegis from '@/styles/PagesModules/Regist.module.scss';
-import Input from '@/UI/Input/Input';
+
+//components
+import Input from '@/shared/UI/Input/Input';
+
+// modules
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import imgRegis from '@/icons/RegisImg.jpg';
-import twich from '@/icons/twitch.png';
-import instagram from '@/icons/instagram.png';
-import facebook from '@/icons/fb 1.png';
 import Cookies from 'js-cookie';
-import { usersType } from '@/types/User/User.types';
-import user from '../store/user/user';
 import { useRouter } from 'next/navigation';
-import { isValidUsername } from '../constant/isValid';
+import { isValidUsername } from '../../Features/isValid';
+
+// store
+import user from '../store/user/user';
+
+// types
+import { usersType } from '@/shared/types/User/User.types';
+
+// icons
+import imgRegis from '@/shared/icons/RegisImg.jpg';
+import twich from '@/shared/icons/twitch.png';
+import instagram from '@/shared/icons/instagram.png';
+import facebook from '@/shared/icons/fb 1.png';
 
 const Regis = () => {
     const router = useRouter();

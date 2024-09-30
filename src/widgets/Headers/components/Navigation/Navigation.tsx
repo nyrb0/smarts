@@ -1,5 +1,5 @@
 import navStyle from '@/styles/componentsModules/Navigation.module.scss';
-import Button from '@/UI/Button/Button';
+import Button from '@/shared/UI/Button/Button';
 import Logo from '@/icons/mobilelo 2.png';
 import Image from 'next/image';
 import Link from 'next/link';

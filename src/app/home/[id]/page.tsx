@@ -4,7 +4,7 @@
 import style from '@/styles/PagesModules/HomeItem.module.scss';
 
 // types
-import { Comments, Phone, ReviewCount } from '@/types/Phones/TypePhone.types';
+import { Comments, Phone, ReviewCount } from '@/shared/types/Phones/TypePhone.types';
 
 // modules
 import Image from 'next/image';
@@ -12,17 +12,17 @@ import { ChangeEvent, FC, useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 
 // img
-import CPUicon from '@/icons/characteristic/Screensize.png';
-import CameraIcon from '@/icons/characteristic/smartphone-rotate-2-svgrepo-com 2 (2).png';
-import FrontCamera from '@/icons/characteristic/smartphone-rotate-2-svgrepo-com 2 (3).png';
-import BatteryIcon from '@/icons/characteristic/smartphone-rotate-2-svgrepo-com 2 (4).png';
-import Mark from '@/image/gif/mark ok.gif';
+import CPUicon from '@/shared//icons/characteristic/Screensize.png';
+import CameraIcon from '@/shared/icons/characteristic/smartphone-rotate-2-svgrepo-com 2 (2).png';
+import FrontCamera from '@/shared//icons/characteristic/smartphone-rotate-2-svgrepo-com 2 (3).png';
+import BatteryIcon from '@/shared//icons/characteristic/smartphone-rotate-2-svgrepo-com 2 (4).png';
+import Mark from '@/shared//image/gif/mark ok.gif';
 
 // componnents
-import Btn from '@/UI/Button/Button';
-import Button from '@/UI/Button/ButtonStorage/Button';
+import Btn from '@/shared/UI/Button/Button';
+import Button from '@/shared/UI/Button/ButtonStorage/Button';
 import styled from 'styled-components';
-import Comment from '@/components/comment/Comment';
+import Comment from '@/Entities/comment/Comment';
 
 // Global state
 import cartProducts from '@/app/store/cart/cartProducts';
@@ -30,10 +30,10 @@ import { observer } from 'mobx-react-lite';
 import user from '@/app/store/user/user';
 
 // UI
-import Modal from '@/UI/Modal/Modal';
-import Review from '@/components/Review/Review';
+import Modal from '@/shared/UI/Modal/Modal';
+import Review from '@/Entities/Review/Review';
 import { Rating } from '@mui/material';
-import { generateId } from '@/app/constant/generateId';
+import { generateId } from '@/Features/generateId';
 
 interface PageGlobalDinamic {
     params: {

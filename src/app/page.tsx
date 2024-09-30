@@ -1,7 +1,7 @@
 import style from '@/styles/PagesModules/Main.module.scss';
-import bigPhone from '@/icons/bigPhone.png';
+import bigPhone from '@/shared/icons/bigPhone.png';
 import Image from 'next/image';
-import Btn from '@/UI/Button/Button';
+import Btn from '@/shared/UI/Button/Button';
 import Link from 'next/link';
 
 export default function Home() {

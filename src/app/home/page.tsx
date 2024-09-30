@@ -2,14 +2,14 @@
 import styles from '@/styles/PagesModules/Home.module.scss';
 import Image from 'next/image';
 import phone from '@/icons/bigPhone.png';
-import CusSelect from '@/UI/Select/CusSelect';
-import Button from '@/UI/Button/Button';
-import { IphoneArr, Phone, PopularArr } from '@/types/Phones/TypePhone.types';
-import Block from '@/components/Block/Block';
+import CusSelect from '@/shared/UI/Select/CusSelect';
+import Button from '@/shared/UI/Button/Button';
+import { IphoneArr, Phone, PopularArr } from '@/shared/types/Phones/TypePhone.types';
+import Block from '@/Entities/Block/Block';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Filter from '@/components/Filters/Filter';
-import Select from '@/UI/Select/Select Filter/Select';
+import Select from '@/shared/UI/Select/Select Filter/Select';
 import { observer } from 'mobx-react-lite';
 import Global from '../store/GlobalStorage/Global';
 

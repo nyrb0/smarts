@@ -1,4 +1,4 @@
-import { Phone } from '@/types/Phones/TypePhone.types';
+import { Phone } from '@/shared/types/Phones/TypePhone.types';
 import { makeAutoObservable } from 'mobx';
 
 class CartProducts {

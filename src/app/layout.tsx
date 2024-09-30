@@ -1,4 +1,4 @@
-import Headers from '@/components/Headers/Headers';
+import Headers from '@/widgets/Headers/Headers';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import '../styles/global.scss';

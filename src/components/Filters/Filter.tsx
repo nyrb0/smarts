@@ -3,7 +3,7 @@ import stFil from '@/styles/componentsModules/Filter.module.scss';
 import filIcon from '@/icons/filter.png';
 import Image from 'next/image';
 import { useState } from 'react';
-import Radio from '@/UI/CustomRadio/Radio';
+import Radio from '@/shared/UI/CustomRadio/Radio';
 
 type optionsT = {
     price: number;

@@ -1,6 +1,6 @@
 'use client';
 
-import { logOut } from '../constant/isValid';
+import { logOut } from '../../Features/isValid';
 
 import { observer } from 'mobx-react-lite';
 

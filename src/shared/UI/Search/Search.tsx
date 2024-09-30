@@ -12,7 +12,8 @@ interface SearchI {
 const StyledComponents = styled.input`
     width: 100%;
     background: #f5f5f5;
-    padding: 16px;
+    padding: 0 6px;
+    height: 44px;
     border-radius: 8px;
     &::placeholder {
         color: #b0b0b0;

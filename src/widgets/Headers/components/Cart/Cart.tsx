@@ -1,7 +1,7 @@
 'use client';
 import cartProducts from '@/app/store/cart/cartProducts';
 import stylesCart from '@/styles/componentsModules/Cart.module.scss';
-import { Phone } from '@/types/Phones/TypePhone.types';
+import { Phone } from '@/shared/types/Phones/TypePhone.types';
 import { div } from 'framer-motion/client';
 import { observer } from 'mobx-react-lite';
 import Image from 'next/image';

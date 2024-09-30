@@ -2,7 +2,7 @@
 import commentS from '@/styles/componentsModules/Comment.module.scss';
 
 // types
-import { Comments } from '@/types/Phones/TypePhone.types';
+import { Comments } from '@/shared/types/Phones/TypePhone.types';
 
 // UI
 import { Rating } from '@mui/material';
@@ -16,7 +16,7 @@ import profilePhoto from '@/image/me.jpg';
 import { MdDelete } from 'react-icons/md';
 
 // func
-import { months } from '@/app/constant/month';
+import { months } from '@/Features/month';
 
 interface CommentI {
     com: Comments;

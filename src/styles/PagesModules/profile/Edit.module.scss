@@ -1,5 +1,30 @@
 .edit {
     & h3 {
+        font-weight: 700;
         font-size: 24px;
+        color: var(--secandery-two);
+        margin-bottom: 40px;
+    }
+
+    .editProfile {
+        justify-content: center;
+        .int {
+            max-width: 516px;
+            justify-content: space-between;
+            .block {
+                width: 100%;
+                .field {
+                    font-weight: 700;
+                    font-size: 16px;
+                    margin-bottom: 4px;
+                }
+                .input {
+                    width: 100%;
+                }
+            }
+            &:not(:first-child) {
+                margin-top: 24px;
+            }
+        }
     }
 }

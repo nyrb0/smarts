@@ -1,18 +1,21 @@
 'use client';
 
-import styles from '@/styles/componentsModules/Block.module.scss';
-import { Phone } from '@/types/Phones/TypePhone.types';
-import Btn from '@/UI/Button/Button';
-import Image from 'next/image';
-import { FC, useEffect, useState } from 'react';
-import Link from 'next/link';
+// components
+import Btn from '@/shared/UI/Button/Button';
+
+// types
+import { usersType } from '@/shared/types/User/User.types';
 
 // icons
-import likeProducts from '@/icons/likeProducts.png';
-import { usersType } from '@/types/User/User.types';
+import likeProducts from '@/shared//icons/likeProducts.png';
+
+// other
 import { observer } from 'mobx-react-lite';
 import user from '@/app/store/user/user';
-
+import styles from '@/styles/componentsModules/Block.module.scss';
+import { Phone } from '@/shared/types/Phones/TypePhone.types';
+import Image from 'next/image';
+import { FC, useEffect, useState } from 'react';
 interface BlockI {
     data: Phone | null;
 }
@@ -34,8 +37,13 @@ const Block: FC<BlockI> = ({ data: teh }) => {
     //     }
     // };
 
-    const setServerUser = async (theData: Phone) => {
-        await user.search(theData);
+    const setServerUser = (theData: Phone) => {
+        const isLiked = user.userFullData?.saved.some(s => s.id === theData.id);
+        if (isLiked) {
+            user.unLike(theData);
+            return;
+        }
+        user.like(theData);
         // await savedResursUser();
     };
 

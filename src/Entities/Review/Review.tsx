@@ -1,6 +1,6 @@
 import styleReview from '@/styles/componentsModules/Review.module.scss';
-import ProgressBar from '../ProgressBar/ProgressBar';
-import { ReviewCount } from '@/types/Phones/TypePhone.types';
+import ProgressBar from '../../widgets/ProgressBar/ProgressBar';
+import { ReviewCount } from '@/shared/types/Phones/TypePhone.types';
 import { FC } from 'react';
 
 interface ReviewI {

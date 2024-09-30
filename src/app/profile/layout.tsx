@@ -2,7 +2,7 @@
 
 import { ReactNode, useEffect } from 'react';
 
-import { logOut } from '../constant/isValid';
+import { logOut } from '../../Features/isValid';
 import { useRouter } from 'next/navigation';
 import { observer } from 'mobx-react-lite';
 import HeaderImame from '@/image/header.png';
@@ -12,9 +12,9 @@ import me from '@/image/me.jpg';
 
 //icons
 import { FaCamera } from 'react-icons/fa6';
-import sendProfile from '@/icons/sendProfile.png';
+import sendProfile from '@/shared//icons/sendProfile.png';
 import user from '../store/user/user';
-import { cookieMy } from '../constant/cookie';
+import { cookieMy } from '../../Features/cookie';
 import Link from 'next/link';
 // import { div } from 'framer-motion/client';
 
@@ -52,10 +52,7 @@ function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
                                     ? `${user.userFullData?.name} ${user.userFullData.lastName}`
                                     : 'Неизвестно'}
                             </div>
-                            <div className={profieSt.aboutme}>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe dolores necessitatibus
-                                illum omnis quae facere cum esse provident? Enim, molestias?
-                            </div>
+                            <div className={profieSt.aboutme}>Хочу стать программистом...</div>
                         </div>
                         <Image src={sendProfile} alt='Cсылка на профиль' />
                     </div>
@@ -75,7 +72,7 @@ function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
                             })}
                         </ul>
                     </nav>
-                    <div>{children}</div>
+                    {children}
                 </div>
             </div>
         </div>
