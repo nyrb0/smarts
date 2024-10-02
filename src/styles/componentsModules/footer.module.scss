@@ -1,0 +1,40 @@
+.footer {
+    background-color: var(--main-black);
+
+    color: white;
+    .inner {
+        padding: 104px 0;
+        .content {
+            justify-content: space-between;
+            width: 100%;
+            .column1 {
+                width: 384px;
+                .name {
+                    font-size: 24px;
+                    font-weight: 700;
+                }
+                .desc {
+                    font-weight: 500;
+                    font-size: 14px;
+                    line-height: 171%;
+                    width: 200px;
+                    width: 100%;
+                    margin-top: 24px;
+                }
+            }
+            .column {
+                .service {
+                    font-weight: 600;
+                    font-size: 16px;
+                }
+                line-height: 229%;
+                & ul {
+                    & li {
+                        font-weight: 400;
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+    }
+}

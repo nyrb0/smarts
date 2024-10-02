@@ -7,4 +7,9 @@ export type usersType = {
     lastName?: string;
     password: string;
     saved: Phone[];
+    country: string;
+    city: string;
+    email: string;
+    number: string;
+    education: string;
 };

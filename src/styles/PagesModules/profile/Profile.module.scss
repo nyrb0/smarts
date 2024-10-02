@@ -41,7 +41,10 @@
     }
 
     .content {
+        width: 100%;
+
         .menu {
+            width: 100%;
             & nav {
                 & li {
                     border-radius: 8px;
@@ -61,4 +64,5 @@
             }
         }
     }
+    margin-bottom: 100px;
 }

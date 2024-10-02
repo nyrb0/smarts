@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import '../styles/global.scss';
 import { useRouter } from 'next/router';
+import Footer from '@/widgets/Footer/Footer';
 
 // const geistSans = localFont({
 //   src: "./fonts/GeistVF.woff",
@@ -42,6 +43,7 @@ export default function RootLayout({
             <body className={`${poppins.variable}`}>
                 <Headers />
                 {children}
+                <Footer />
             </body>
         </html>
     );

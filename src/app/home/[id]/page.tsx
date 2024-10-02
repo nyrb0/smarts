@@ -12,11 +12,11 @@ import { ChangeEvent, FC, useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 
 // img
-import CPUicon from '@/shared//icons/characteristic/Screensize.png';
+import CPUicon from '@/shared/icons/characteristic/Screensize.png';
 import CameraIcon from '@/shared/icons/characteristic/smartphone-rotate-2-svgrepo-com 2 (2).png';
-import FrontCamera from '@/shared//icons/characteristic/smartphone-rotate-2-svgrepo-com 2 (3).png';
-import BatteryIcon from '@/shared//icons/characteristic/smartphone-rotate-2-svgrepo-com 2 (4).png';
-import Mark from '@/shared//image/gif/mark ok.gif';
+import FrontCamera from '@/shared/icons/characteristic/smartphone-rotate-2-svgrepo-com 2 (3).png';
+import BatteryIcon from '@/shared/icons/characteristic/smartphone-rotate-2-svgrepo-com 2 (4).png';
+import Mark from '@/shared/image/gif/mark ok.gif';
 
 // componnents
 import Btn from '@/shared/UI/Button/Button';

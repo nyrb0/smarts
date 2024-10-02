@@ -29,7 +29,8 @@ function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
         location.reload();
     };
 
-    const menu: { edit: string; notifications: string; saved: string; security: string } = {
+    const menu = {
+        aboutme: 'Обо мне',
         edit: 'Редактирование',
         notifications: 'Уведомления',
         saved: 'Сохраненные',
@@ -52,13 +53,13 @@ function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
                                     ? `${user.userFullData?.name} ${user.userFullData.lastName}`
                                     : 'Неизвестно'}
                             </div>
-                            <div className={profieSt.aboutme}>Хочу стать программистом...</div>
+                            <div className={profieSt.aboutme}>Крутая цитата в мире </div>
                         </div>
                         <Image src={sendProfile} alt='Cсылка на профиль' />
                     </div>
                 </div>
             </div>
-            <div className={`${profieSt.content} container`}>
+            <div className={`${profieSt.content} container df`}>
                 <div className={`${profieSt.menu} df`}>
                     <nav>
                         <ul>
@@ -72,7 +73,7 @@ function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
                             })}
                         </ul>
                     </nav>
-                    {children}
+                    <div style={{ width: '100%' }}>{children}</div>
                 </div>
             </div>
         </div>
@@ -80,14 +81,3 @@ function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
 }
 
 export default observer(RootLayout);
-
-{
-    /* <button
-                onClick={() => {
-                    logOutHandler('userData1');
-                    router.push('/auth');
-                }}
-            >
-                Log out
-            </button> */
-}

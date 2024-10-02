@@ -1,0 +1,20 @@
+.about {
+    line-height: 150%;
+    .aboutMe {
+        font-size: 23px;
+        text-align: center;
+        font-weight: 700;
+    }
+    font-weight: 600;
+
+    .location {
+        margin-top: 15px;
+        .locationAbout {
+            font-size: 23px;
+        }
+    }
+    .center {
+        padding-left: 20px;
+        font-weight: 400;
+    }
+}

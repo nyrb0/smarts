@@ -1,30 +1,42 @@
 .edit {
-    & h3 {
-        font-weight: 700;
-        font-size: 24px;
-        color: var(--secandery-two);
-        margin-bottom: 40px;
+    width: 100%;
+    .content {
+        width: 100%;
+        justify-content: space-between;
+    }
+    .personal {
+        width: 516px;
+        width: 100%;
+        margin-right: 64px;
     }
 
-    .editProfile {
-        justify-content: center;
-        .int {
-            max-width: 516px;
-            justify-content: space-between;
-            .block {
-                width: 100%;
-                .field {
-                    font-weight: 700;
-                    font-size: 16px;
-                    margin-bottom: 4px;
-                }
-                .input {
-                    width: 100%;
-                }
-            }
-            &:not(:first-child) {
-                margin-top: 24px;
-            }
-        }
+    .contact {
+        width: 516px;
+        width: 100%;
     }
+    .btn {
+        width: 128px;
+    }
+}
+
+.save {
+    & img {
+        width: 60px;
+        height: 60px;
+        object-fit: contain;
+    }
+}
+
+.input {
+    .name {
+        font-weight: 700;
+        font-size: 16px;
+        margin-bottom: 4px;
+    }
+    margin-bottom: 24px;
+}
+.cate {
+    color: #caced8;
+    font-size: 17px;
+    margin-bottom: 20px;
 }

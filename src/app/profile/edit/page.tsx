@@ -10,180 +10,173 @@ import Input from '@/shared/UI/Search/Search';
 import axios from 'axios';
 
 // modules
-import { FC, useEffect, useState } from 'react';
-import styled from 'styled-components';
+import { FC, useState } from 'react';
+import Btn from '@/shared/UI/Button/Button';
+import { observer } from 'mobx-react-lite';
+import Modal from '@/shared/UI/Modal/Modal';
+
+import Mark from '@/shared/image/gif/mark ok.gif';
+import Image from 'next/image';
+import { cookieMy } from '@/Features/cookie';
 
 interface EditI {}
-const Edit: FC<EditI> = ({}) => {
-    const [users, setUsers] = useState<usersType>();
+const Edit: FC<EditI> = observer(({}) => {
+    const userD = user.userFullData;
+
+    const [open, setOpen] = useState<boolean>(false);
+
     const [dataInt, setDataInt] = useState({
-        name: '',
-        education: '',
-        lastName: '',
-        email: '',
-        city: '',
-        number: '',
-        country: '',
-        description: '',
+        name: userD?.name || '',
+        education: userD?.education || '',
+        lastName: userD?.lastName || '',
+        email: userD?.email || '',
+        city: userD?.city || '',
+        number: userD?.number || '',
+        country: userD?.country || '',
     });
 
-    const chageName = (e: string) => {
-        setDataInt(prev => ({ ...prev, name: e }));
-    };
-    const chageSurName = (e: string) => {
-        setDataInt(prev => ({ ...prev, lastName: e }));
-    };
-    const changeEducation = (e: string) => {
-        setDataInt(prev => ({ ...prev, education: e }));
+    const saveOpen = (ms: number) => {
+        setOpen(true);
+        setTimeout(() => {
+            setOpen(false);
+        }, ms);
     };
 
-    const changeEmail = (e: string) => {
-        setDataInt(prev => ({ ...prev, email: e }));
-    };
-    const changeNumber = (e: string) => {
-        setDataInt(prev => ({ ...prev, number: e }));
-    };
-    const changeCountry = (e: string) => {
-        setDataInt(prev => ({ ...prev, country: e }));
-    };
-    const changeCity = (e: string) => {
-        setDataInt(prev => ({ ...prev, city: e }));
+    const searchChange = () => {
+        let save: Partial<typeof dataInt> = {};
+        Object.keys(dataInt).forEach(key => {
+            if (dataInt[key as keyof typeof dataInt] !== userD?.[key as keyof typeof userD]) {
+                save[key as keyof typeof dataInt] = dataInt[key as keyof typeof dataInt];
+            }
+        });
+        if (Object.keys(save).length > 0) {
+            toServer(save);
+            save = {};
+            saveOpen(1500);
+        }
     };
 
-    // const searchFind = ()=>{
-    //     user.userFullData
-    // }
-    console.log(user.userFullData?.name);
+    const handleInputChange = (key: string, e: string) => {
+        setDataInt(prev => ({ ...prev, [key]: e.trim() }));
+    };
 
-    const toServer = async () => {
+    const toServer = async (update: any) => {
         try {
-            fetch('http://localhost:3000/user', {
-                method: 'POST',
+            fetch(`/api/user/${userD?.id}`, {
+                method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(dataInt),
+                body: JSON.stringify({ user: update }),
             });
         } catch (err) {
             throw err;
         }
     };
 
-    useEffect(() => {
-        const get = async () => {
-            try {
-                const resFromserver = await axios('http://localhost:3000/user');
-
-                if (resFromserver) {
-                    setUsers(resFromserver.data);
-                }
-            } catch (err) {
-                throw err;
-            }
-        };
-        get();
-    }, []);
-
     return (
-        <div className={styleEdit.edit}>
-            <h3>Edit Profile</h3>
-            <div className={`${styleEdit.editProfile} df`}>
-                <div>
-                    <div className={styleEdit.part}>Персонал</div>
-                    <div className={`${styleEdit.int} df`}>
-                        <div className={styleEdit.block} style={{ marginRight: 20 }}>
-                            <div className={styleEdit.field}>Имя</div>
-                            <div className={styleEdit.input}>
-                                <Input onChanges={chageName} value={dataInt.name} placeholder={'Имя'} type={'text'} />
-                            </div>
+        <>
+            <Modal isOpen={open} visibleX={false}>
+                <div className={`${styleEdit.save} dfc`}>
+                    <div>
+                        <div className='dfc'>
+                            <Image src={Mark} alt='mark' />
                         </div>
-                        <div className={styleEdit.block}>
-                            <div className={styleEdit.field}>Фамилия</div>
-                            <div className={styleEdit.input}>
+                        <div className={styleEdit.thankText}>Сохранен!</div>
+                    </div>
+                </div>
+            </Modal>
+
+            <div className={styleEdit.edit}>
+                <div className={`${styleEdit.content} df`}>
+                    <div className={styleEdit.personal}>
+                        <div className={styleEdit.cate}>Персональные</div>
+                        <div className={styleEdit.input}>
+                            <div className={styleEdit.name}>Имя</div>
+                            <div className='df' style={{ gap: 12 }}>
                                 <Input
-                                    onChanges={chageSurName}
-                                    value={dataInt.lastName}
-                                    placeholder={'Фамилия'}
                                     type={'text'}
+                                    placeholder={'Имя'}
+                                    onChanges={(e: string) => handleInputChange('name', e)}
+                                    value={dataInt.name}
+                                />
+                                <Input
+                                    type={'text'}
+                                    placeholder={'Фамилия'}
+                                    onChanges={(e: string) => handleInputChange('lastName', e)}
+                                    value={dataInt.lastName}
                                 />
                             </div>
+                        </div>
+
+                        <div className={styleEdit.input}>
+                            <div className={styleEdit.name}>Образование</div>
+                            <Input
+                                type={'text'}
+                                placeholder={'Образование'}
+                                onChanges={(e: string) => handleInputChange('education', e)}
+                                value={dataInt.education}
+                            />
                         </div>
                     </div>
-                    <div className={`${styleEdit.int} df`}>
-                        <div className={styleEdit.block}>
-                            <div className={styleEdit.field}>Образование</div>
-                            <div className={styleEdit.input}>
-                                <Input
-                                    onChanges={changeEducation}
-                                    value={dataInt.education}
-                                    placeholder={'Образование'}
-                                    type={'text'}
-                                />
-                            </div>
+
+                    <div className={styleEdit.contact}>
+                        <div className={styleEdit.cate}>Контактнные</div>
+                        <div className={styleEdit.input}>
+                            <div className={styleEdit.name}>Почта</div>
+                            <Input
+                                type={'text'}
+                                placeholder={'Почта'}
+                                onChanges={(e: string) => handleInputChange('email', e)}
+                                value={dataInt.email}
+                            />
+                        </div>
+
+                        <div className={styleEdit.input}>
+                            <div className={styleEdit.name}>Номер</div>
+                            <Input
+                                type={'text'}
+                                placeholder={'Номер'}
+                                onChanges={(e: string) => handleInputChange('number', e)}
+                                value={dataInt.number}
+                            />
+                        </div>
+
+                        <div className={styleEdit.input}>
+                            <div className={styleEdit.name}>Страна</div>
+                            <Input
+                                type={'text'}
+                                placeholder={'Страна'}
+                                onChanges={(e: string) => handleInputChange('country', e)}
+                                value={dataInt.country}
+                            />
+                        </div>
+                        <div className={styleEdit.input}>
+                            <div className={styleEdit.name}>Город</div>
+                            <Input
+                                type={'text'}
+                                placeholder={'Город'}
+                                onChanges={(e: string) => handleInputChange('city', e)}
+                                value={dataInt.city}
+                            />
                         </div>
                     </div>
                 </div>
-
-                <div>
-                    <div className={styleEdit.part}>Контакты</div>
-                    <div className={`${styleEdit.int} df`}>
-                        <div className={styleEdit.block}>
-                            <div className={styleEdit.field}>Почта</div>
-                            <div className={styleEdit.input}>
-                                <Input
-                                    onChanges={changeEmail}
-                                    value={dataInt.email}
-                                    placeholder={'Почта'}
-                                    type={'text'}
-                                />
-                            </div>
-                        </div>
-                    </div>
-                    <div className={`${styleEdit.int} df`}>
-                        <div className={styleEdit.block}>
-                            <div className={styleEdit.field}>Номер</div>
-                            <div className={styleEdit.input}>
-                                <Input
-                                    onChanges={changeNumber}
-                                    value={dataInt.number}
-                                    placeholder={'Номер'}
-                                    type={'text'}
-                                />
-                            </div>
-                        </div>
-                    </div>
-                    <div className={`${styleEdit.int} df`}>
-                        <div className={styleEdit.block}>
-                            <div className={styleEdit.field}>Город</div>
-                            <div className={styleEdit.input}>
-                                <Input
-                                    onChanges={changeCity}
-                                    value={dataInt.city}
-                                    placeholder={'Город'}
-                                    type={'text'}
-                                />
-                            </div>
-                        </div>
-                    </div>
-                    <div className={`${styleEdit.int} df`}>
-                        <div className={styleEdit.block}>
-                            <div className={styleEdit.field}>Страна</div>
-                            <div className={styleEdit.input}>
-                                <Input
-                                    onChanges={changeCountry}
-                                    value={dataInt.country}
-                                    placeholder={'Страна'}
-                                    type={'text'}
-                                />
-                            </div>
-                        </div>
-                    </div>
+                <div className={styleEdit.btn}>
+                    <Btn
+                        style={{
+                            background: 'transparent',
+                            color: 'black',
+                            border: 6,
+                        }}
+                        onClick={searchChange}
+                    >
+                        Сохранить
+                    </Btn>
                 </div>
             </div>
-
-            {/* <button onClick={toServer}>dfsfsdfvhusdfh</button> */}
-        </div>
+        </>
     );
-};
+});
 
 export default Edit;

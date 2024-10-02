@@ -22,11 +22,11 @@
       "review": [
         {
           "category": "Отличное",
-          "votes": 4
+          "votes": 5
         },
         {
           "category": "Средний",
-          "votes": 0
+          "votes": 1
         },
         {
           "category": "Ниже среднего",
@@ -43,34 +43,6 @@
       ],
       "comments": [
         {
-          "id": "1727020944668-3729",
-          "user": "ny1bo",
-          "votesStars": 5,
-          "comment": "jvbsfbvhsbvhsdbfv",
-          "date": {
-            "day": 22,
-            "month": 8,
-            "year": 2024,
-            "hours": 22,
-            "minutes": 2,
-            "second": 23
-          }
-        },
-        {
-          "id": "1727022352145-2600",
-          "user": "ny1bo",
-          "votesStars": 5,
-          "comment": " b     b b  bb b ",
-          "date": {
-            "day": 22,
-            "month": 8,
-            "year": 2024,
-            "hours": 22,
-            "minutes": 25,
-            "second": 51
-          }
-        },
-        {
           "id": "1727283355261-980",
           "user": "нурбо",
           "votesStars": 3,
@@ -82,6 +54,20 @@
             "hours": 22,
             "minutes": 55,
             "second": 54
+          }
+        },
+        {
+          "id": "1727805157408-99",
+          "user": "ny1bo",
+          "votesStars": 4,
+          "comment": "const return",
+          "date": {
+            "day": 1,
+            "month": 9,
+            "year": 2024,
+            "hours": 23,
+            "minutes": 52,
+            "second": 36
           }
         }
       ]
@@ -725,11 +711,16 @@
   "user": [
     {
       "id": "af6e",
-      "name": "Nurbolot",
+      "name": "Нурбо",
       "userName": "ny1bo",
-      "lastName": "Kadyrov",
+      "lastName": "Кадыров",
       "password": "qwerty_as",
-      "saved": []
+      "saved": [],
+      "education": "среднее",
+      "email": "ny1boo@gmail.com",
+      "city": "Бишкек",
+      "number": "0700269301",
+      "country": "Кыргызстан"
     },
     {
       "id": "af5e",
@@ -737,7 +728,12 @@
       "userName": "daniar07",
       "lastName": "Bolotov",
       "password": "qwerty_as",
-      "saved": []
+      "saved": [],
+      "education": "среднее",
+      "email": "ny1b0",
+      "city": "Бишкек",
+      "number": "0700269301",
+      "country": "Кыргызстан"
     }
   ]
 }

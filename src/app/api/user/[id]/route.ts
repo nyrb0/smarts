@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 
 export const PATCH = async (req: Request, { params }: { params: { id: string } }) => {
-    const { saved } = await req.json();
+    const { saved, user } = await req.json();
     const { id } = params;
     if (!id) {
         return NextResponse.json({ message: 'Missing required fields' }, { status: 400 });
@@ -13,7 +13,7 @@ export const PATCH = async (req: Request, { params }: { params: { id: string } }
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ saved }),
+            body: saved ? JSON.stringify({ saved }) : JSON.stringify(user),
         });
         return NextResponse.json({ res }, { status: 200 });
     } catch (err) {

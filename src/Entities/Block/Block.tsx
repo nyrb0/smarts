@@ -16,6 +16,7 @@ import styles from '@/styles/componentsModules/Block.module.scss';
 import { Phone } from '@/shared/types/Phones/TypePhone.types';
 import Image from 'next/image';
 import { FC, useEffect, useState } from 'react';
+import Link from 'next/link';
 interface BlockI {
     data: Phone | null;
 }
@@ -67,7 +68,9 @@ const Block: FC<BlockI> = ({ data: teh }) => {
                         </div>
                         <div className={`${styles.thePhone} dfc`}>
                             {teh.image?.url ? (
-                                <Image src={teh.image.url} alt='like procducts' width={150} height={260} />
+                                <Link href={`/home/${teh.id}`}>
+                                    <Image src={teh.image.url} alt='like procducts' width={150} height={260} />
+                                </Link>
                             ) : null}
                         </div>
                         <div className={styles.name}>{teh.name}</div>
