@@ -10,14 +10,13 @@ import Input from '@/shared/UI/Search/Search';
 import axios from 'axios';
 
 // modules
-import { FC, useState } from 'react';
+import { FC, useContext, useState } from 'react';
 import Btn from '@/shared/UI/Button/Button';
 import { observer } from 'mobx-react-lite';
 import Modal from '@/shared/UI/Modal/Modal';
 
 import Mark from '@/shared/image/gif/mark ok.gif';
 import Image from 'next/image';
-import { cookieMy } from '@/Features/cookie';
 
 interface EditI {}
 const Edit: FC<EditI> = observer(({}) => {
@@ -49,6 +48,7 @@ const Edit: FC<EditI> = observer(({}) => {
                 save[key as keyof typeof dataInt] = dataInt[key as keyof typeof dataInt];
             }
         });
+
         if (Object.keys(save).length > 0) {
             toServer(save);
             save = {};

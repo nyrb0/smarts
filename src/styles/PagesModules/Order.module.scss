@@ -1,0 +1,53 @@
+.process {
+    width: 100%;
+    .buy {
+    }
+}
+.carts {
+    width: 536px;
+}
+.process {
+    border: 1px solid #ebebeb;
+    border-radius: 10px;
+    width: 536px;
+    height: 100%;
+    .containerOrderCard {
+        width: 408px;
+        margin: 0 auto;
+        padding: 56px 0;
+        .orderTitle {
+            font-weight: 700;
+            font-size: 20px;
+            line-height: 80%;
+            color: #111;
+            margin-bottom: 40px;
+        }
+        .form {
+            .promo {
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 114%;
+                color: #545454;
+                label {
+                    display: inline-block;
+                    margin-bottom: 12px;
+                }
+            }
+        }
+        .resultShop {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 400;
+            font-size: 16px;
+            color: #545454;
+            margin-bottom: 16px;
+            .name {
+                font-weight: 500;
+                color: var(--main-black);
+            }
+        }
+        .btnOrder {
+            height: 56px;
+        }
+    }
+}

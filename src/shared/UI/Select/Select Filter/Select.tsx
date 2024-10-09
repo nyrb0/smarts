@@ -22,7 +22,6 @@ const Select: FC<CusSelI> = ({ name, children, values, onChange, selected }) => 
         setOpen(false);
         onChange(v);
     };
-    const arr = [1, 2, 3, 4, 5];
 
     return (
         <div className={st.select}>
@@ -31,7 +30,7 @@ const Select: FC<CusSelI> = ({ name, children, values, onChange, selected }) => 
                 <div className={st.arrow}>{open ? <IoIosArrowUp /> : <IoIosArrowDown />}</div>
             </div>
             <hr style={{ color: 'black', opacity: 0.3 }} />
-            {open ? (
+            {open && (
                 <div className={st.inner}>
                     {values.map(v => (
                         <div className={st.single} key={v} onClick={() => changeValue(v)}>
@@ -40,7 +39,7 @@ const Select: FC<CusSelI> = ({ name, children, values, onChange, selected }) => 
                         </div>
                     ))}
                 </div>
-            ) : null}
+            )}
         </div>
     );
 };

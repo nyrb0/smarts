@@ -20,12 +20,12 @@ const Review: FC<ReviewI> = ({ dataAboutRev }) => {
 
     return (
         <div className={`${styleReview.review} `}>
-            <div className={styleReview.text}>Reviews</div>
+            <div className={styleReview.text}>Отзывы</div>
             <div className={`${styleReview.allResults} df`}>
                 <div className={`${styleReview.block}   dfca`}>
                     <div className={styleReview.inner}>
                         <div className={styleReview.reviewNum}>4.8</div>
-                        <div className={styleReview.lengthReview}>of {totalVotes} reviews</div>
+                        <div className={styleReview.lengthReview}>{totalVotes} пользователей оценили</div>
                     </div>
                 </div>
                 <div className={styleReview.static} style={{ width: '100%' }}>

@@ -2,19 +2,26 @@
 import styles from '@/styles/PagesModules/Home.module.scss';
 import { Phone } from '@/shared/types/Phones/TypePhone.types';
 import Block from '@/Entities/Block/Block';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 // import Filter from '@/Entities/Filters/Filter';
 import Select from '@/shared/UI/Select/Select Filter/Select';
 import { observer } from 'mobx-react-lite';
 import Global from '../store/GlobalStorage/Global';
+import CurrencyContext, { CurrencyCon } from '@/shared/context/currency/CurrencyContext';
 
 const Home = observer(() => {
     const [data, setData] = useState<null | Phone[]>(null);
-    const [currency, setCurrency] = useState('');
+
+    const context = useContext(CurrencyCon);
+    if (!context) throw Error('Error: not context Currency');
+    const { currency, setCurrency } = context;
+
+    // const [currency, setCurrency] = useState(localStorage.getItem('currency') || '');
     // const [popular, setPopular] = useState<Phone[] | null>(null);
     // const [selectModelPhone, setSelectModelPhone] = useState();
     // const brand1 = ['Iphone', 'Huawei', 'Samsung', 'Redmi', 'Pixel'];
+
     const brand = {
         iphone: 'Iphone',
         huawei: 'Huawei',
@@ -39,6 +46,7 @@ const Home = observer(() => {
 
     const changeCurrency = (s: string) => {
         setCurrency(s);
+        localStorage.setItem('currency', s);
     };
 
     useEffect(() => {

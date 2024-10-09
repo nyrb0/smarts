@@ -5,10 +5,10 @@ import { ReactNode, useEffect } from 'react';
 import { logOut } from '../../Features/isValid';
 import { useRouter } from 'next/navigation';
 import { observer } from 'mobx-react-lite';
-import HeaderImame from '@/image/header.png';
+import HeaderImame from '@/shared/image/header.png';
 import profieSt from '@/styles/PagesModules/profile/Profile.module.scss';
 import Image from 'next/image';
-import me from '@/image/me.jpg';
+import me from '@/shared/image/me.jpg';
 
 //icons
 import { FaCamera } from 'react-icons/fa6';

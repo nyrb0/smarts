@@ -26,7 +26,7 @@
         },
         {
           "category": "Средний",
-          "votes": 1
+          "votes": 2
         },
         {
           "category": "Ниже среднего",
@@ -54,20 +54,6 @@
             "hours": 22,
             "minutes": 55,
             "second": 54
-          }
-        },
-        {
-          "id": "1727805157408-99",
-          "user": "ny1bo",
-          "votesStars": 4,
-          "comment": "const return",
-          "date": {
-            "day": 1,
-            "month": 9,
-            "year": 2024,
-            "hours": 23,
-            "minutes": 52,
-            "second": 36
           }
         }
       ]
@@ -715,7 +701,392 @@
       "userName": "ny1bo",
       "lastName": "Кадыров",
       "password": "qwerty_as",
-      "saved": [],
+      "saved": [
+        {
+          "id": "20",
+          "name": "Iphone 16 pro max",
+          "image": {
+            "url": "https://nanoreview.net/common/images/phone/apple-iphone-16-pro-max-mini@2x.jpeg"
+          },
+          "level": 16,
+          "isImproved": 4,
+          "price": {
+            "rub": 120000,
+            "usd": 1300,
+            "som": 110000
+          },
+          "processor": "Apple A18 Pro",
+          "camera": "4 (48 MP + 12 MP + 48 MP)",
+          "weigth": 225,
+          "battery": 4676,
+          "ios": "18",
+          "screen": "2796х1290",
+          "review": [
+            {
+              "category": "Отличное",
+              "votes": 5
+            },
+            {
+              "category": "Средний",
+              "votes": 2
+            },
+            {
+              "category": "Ниже среднего",
+              "votes": 1
+            },
+            {
+              "category": "Нормально",
+              "votes": 1
+            },
+            {
+              "category": "Плохо",
+              "votes": 0
+            }
+          ],
+          "comments": [
+            {
+              "id": "1727283355261-980",
+              "user": "нурбо",
+              "votesStars": 3,
+              "comment": "jbvhsdvhsdbkvjwdbv",
+              "date": {
+                "day": 25,
+                "month": 8,
+                "year": 2024,
+                "hours": 22,
+                "minutes": 55,
+                "second": 54
+              }
+            },
+            {
+              "id": "1727805157408-99",
+              "user": "ny1bo",
+              "votesStars": 4,
+              "comment": "const return",
+              "date": {
+                "day": 1,
+                "month": 9,
+                "year": 2024,
+                "hours": 23,
+                "minutes": 52,
+                "second": 36
+              }
+            },
+            {
+              "id": "1727937036653-7475",
+              "user": "ny1bo",
+              "votesStars": 4,
+              "comment": "rethsbhsdhjvdfsjvjsd",
+              "date": {
+                "day": 3,
+                "month": 9,
+                "year": 2024,
+                "hours": 12,
+                "minutes": 30,
+                "second": 35
+              }
+            }
+          ]
+        },
+        {
+          "id": "20",
+          "name": "Iphone 16 pro max",
+          "image": {
+            "url": "https://nanoreview.net/common/images/phone/apple-iphone-16-pro-max-mini@2x.jpeg"
+          },
+          "level": 16,
+          "isImproved": 4,
+          "price": {
+            "rub": 120000,
+            "usd": 1300,
+            "som": 110000
+          },
+          "processor": "Apple A18 Pro",
+          "camera": "4 (48 MP + 12 MP + 48 MP)",
+          "weigth": 225,
+          "battery": 4676,
+          "ios": "18",
+          "screen": "2796х1290",
+          "review": [
+            {
+              "category": "Отличное",
+              "votes": 5
+            },
+            {
+              "category": "Средний",
+              "votes": 2
+            },
+            {
+              "category": "Ниже среднего",
+              "votes": 1
+            },
+            {
+              "category": "Нормально",
+              "votes": 1
+            },
+            {
+              "category": "Плохо",
+              "votes": 0
+            }
+          ],
+          "comments": [
+            {
+              "id": "1727283355261-980",
+              "user": "нурбо",
+              "votesStars": 3,
+              "comment": "jbvhsdvhsdbkvjwdbv",
+              "date": {
+                "day": 25,
+                "month": 8,
+                "year": 2024,
+                "hours": 22,
+                "minutes": 55,
+                "second": 54
+              }
+            },
+            {
+              "id": "1727805157408-99",
+              "user": "ny1bo",
+              "votesStars": 4,
+              "comment": "const return",
+              "date": {
+                "day": 1,
+                "month": 9,
+                "year": 2024,
+                "hours": 23,
+                "minutes": 52,
+                "second": 36
+              }
+            },
+            {
+              "id": "1727937036653-7475",
+              "user": "ny1bo",
+              "votesStars": 4,
+              "comment": "rethsbhsdhjvdfsjvjsd",
+              "date": {
+                "day": 3,
+                "month": 9,
+                "year": 2024,
+                "hours": 12,
+                "minutes": 30,
+                "second": 35
+              }
+            }
+          ]
+        },
+        {
+          "id": "100",
+          "name": "Iphone 16 pro max",
+          "image": {
+            "url": "https://nanoreview.net/common/images/phone/apple-iphone-16-pro-max-mini@2x.jpeg"
+          },
+          "level": 16,
+          "isImproved": 4,
+          "price": {
+            "rub": 120000,
+            "usd": 1300,
+            "som": 110000
+          },
+          "processor": "Apple A18 Pro",
+          "camera": "4 (48 MP + 12 MP + 48 MP)",
+          "weigth": 225,
+          "battery": 4676,
+          "ios": "18",
+          "screen": "2796х1290"
+        },
+        {
+          "id": "20",
+          "name": "Iphone 16 pro max",
+          "image": {
+            "url": "https://nanoreview.net/common/images/phone/apple-iphone-16-pro-max-mini@2x.jpeg"
+          },
+          "level": 16,
+          "isImproved": 4,
+          "price": {
+            "rub": 120000,
+            "usd": 1300,
+            "som": 110000
+          },
+          "processor": "Apple A18 Pro",
+          "camera": "4 (48 MP + 12 MP + 48 MP)",
+          "weigth": 225,
+          "battery": 4676,
+          "ios": "18",
+          "screen": "2796х1290",
+          "review": [
+            {
+              "category": "Отличное",
+              "votes": 5
+            },
+            {
+              "category": "Средний",
+              "votes": 2
+            },
+            {
+              "category": "Ниже среднего",
+              "votes": 1
+            },
+            {
+              "category": "Нормально",
+              "votes": 1
+            },
+            {
+              "category": "Плохо",
+              "votes": 0
+            }
+          ],
+          "comments": [
+            {
+              "id": "1727283355261-980",
+              "user": "нурбо",
+              "votesStars": 3,
+              "comment": "jbvhsdvhsdbkvjwdbv",
+              "date": {
+                "day": 25,
+                "month": 8,
+                "year": 2024,
+                "hours": 22,
+                "minutes": 55,
+                "second": 54
+              }
+            },
+            {
+              "id": "1727805157408-99",
+              "user": "ny1bo",
+              "votesStars": 4,
+              "comment": "const return",
+              "date": {
+                "day": 1,
+                "month": 9,
+                "year": 2024,
+                "hours": 23,
+                "minutes": 52,
+                "second": 36
+              }
+            },
+            {
+              "id": "1727937036653-7475",
+              "user": "ny1bo",
+              "votesStars": 4,
+              "comment": "rethsbhsdhjvdfsjvjsd",
+              "date": {
+                "day": 3,
+                "month": 9,
+                "year": 2024,
+                "hours": 12,
+                "minutes": 30,
+                "second": 35
+              }
+            }
+          ]
+        },
+        {
+          "id": "20",
+          "name": "Iphone 16 pro max",
+          "image": {
+            "url": "https://nanoreview.net/common/images/phone/apple-iphone-16-pro-max-mini@2x.jpeg"
+          },
+          "level": 16,
+          "isImproved": 4,
+          "price": {
+            "rub": 120000,
+            "usd": 1300,
+            "som": 110000
+          },
+          "processor": "Apple A18 Pro",
+          "camera": "4 (48 MP + 12 MP + 48 MP)",
+          "weigth": 225,
+          "battery": 4676,
+          "ios": "18",
+          "screen": "2796х1290",
+          "review": [
+            {
+              "category": "Отличное",
+              "votes": 5
+            },
+            {
+              "category": "Средний",
+              "votes": 2
+            },
+            {
+              "category": "Ниже среднего",
+              "votes": 1
+            },
+            {
+              "category": "Нормально",
+              "votes": 1
+            },
+            {
+              "category": "Плохо",
+              "votes": 0
+            }
+          ],
+          "comments": [
+            {
+              "id": "1727283355261-980",
+              "user": "нурбо",
+              "votesStars": 3,
+              "comment": "jbvhsdvhsdbkvjwdbv",
+              "date": {
+                "day": 25,
+                "month": 8,
+                "year": 2024,
+                "hours": 22,
+                "minutes": 55,
+                "second": 54
+              }
+            },
+            {
+              "id": "1727805157408-99",
+              "user": "ny1bo",
+              "votesStars": 4,
+              "comment": "const return",
+              "date": {
+                "day": 1,
+                "month": 9,
+                "year": 2024,
+                "hours": 23,
+                "minutes": 52,
+                "second": 36
+              }
+            },
+            {
+              "id": "1727937036653-7475",
+              "user": "ny1bo",
+              "votesStars": 4,
+              "comment": "rethsbhsdhjvdfsjvjsd",
+              "date": {
+                "day": 3,
+                "month": 9,
+                "year": 2024,
+                "hours": 12,
+                "minutes": 30,
+                "second": 35
+              }
+            }
+          ]
+        },
+        {
+          "id": "100",
+          "name": "Iphone 16 pro max",
+          "image": {
+            "url": "https://nanoreview.net/common/images/phone/apple-iphone-16-pro-max-mini@2x.jpeg"
+          },
+          "level": 16,
+          "isImproved": 4,
+          "price": {
+            "rub": 120000,
+            "usd": 1300,
+            "som": 110000
+          },
+          "processor": "Apple A18 Pro",
+          "camera": "4 (48 MP + 12 MP + 48 MP)",
+          "weigth": 225,
+          "battery": 4676,
+          "ios": "18",
+          "screen": "2796х1290"
+        }
+      ],
       "education": "среднее",
       "email": "ny1boo@gmail.com",
       "city": "Бишкек",

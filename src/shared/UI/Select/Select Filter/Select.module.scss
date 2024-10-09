@@ -1,7 +1,6 @@
 .select {
     width: 256px;
-    height: 48px;
-    position: relative;
+    min-height: 48px;
     .out {
         .name {
             font-weight: 500;
@@ -10,9 +9,15 @@
         }
         justify-content: space-between;
     }
+
+    cursor: pointer;
     .inner {
+        background-color: #fff;
+        z-index: 100;
+
         .single {
             padding: 5px 0;
         }
     }
+    margin-bottom: 24px;
 }

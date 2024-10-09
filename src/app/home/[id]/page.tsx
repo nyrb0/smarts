@@ -8,7 +8,7 @@ import { Comments, Phone, ReviewCount } from '@/shared/types/Phones/TypePhone.ty
 
 // modules
 import Image from 'next/image';
-import { ChangeEvent, FC, useEffect, useState } from 'react';
+import { ChangeEvent, FC, useContext, useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 
 // img
@@ -34,6 +34,8 @@ import Modal from '@/shared/UI/Modal/Modal';
 import Review from '@/Entities/Review/Review';
 import { Rating } from '@mui/material';
 import { generateId } from '@/Features/generateId';
+import { currencyChoose } from '@/Features/CurrencyChoose';
+import { CurrencyCon } from '@/shared/context/currency/CurrencyContext';
 
 interface PageGlobalDinamic {
     params: {
@@ -75,6 +77,11 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
     const storages = ['128', '256', '512', '1024'];
 
     const date = new Date();
+
+    const context = useContext(CurrencyCon);
+    if (!context) throw new Error('Error in context Currency');
+
+    const { currency, setCurrency } = context;
 
     const warningFunc = (theWarning: string, ms: number) => {
         setWarningTime(true);
@@ -243,9 +250,16 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
                     </div>
                     <div className={style.info}>
                         <h1 className={style.namePhone}>{data.name}</h1>
-                        <div className={style.price}>{data.price.rub}</div>
+                        <div className={style.price}>
+                            {currency === 'rub'
+                                ? data?.price?.rub
+                                : currency === 'som'
+                                ? data?.price?.som
+                                : data?.price?.usd}
+                            {currencyChoose(currency)}
+                        </div>
                         <div className={`${style.color} dfa`}>
-                            <span>Select colors:</span>
+                            <span>Выберите цвет:</span>
                             {colors.map(c => (
                                 <CircleColors key={c} color={c} onClick={() => setChooseColors(c)} />
                             ))}
@@ -335,10 +349,10 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
                                 </div>
                             </div>
                             <div className={style.desc}>
-                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolores architecto vel
-                                accusamus cumque. Tempora esse vitae odit sed sapiente? Aspernatur provident magni
-                                asperiores officia magnam. Labore, quae, aperiam iusto consectetur repellat totam rerum
-                                similique nemo.
+                                Apple iPhone 16 Pro Max - это новинка, которая безусловно привлечет внимание ценителей
+                                высокотехнологичных гаджетов. Принадлежащий к высшему сегменту рынка смартфон от
+                                компании Apple обеспечивает пользователей передовыми возможностями и функциональностью,
+                                которая превосходит многие другие модели на рынке.
                             </div>
                             <div className={`${style.btns} df`}>
                                 <div className={style.btn}>
@@ -349,7 +363,7 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
                                             border: 6,
                                         }}
                                     >
-                                        Add to liked
+                                        Лайкать
                                     </Btn>
                                 </div>
                                 <div
@@ -364,7 +378,7 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
                                             border: 6,
                                         }}
                                     >
-                                        Add to Card
+                                        В покупку
                                     </Btn>
                                 </div>
                             </div>

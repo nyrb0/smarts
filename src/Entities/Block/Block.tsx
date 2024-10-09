@@ -15,14 +15,20 @@ import user from '@/app/store/user/user';
 import styles from '@/styles/componentsModules/Block.module.scss';
 import { Phone } from '@/shared/types/Phones/TypePhone.types';
 import Image from 'next/image';
-import { FC, useEffect, useState } from 'react';
+import { FC, useContext, useEffect, useState } from 'react';
 import Link from 'next/link';
+import { currencyChoose } from '@/Features/CurrencyChoose';
+import { CurrencyCon } from '@/shared/context/currency/CurrencyContext';
 interface BlockI {
     data: Phone | null;
 }
 
 const Block: FC<BlockI> = ({ data: teh }) => {
     const [data, setData] = useState<usersType[]>();
+
+    const context = useContext(CurrencyCon);
+    if (!context) throw new Error('Error in context currency');
+    const { currency, setCurrency } = context;
 
     // const savedResursUser = async () => {
     //     try {
@@ -64,7 +70,12 @@ const Block: FC<BlockI> = ({ data: teh }) => {
                 <div key={teh.id} className={styles.block}>
                     <div className={styles.inner}>
                         <div className={`${styles.like} df`}>
-                            <Image src={likeProducts} alt='like procducts' onClick={() => setServerUser(teh)} />
+                            <Image
+                                src={likeProducts}
+                                alt='like procducts'
+                                style={{ fill: 'red' }}
+                                onClick={() => setServerUser(teh)}
+                            />
                         </div>
                         <div className={`${styles.thePhone} dfc`}>
                             {teh.image?.url ? (
@@ -74,7 +85,14 @@ const Block: FC<BlockI> = ({ data: teh }) => {
                             ) : null}
                         </div>
                         <div className={styles.name}>{teh.name}</div>
-                        <div className={styles.price}>{teh?.price?.rub}P</div>
+                        <div className={styles.price}>
+                            {currency === 'rub'
+                                ? teh?.price?.rub
+                                : currency === 'som'
+                                ? teh?.price?.som
+                                : teh?.price?.usd}
+                            {currencyChoose(currency)}
+                        </div>
                         <div className={`${styles.btn} dfc`}>
                             <span>
                                 <Btn

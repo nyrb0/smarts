@@ -12,7 +12,7 @@ import Image from 'next/image';
 import { FC } from 'react';
 
 //img
-import profilePhoto from '@/image/me.jpg';
+import profilePhoto from '@/shared//image/me.jpg';
 import { MdDelete } from 'react-icons/md';
 
 // func
