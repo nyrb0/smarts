@@ -7,9 +7,10 @@ interface InputPropsI {
     onChange: (e: string) => void;
     placeholder: string;
     isVisibleButton: boolean;
+    onClick?: () => void;
 }
 
-const InputOrder: FC<InputPropsI> = ({ value, onChange, placeholder, isVisibleButton = true }) => {
+const InputOrder: FC<InputPropsI> = ({ value, onChange, placeholder, isVisibleButton = true, onClick }) => {
     const changeValue = (e: ChangeEvent<HTMLInputElement>) => {
         onChange(e.target.value);
     };
@@ -17,7 +18,11 @@ const InputOrder: FC<InputPropsI> = ({ value, onChange, placeholder, isVisibleBu
     return (
         <OrderInt>
             <OrderInputStyled value={value} placeholder={placeholder} type={'text'} onChange={changeValue} />
-            {isVisibleButton && <OrderButtonInputStyled type='button'>Apply</OrderButtonInputStyled>}
+            {isVisibleButton && (
+                <OrderButtonInputStyled type='button' onClick={onClick}>
+                    Apply
+                </OrderButtonInputStyled>
+            )}
         </OrderInt>
     );
 };

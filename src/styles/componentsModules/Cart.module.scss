@@ -2,6 +2,7 @@
     margin-top: 10px;
     justify-content: space-between;
     .name {
+        width: 191px;
         font-size: 18px;
         font-weight: 700;
     }
@@ -14,10 +15,18 @@
                 font-size: 20px;
             }
         }
+        & span {
+            border: 0.5px solid #d9d9d9;
+            border-radius: 4px;
+            padding: 8px 16px;
+            width: 40px;
+            height: 32px;
+        }
     }
     .price {
         font-size: 20px;
         font-weight: 500;
+        width: 100px;
     }
     .x {
         opacity: 0.6;

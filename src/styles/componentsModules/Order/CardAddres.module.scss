@@ -1,0 +1,45 @@
+.address {
+    .radio {
+        margin-right: 16px;
+    }
+    box-sizing: border-box;
+    padding: 24px;
+    background: #f6f6f6;
+    height: 144px;
+    border-radius: 8px;
+
+    .inner {
+        .location {
+            font-weight: 400;
+            font-size: 18px;
+            letter-spacing: 0.01em;
+            color: var(--main-black);
+            .isPlace {
+                background-color: var(--main-black);
+                border-radius: 4px;
+                padding: 4px 8px;
+                color: var(--main-white);
+                margin-left: 24px;
+            }
+        }
+        .theCarrectAddres {
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 150%;
+            color: var(--main-black);
+            margin-top: 10px;
+        }
+        .number {
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 150%;
+            color: var(--main-black);
+            margin-top: 8px;
+        }
+    }
+    .edits {
+        align-items: center;
+        width: 72px;
+    }
+    margin-bottom: 24px;
+}

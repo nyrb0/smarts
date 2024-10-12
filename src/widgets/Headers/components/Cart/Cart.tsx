@@ -31,14 +31,14 @@ const Cart: FC<CartI> = observer(({ data }) => {
 
     return (
         <div className={`${stylesCart.cart} dfa`}>
-            <div className={stylesCart.name}>
-                <Image src={data?.image?.url} alt={data.name} width={50} height={69} />
+            <div className={stylesCart.img}>
+                <Image src={data?.image?.url} alt={data.name} width={50} height={85} />
             </div>
             <div className={stylesCart.name}>{data.name}</div>
             <div className={`${stylesCart.count} dfa`}>
                 <div>
                     <button onClick={dec}>-</button>
-                    {count}
+                    <span>{count}</span>
                     <button onClick={inc}>+</button>
                 </div>
             </div>

@@ -6,6 +6,17 @@
 .carts {
     width: 536px;
 }
+
+.order {
+    & h2 {
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 100%;
+        color: var(--main-black);
+        margin-bottom: 40px;
+    }
+    margin-bottom: 112px;
+}
 .process {
     border: 1px solid #ebebeb;
     border-radius: 10px;
@@ -41,12 +52,9 @@
             font-size: 16px;
             color: #545454;
             margin-bottom: 16px;
-            .name {
-                font-weight: 500;
-                color: var(--main-black);
-            }
         }
         .btnOrder {
+            margin-top: 48px - 16px;
             height: 56px;
         }
     }
