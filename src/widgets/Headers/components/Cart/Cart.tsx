@@ -2,7 +2,6 @@
 import cartProducts from '@/app/store/cart/cartProducts';
 import stylesCart from '@/styles/componentsModules/Cart.module.scss';
 import { Phone } from '@/shared/types/Phones/TypePhone.types';
-import { div } from 'framer-motion/client';
 import { observer } from 'mobx-react-lite';
 import Image from 'next/image';
 import { FC, useContext, useState } from 'react';
@@ -16,11 +15,9 @@ interface CartI {
 const Cart: FC<CartI> = observer(({ data }) => {
     const [count, setCount] = useState<number>(0);
     const context = useContext(CurrencyCon);
-
     if (!context) throw new Error('Error in currency error');
 
-    const { currency, setCurrency } = context;
-
+    const { currency } = context;
     const inc = () => {
         setCount(prev => prev + 1);
     };
@@ -52,5 +49,4 @@ const Cart: FC<CartI> = observer(({ data }) => {
         </div>
     );
 });
-
 export default Cart;

@@ -9,7 +9,7 @@ import Image from 'next/image';
 
 interface CardAddressProps {
     stage: {
-        code: number;
+        code: string;
         title: string;
         place: PlaceProps;
         number: string;

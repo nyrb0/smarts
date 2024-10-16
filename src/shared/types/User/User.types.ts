@@ -17,10 +17,11 @@ export type usersType = {
 };
 
 export type usersOrder = {
-    code: number;
+    code: string;
+    number: string;
     title: string;
     place: UsersOrderPlace;
-    number: string;
+    orderLocation: string;
 };
 
 export type UsersOrderPlace = {

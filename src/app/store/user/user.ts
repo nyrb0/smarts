@@ -22,7 +22,7 @@ class User {
         if (isSimilar) return;
         this.userFullData?.saved.push(p);
         if (this.userFullData) {
-            this.liked([...this.userFullData.saved, ...this.userFullData.saved]);
+            this.liked(this.userFullData.saved);
         }
     }
 
@@ -72,7 +72,6 @@ class User {
         const fet = await axios('/api/user');
         this.theUser = fet.data;
     }
-
     async fetchUserData(d: string) {
         try {
             const res = await fetch('/api/user', {
@@ -91,6 +90,19 @@ class User {
             console.log(err);
         }
     }
+
+    // async getAddressesUser() {
+    //     try {
+    //         const res = await fetch(`/api/user/${this.userFullData?.id}`, {
+    //             method: 'GET',
+    //         });
+
+    //         const data: usersType = await res.json();
+    //         this.addresses.push(data.order);
+    //     } catch (err) {
+    //         throw new Error('Ошибка');
+    //     }
+    // }
 
     removeData(data: usersType) {
         this.userData = null;

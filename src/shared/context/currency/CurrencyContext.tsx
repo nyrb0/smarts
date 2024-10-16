@@ -2,15 +2,19 @@ import { createContext, Dispatch, FC, ReactNode, SetStateAction, useState } from
 
 interface CurInterface {
     currency: string;
-    setCurrency: Dispatch<SetStateAction<string>>;
+    handleSaveCurrency: (v: string) => void;
 }
 
 export const CurrencyCon = createContext<CurInterface | null>(null);
 
 const CurrencyContext: FC<{ children: ReactNode }> = ({ children }) => {
     const [currency, setCurrency] = useState(localStorage.getItem('currency') || '');
+    const handleSaveCurrency = (v: string) => {
+        localStorage.setItem('currency', v);
+        setCurrency(v);
+    };
 
-    return <CurrencyCon.Provider value={{ currency, setCurrency }}>{children}</CurrencyCon.Provider>;
+    return <CurrencyCon.Provider value={{ currency, handleSaveCurrency }}>{children}</CurrencyCon.Provider>;
 };
 
 export default CurrencyContext;

@@ -6,18 +6,32 @@ interface InputPropsI {
     value: string;
     onChange: (e: string) => void;
     placeholder: string;
-    isVisibleButton: boolean;
+    isVisibleButton?: boolean;
     onClick?: () => void;
+    required?: boolean;
 }
 
-const InputOrder: FC<InputPropsI> = ({ value, onChange, placeholder, isVisibleButton = true, onClick }) => {
+const InputOrder: FC<InputPropsI> = ({
+    value,
+    onChange,
+    placeholder,
+    isVisibleButton = false,
+    onClick,
+    required = false,
+}) => {
     const changeValue = (e: ChangeEvent<HTMLInputElement>) => {
         onChange(e.target.value);
     };
 
     return (
         <OrderInt>
-            <OrderInputStyled value={value} placeholder={placeholder} type={'text'} onChange={changeValue} />
+            <OrderInputStyled
+                value={value}
+                placeholder={placeholder}
+                type={'text'}
+                onChange={changeValue}
+                required={required}
+            />
             {isVisibleButton && (
                 <OrderButtonInputStyled type='button' onClick={onClick}>
                     Apply

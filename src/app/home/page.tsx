@@ -15,7 +15,7 @@ const Home = observer(() => {
 
     const context = useContext(CurrencyCon);
     if (!context) throw Error('Error: not context Currency');
-    const { currency, setCurrency } = context;
+    const { currency, handleSaveCurrency } = context;
 
     // const [currency, setCurrency] = useState(localStorage.getItem('currency') || '');
     // const [popular, setPopular] = useState<Phone[] | null>(null);
@@ -45,8 +45,7 @@ const Home = observer(() => {
     };
 
     const changeCurrency = (s: string) => {
-        setCurrency(s);
-        localStorage.setItem('currency', s);
+        handleSaveCurrency(s);
     };
 
     useEffect(() => {

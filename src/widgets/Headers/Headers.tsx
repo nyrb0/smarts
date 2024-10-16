@@ -23,8 +23,9 @@ import likeIcon from '@/shared/icons/user/like.png';
 import userIcon from '@/shared/icons/user/user.png';
 import { IoIosArrowDown } from 'react-icons/io';
 import { IoIosArrowUp } from 'react-icons/io';
-import CurrencyContext from '@/shared/context/currency/CurrencyContext';
+import CurrencyContext, { CurrencyCon } from '@/shared/context/currency/CurrencyContext';
 import Button from '@/shared/UI/Button/Button';
+import Radio from '@/shared/UI/CustomRadio/Radio';
 
 interface HeaderI {}
 
@@ -68,6 +69,22 @@ const CartComponent: FC<CartI> = ({ closeModalCart, value }) => {
         </CurrencyContext>
     );
 };
+const ListCurrency = () => {
+    const context = useContext(CurrencyCon);
+    if (!context) throw new Error('Error context in carrency');
+
+    const valuesCurrency = [
+        { value: 'som', label: 'сом' },
+        { value: 'rub', label: 'руб' },
+        { value: 'usd', label: 'доллар' },
+    ];
+
+    const { currency, handleSaveCurrency } = context;
+    const selectedOptionCurrency = (v: string) => {
+        handleSaveCurrency(v);
+    };
+    return <Radio options={valuesCurrency} selected={currency} onChange={selectedOptionCurrency} />;
+};
 
 const Headers: FC<HeaderI> = observer(() => {
     const [searchValue, setSearchValue] = useState<string>('');
@@ -79,14 +96,12 @@ const Headers: FC<HeaderI> = observer(() => {
     const changesHandler = (value: string) => {
         setSearchValue(value);
     };
-
     const closeModalCart = () => {
         setCartModal(false);
     };
     const openModalCart = () => {
         setCartModal(true);
     };
-
     const openMenu = () => {
         setOpenProfileMenu(prev => !prev);
     };
@@ -96,7 +111,7 @@ const Headers: FC<HeaderI> = observer(() => {
         <header className={`${styles.header}`}>
             <CartComponent value={cartModal} closeModalCart={closeModalCart} />
             <div className={'container'}>
-                <div className={`${styles.inner}  `}>
+                <div className={`${styles.inner}`}>
                     <div className={styles.logoType}>cyber</div>
                     <div className={styles.search}>
                         <Search value={searchValue} onChanges={changesHandler} placeholder={'поиск'} />
@@ -114,11 +129,18 @@ const Headers: FC<HeaderI> = observer(() => {
                         <span>
                             <Image src={likeIcon} alt='like icon' onClick={() => router.push('/profile/saved')} />
                         </span>
-                        <span className='dfa'>
+                        <span className={`${styles.menuProfile} dfa`}>
                             <Image src={userIcon} alt='profile' onClick={() => router.push('/profile')} />
                             <div className={styles.arrow} onClick={openMenu}>
                                 {openProfileMenu ? <IoIosArrowUp /> : <IoIosArrowDown />}
                             </div>
+                            {openProfileMenu && (
+                                <div className={styles.menuProfileBottom}>
+                                    <CurrencyContext>
+                                        <ListCurrency />
+                                    </CurrencyContext>
+                                </div>
+                            )}
                         </span>
                     </div>
                 </div>

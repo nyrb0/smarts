@@ -57,5 +57,22 @@
             margin-top: 48px - 16px;
             height: 56px;
         }
+        .warning {
+            text-align: center;
+            line-height: 150%;
+            font-weight: 600;
+            .error {
+                color: red;
+                font-size: 20px;
+            }
+            .bonus {
+                color: yellow;
+                font-size: 18px;
+            }
+            .promo {
+                color: yellow;
+                font-size: 16px;
+            }
+        }
     }
 }
