@@ -25,11 +25,11 @@ const Cart: FC<CartI> = observer(({ data }) => {
         if (count <= 0) return;
         setCount(prev => prev - 1);
     };
-
+    if (!data.selected?.color && !data.selected?.storage) return;
     return (
         <div className={`${stylesCart.cart} dfa`}>
             <div className={stylesCart.img}>
-                <Image src={data?.image?.url} alt={data.name} width={50} height={85} />
+                <Image src={data?.image.url} alt={data.name} width={50} height={85} />
             </div>
             <div className={stylesCart.name}>{data.name}</div>
             <div className={`${stylesCart.count} dfa`}>

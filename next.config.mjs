@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-        domains: ['nanoreview.net'],
+        domains: ['nanoreview.net', 'asiastore.kg'],
     },
 };
 

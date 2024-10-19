@@ -38,3 +38,5 @@ next-env.d.ts
 # components
 src/test.tsx
 
+fakedb.json
+

@@ -26,6 +26,8 @@ import { IoIosArrowUp } from 'react-icons/io';
 import CurrencyContext, { CurrencyCon } from '@/shared/context/currency/CurrencyContext';
 import Button from '@/shared/UI/Button/Button';
 import Radio from '@/shared/UI/CustomRadio/Radio';
+import searchStore from '@/app/store/searchStore/searchStore';
+import { div } from 'framer-motion/client';
 
 interface HeaderI {}
 
@@ -85,12 +87,10 @@ const ListCurrency = () => {
     };
     return <Radio options={valuesCurrency} selected={currency} onChange={selectedOptionCurrency} />;
 };
-
 const Headers: FC<HeaderI> = observer(() => {
     const [searchValue, setSearchValue] = useState<string>('');
     const [openProfileMenu, setOpenProfileMenu] = useState(false);
     const [cartModal, setCartModal] = useState(false);
-
     const router = useRouter();
 
     const changesHandler = (value: string) => {
@@ -105,8 +105,8 @@ const Headers: FC<HeaderI> = observer(() => {
     const openMenu = () => {
         setOpenProfileMenu(prev => !prev);
     };
-
     // const iconsHeaderArray = [cartIcon, likeIcons, useIcon];
+
     return (
         <header className={`${styles.header}`}>
             <CartComponent value={cartModal} closeModalCart={closeModalCart} />
@@ -115,6 +115,13 @@ const Headers: FC<HeaderI> = observer(() => {
                     <div className={styles.logoType}>cyber</div>
                     <div className={styles.search}>
                         <Search value={searchValue} onChanges={changesHandler} placeholder={'поиск'} />
+                        {searchValue.length > 0 && (
+                            <div className={styles.searchResult}>
+                                {searchStore.stories.map(stories => (
+                                    <div key={stories.id}>{stories.title}</div>
+                                ))}
+                            </div>
+                        )}
                     </div>
                     <div className={styles.bottomHeader}>
                         <div className={styles.navigation}>

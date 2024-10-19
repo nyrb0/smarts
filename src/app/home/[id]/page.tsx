@@ -56,32 +56,30 @@ const CircleColors = styled.div<CircleColorsType>`
         outline: 1.3px solid black;
     }
 `;
-
 const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
     const [data, setData] = useState<Phone | null>(null);
-    const [chooseColors, setChooseColors] = useState<string>('');
+    const [chooseColors, setChooseColors] = useState<'gold' | 'black' | 'url'>('black');
     const [chooseStorage, setChooseStorage] = useState<string>('');
     const [warning, setWarning] = useState('');
     const [warningTime, setWarningTime] = useState<boolean>(false);
     const [activeStorage, setActiveStorage] = useState<null | number>(null);
     const [thank, setThank] = useState<boolean>(false);
+    const [image, setImage] = useState('');
+    const [isSelectedProductsImage, setIsSelectedProductsImage] = useState<number>(0);
+    let copyData = data;
 
     const [stars, setStars] = useState(0);
     const [nextStart, setNextStars] = useState(false);
-
     const [commentValue, setCommentValue] = useState('');
     const userAboutData = user.userData;
     const userCookie = Cookies.get('userData1');
-
     const colors = ['black', 'purple', 'red', 'yellow', 'white'];
     const storages = ['128', '256', '512', '1024'];
-
     const date = new Date();
-
     const context = useContext(CurrencyCon);
     if (!context) throw new Error('Error in context Currency');
 
-    const { currency, setCurrency } = context;
+    const { currency } = context;
 
     const warningFunc = (theWarning: string, ms: number) => {
         setWarningTime(true);
@@ -117,7 +115,6 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
             setThank(false);
         }, ms);
     };
-
     async function getDataDinamic() {
         try {
             const res = await fetch(`http://localhost:3000/iphone/${id}`);
@@ -127,7 +124,6 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
             throw new Error('Error server backEnd:');
         }
     }
-
     const closeStars = () => {
         setStars(0);
         setNextStars(false);
@@ -159,18 +155,15 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
             throw e;
         }
     };
-
     const handleRating = (event: React.SyntheticEvent<Element, Event>, newValue: number | null) => {
         if (newValue) {
             setStars(newValue);
         }
     };
-
     const nextToStart = () => {
         if (!commentValue.length) return null;
         setNextStars(true);
     };
-
     const toParseCategory = (s: number) => {
         const stars = 5 - s;
         return data?.review?.map((d, i) => {
@@ -206,7 +199,6 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
             toParseCategory(stars)
         );
     };
-
     const deleteComent = async (c: string) => {
         try {
             const filterComment = await data?.comments.filter(f => f.id !== c);
@@ -231,6 +223,32 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
     }, []);
 
     if (!data) return;
+    const TopImagesTechnolagy = () => {
+        return (
+            <div>
+                {Object.keys(data.image.black).map((colorsImage, index) => {
+                    const theImage = data.image?.[chooseColors][colorsImage as keyof typeof data.image.black];
+                    return (
+                        <div key={colorsImage}>
+                            <Image
+                                onClick={() => {
+                                    if (isSelectedProductsImage !== index) {
+                                        setImage(theImage);
+                                        setIsSelectedProductsImage(index);
+                                    }
+                                }}
+                                width={74}
+                                height={93}
+                                src={theImage}
+                                alt='iphones'
+                                style={{ opacity: isSelectedProductsImage === index ? 1 : 0.6 }}
+                            />
+                        </div>
+                    );
+                })}
+            </div>
+        );
+    };
 
     return (
         <>
@@ -239,30 +257,42 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
             </Modal>
             <div className={style.itemPhone}>
                 <div className={`${style.containerBlock} container`}>
-                    <div className={style.phoneImage}>
-                        <Image
-                            src={data?.image.url}
-                            alt={data.name}
-                            width={300}
-                            height={516}
-                            // layout='responsive'
-                        />
+                    <div className={`dfj dfa`}>
+                        <TopImagesTechnolagy />
+                        <div>
+                            <Image
+                                src={image || data?.image?.[chooseColors][1]}
+                                alt={data.name}
+                                width={300}
+                                height={516}
+                                className={style.phoneImage}
+                                // layout='responsive'
+                            />
+                        </div>
                     </div>
                     <div className={style.info}>
                         <h1 className={style.namePhone}>{data.name}</h1>
                         <div className={style.price}>
-                            {currency === 'rub'
-                                ? data?.price?.rub
-                                : currency === 'som'
-                                ? data?.price?.som
-                                : data?.price?.usd}
+                            {currency === 'rub' ? data?.price?.rub : currency === 'som' ? data?.price?.som : data?.price?.usd}
                             {currencyChoose(currency)}
                         </div>
                         <div className={`${style.color} dfa`}>
                             <span>Выберите цвет:</span>
-                            {colors.map(c => (
-                                <CircleColors key={c} color={c} onClick={() => setChooseColors(c)} />
-                            ))}
+                            {Object.keys(data.image).map(c => {
+                                return (
+                                    c !== 'url' && (
+                                        <CircleColors
+                                            key={c}
+                                            color={c}
+                                            onClick={() => {
+                                                data.selected.color = c;
+                                                setImage(data.image?.[chooseColors][c as keyof typeof data.image.black]);
+                                                setChooseColors(c as keyof typeof data.image);
+                                            }}
+                                        />
+                                    )
+                                );
+                            })}
                         </div>
                         <div className={style.storage}>
                             {storages.map((s, i) => (
@@ -270,6 +300,7 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
                                     key={s}
                                     onClick={() => {
                                         activeStorageSet(i);
+                                        data.selected.storage = s;
                                         addStorage(s);
                                     }}
                                     border={activeStorage === i ? '1px solid black' : ''}
@@ -349,10 +380,9 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
                                 </div>
                             </div>
                             <div className={style.desc}>
-                                Apple iPhone 16 Pro Max - это новинка, которая безусловно привлечет внимание ценителей
-                                высокотехнологичных гаджетов. Принадлежащий к высшему сегменту рынка смартфон от
-                                компании Apple обеспечивает пользователей передовыми возможностями и функциональностью,
-                                которая превосходит многие другие модели на рынке.
+                                Apple iPhone 16 Pro Max - это новинка, которая безусловно привлечет внимание ценителей высокотехнологичных гаджетов.
+                                Принадлежащий к высшему сегменту рынка смартфон от компании Apple обеспечивает пользователей передовыми возможностями
+                                и функциональностью, которая превосходит многие другие модели на рынке.
                             </div>
                             <div className={`${style.btns} df`}>
                                 <div className={style.btn}>
@@ -366,16 +396,14 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
                                         Лайкать
                                     </Btn>
                                 </div>
-                                <div
-                                    className={style.btn}
-                                    onClick={() => {
-                                        addToCart(data);
-                                    }}
-                                >
+                                <div className={style.btn}>
                                     <Btn
                                         style={{
                                             background: 'black',
                                             border: 6,
+                                        }}
+                                        onClick={() => {
+                                            addToCart(data);
                                         }}
                                     >
                                         В покупку
@@ -386,6 +414,33 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
                     </div>
                 </div>
             </div>
+
+            <div className={`${style.review} container`}>
+                <Review dataAboutRev={data.review} />
+                <div className={style.comment}>
+                    <input type='text' placeholder='Оставь комментарии' onChange={changeValueComment} value={commentValue} />
+                    <div className={`dfc`}>
+                        <span className={style.btn}>
+                            <Btn
+                                style={{
+                                    background: 'transparent',
+                                    color: 'black',
+                                    border: 6,
+                                }}
+                                onClick={nextToStart}
+                            >
+                                Отправить
+                            </Btn>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div className={`${style.commentItems} container`}>
+                {data.comments?.map((c, i) => (
+                    <Comment com={c} key={i} deleteCom={deleteComent} userCommnent={userCookie} />
+                ))}
+            </div>
+
             <Modal isOpen={nextStart} visibleX close={closeStars}>
                 <div className={`${style.rating} dfc`}>
                     <div>
@@ -410,31 +465,7 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
                     </div>
                 </div>
             </Modal>
-            <div className={`${style.review} container`}>
-                <Review dataAboutRev={data.review} />
-                <div className={style.comment}>
-                    <input
-                        type='text'
-                        placeholder='Оставь комментарии'
-                        onChange={changeValueComment}
-                        value={commentValue}
-                    />
-                    <div className={`dfc`}>
-                        <span className={style.btn}>
-                            <Btn
-                                style={{
-                                    background: 'transparent',
-                                    color: 'black',
-                                    border: 6,
-                                }}
-                                onClick={nextToStart}
-                            >
-                                Отправить
-                            </Btn>
-                        </span>
-                    </div>
-                </div>
-            </div>
+
             <Modal isOpen={thank} visibleX={false}>
                 <div className={`${style.thank} dfc`}>
                     <div>
@@ -445,11 +476,6 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
                     </div>
                 </div>
             </Modal>
-            <div className={`${style.commentItems} container`}>
-                {data.comments?.map((c, i) => (
-                    <Comment com={c} key={i} deleteCom={deleteComent} userCommnent={userCookie} />
-                ))}
-            </div>
         </>
     );
 });

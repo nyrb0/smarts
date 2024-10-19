@@ -11,6 +11,11 @@
         display: flex;
         justify-content: space-between;
 
+        height: 672px;
+        .phoneImage {
+            width: 400px;
+            height: auto;
+        }
         .info {
             width: 536px;
             height: 112px;

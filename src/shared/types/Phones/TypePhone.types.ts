@@ -20,11 +20,27 @@ export interface Phone {
     screen: string;
     android: string;
     review?: ReviewCount[];
+    selected: {
+        color: string;
+        storage: string;
+    };
     comments: Comments[];
 }
 
 export interface Image {
     url: string;
+    gold: {
+        '1': string;
+        '2': string;
+        '3': string;
+        '4': string;
+    };
+    black: {
+        '1': string;
+        '2': string;
+        '3': string;
+        '4': string;
+    };
 }
 
 export interface Price {

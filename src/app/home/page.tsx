@@ -62,12 +62,7 @@ const Home = observer(() => {
                         <Select onChange={changeSel} selected={'currency'} name={'Бренд'} values={brands}></Select>
                     </span>
                     <span>
-                        <Select
-                            onChange={changeCurrency}
-                            selected={currency}
-                            name={'Валюта'}
-                            values={currencyList}
-                        ></Select>
+                        <Select onChange={changeCurrency} selected={currency} name={'Валюта'} values={currencyList}></Select>
                     </span>
                 </div>
                 <span className={`${styles.smarts} dfc`}>
