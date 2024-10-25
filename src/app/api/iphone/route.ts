@@ -7,7 +7,7 @@ export const GET = async (req: Request) => {
 
         if (!res.ok) throw new Error('Error in phone api');
 
-        return NextResponse.json({ data }, { status: 200 });
+        return NextResponse.json(data, { status: 200 });
     } catch (e) {
         return NextResponse.json({ message: 'Error phone' }, { status: 500 });
     }

@@ -1,5 +1,5 @@
-'use client ';
-import { ChangeEvent, FC } from 'react';
+'use client';
+import { FC, ChangeEvent, KeyboardEvent } from 'react';
 import styled from 'styled-components';
 
 interface SearchI {
@@ -7,9 +7,11 @@ interface SearchI {
     onChanges: (v: string) => void;
     placeholder: string;
     type?: 'search' | 'text';
+    onKeyDown?: (v: string) => void;
+    onFocus?: (v: boolean) => void;
 }
 
-const StyledComponents = styled.input`
+const StyledInput = styled.input`
     width: 100%;
     background: #f5f5f5;
     padding: 0 6px;
@@ -20,16 +22,16 @@ const StyledComponents = styled.input`
     }
 `;
 
-const Search: FC<SearchI> = ({ value, onChanges, placeholder, type = 'search' }) => {
-    const changes = (v: string) => {
-        onChanges(v);
-    };
+const Search: FC<SearchI> = ({ value, onChanges, placeholder, type = 'search', onKeyDown, onFocus }) => {
     return (
-        <StyledComponents
+        <StyledInput
             type={type}
             value={value}
-            onChange={(e: ChangeEvent<HTMLInputElement>) => changes(e.target.value)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => onChanges(e.target.value)}
             placeholder={placeholder}
+            onFocus={() => onFocus?.(true)}
+            onBlur={() => onFocus?.(false)}
+            onKeyDown={(e: KeyboardEvent<HTMLInputElement>) => onKeyDown?.(e.key)}
         />
     );
 };

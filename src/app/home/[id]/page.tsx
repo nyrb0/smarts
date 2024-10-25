@@ -1,5 +1,4 @@
 'use client';
-
 // styles
 import style from '@/styles/PagesModules/HomeItem.module.scss';
 
@@ -35,7 +34,7 @@ import Review from '@/Entities/Review/Review';
 import { Rating } from '@mui/material';
 import { generateId } from '@/Features/generateId';
 import { currencyChoose } from '@/Features/CurrencyChoose';
-import { CurrencyCon } from '@/shared/context/currency/CurrencyContext';
+import CurrencyContext, { CurrencyCon } from '@/shared/context/currency/CurrencyContext';
 
 interface PageGlobalDinamic {
     params: {
@@ -56,6 +55,20 @@ const CircleColors = styled.div<CircleColorsType>`
         outline: 1.3px solid black;
     }
 `;
+
+const CurrencyComponent: FC<{ data: Phone }> = ({ data }) => {
+    const context = useContext(CurrencyCon);
+    if (!context) throw new Error('Error in context Currency');
+
+    const { currency } = context;
+    return (
+        <>
+            {currency === 'rub' ? data?.price?.rub : currency === 'som' ? data?.price?.som : data?.price?.usd}
+            {currencyChoose(currency)}
+        </>
+    );
+};
+
 const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
     const [data, setData] = useState<Phone | null>(null);
     const [chooseColors, setChooseColors] = useState<'gold' | 'black' | 'url'>('black');
@@ -66,8 +79,6 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
     const [thank, setThank] = useState<boolean>(false);
     const [image, setImage] = useState('');
     const [isSelectedProductsImage, setIsSelectedProductsImage] = useState<number>(0);
-    let copyData = data;
-
     const [stars, setStars] = useState(0);
     const [nextStart, setNextStars] = useState(false);
     const [commentValue, setCommentValue] = useState('');
@@ -76,10 +87,6 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
     const colors = ['black', 'purple', 'red', 'yellow', 'white'];
     const storages = ['128', '256', '512', '1024'];
     const date = new Date();
-    const context = useContext(CurrencyCon);
-    if (!context) throw new Error('Error in context Currency');
-
-    const { currency } = context;
 
     const warningFunc = (theWarning: string, ms: number) => {
         setWarningTime(true);
@@ -218,6 +225,23 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
         }
     };
 
+    // function duplicateEncode(word: string) {
+    //     const obj: { [key: string]: number } = {};
+    //     word.split('').forEach(w => {
+    //         if (obj[w]) {
+    //             obj[w] = (obj[w] || 0) + 1;
+    //         }
+    //     });
+    //     return obj;
+    // }
+    // function duplicateEncode2(word: string) {
+    //     word = word.toLowerCase();
+    //     return word
+    //         .split('')
+    //         .map((alone, _, arr) => (arr.filter(f => f === alone).length === 1 ? '(' : ')'))
+    //         .join('');
+    // }
+
     useEffect(() => {
         getDataDinamic();
     }, []);
@@ -273,8 +297,9 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
                     <div className={style.info}>
                         <h1 className={style.namePhone}>{data.name}</h1>
                         <div className={style.price}>
-                            {currency === 'rub' ? data?.price?.rub : currency === 'som' ? data?.price?.som : data?.price?.usd}
-                            {currencyChoose(currency)}
+                            <CurrencyContext>
+                                <CurrencyComponent data={data} />
+                            </CurrencyContext>
                         </div>
                         <div className={`${style.color} dfa`}>
                             <span>Выберите цвет:</span>

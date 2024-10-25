@@ -1,10 +1,10 @@
 'use client';
 // styles
-import styles from '@/styles/componentsModules/Headers.module.scss';
+import styles from '@/styles/componentsModules/header/Headers.module.scss';
 
 // modules
 import Image from 'next/image';
-import { FC, useContext, useState } from 'react';
+import { FC, useCallback, useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 // components
@@ -27,7 +27,10 @@ import CurrencyContext, { CurrencyCon } from '@/shared/context/currency/Currency
 import Button from '@/shared/UI/Button/Button';
 import Radio from '@/shared/UI/CustomRadio/Radio';
 import searchStore from '@/app/store/searchStore/searchStore';
-import { div } from 'framer-motion/client';
+import Result from './components/ResultSearch/Result';
+import { Phone } from '@/shared/types/Phones/TypePhone.types';
+import Link from 'next/link';
+import user from '@/app/store/user/user';
 
 interface HeaderI {}
 
@@ -71,31 +74,39 @@ const CartComponent: FC<CartI> = ({ closeModalCart, value }) => {
         </CurrencyContext>
     );
 };
-const ListCurrency = () => {
+const ListCurrency = observer(() => {
     const context = useContext(CurrencyCon);
     if (!context) throw new Error('Error context in carrency');
+    const { userFullData } = user;
 
     const valuesCurrency = [
-        { value: 'som', label: 'сом' },
-        { value: 'rub', label: 'руб' },
-        { value: 'usd', label: 'доллар' },
+        { value: 'som', label: 'KGS', money: userFullData?.have_money.som || 0 },
+        { value: 'rub', label: '₽', money: userFullData?.have_money.rub || 0 },
+        { value: 'usd', label: '$', money: userFullData?.have_money.usd || 0 },
     ];
 
     const { currency, handleSaveCurrency } = context;
+
     const selectedOptionCurrency = (v: string) => {
         handleSaveCurrency(v);
     };
     return <Radio options={valuesCurrency} selected={currency} onChange={selectedOptionCurrency} />;
-};
+});
 const Headers: FC<HeaderI> = observer(() => {
+    const [data, setData] = useState<Phone[]>([]);
     const [searchValue, setSearchValue] = useState<string>('');
     const [openProfileMenu, setOpenProfileMenu] = useState(false);
     const [cartModal, setCartModal] = useState(false);
+    const [include, setInclude] = useState<Phone[]>([]);
     const router = useRouter();
+    const { toSaveStore } = searchStore;
 
-    const changesHandler = (value: string) => {
+    const changesHandler = async (value: string) => {
+        await setInclude(data.filter(s => s.name && s.name.toLowerCase().includes(searchValue.toLowerCase())));
         setSearchValue(value);
     };
+    console.log(include, 'include');
+
     const closeModalCart = () => {
         setCartModal(false);
     };
@@ -105,6 +116,37 @@ const Headers: FC<HeaderI> = observer(() => {
     const openMenu = () => {
         setOpenProfileMenu(prev => !prev);
     };
+
+    const closeVisibleSearch = (isClose: boolean) => {
+        isClose ? setSearchValue('') : null;
+    };
+    const setValueFromSearch = (value: string) => {
+        setSearchValue(value);
+    };
+
+    const toSearch = useCallback(
+        (e: string) => {
+            if (e === 'Enter') {
+                setInclude(data.filter(s => s.name && s.name.toLowerCase().includes(searchValue.toLowerCase())));
+                toSaveStore(searchValue);
+            }
+        },
+        [data, searchValue]
+    );
+
+    useEffect(() => {
+        fetch('/api/iphone')
+            .then(res => {
+                return res.json();
+            })
+            .then(data => {
+                setData(data);
+            })
+            .catch(e => {
+                throw new Error('Error getting search data Phone');
+            });
+    }, []);
+
     // const iconsHeaderArray = [cartIcon, likeIcons, useIcon];
 
     return (
@@ -112,14 +154,14 @@ const Headers: FC<HeaderI> = observer(() => {
             <CartComponent value={cartModal} closeModalCart={closeModalCart} />
             <div className={'container'}>
                 <div className={`${styles.inner}`}>
-                    <div className={styles.logoType}>cyber</div>
+                    <Link href={'/home'} className={styles.logoType} style={{ cursor: 'pointer' }}>
+                        cyber
+                    </Link>
                     <div className={styles.search}>
-                        <Search value={searchValue} onChanges={changesHandler} placeholder={'поиск'} />
+                        <Search value={searchValue} onChanges={changesHandler} placeholder={'поиск'} onKeyDown={toSearch} />
                         {searchValue.length > 0 && (
                             <div className={styles.searchResult}>
-                                {searchStore.stories.map(stories => (
-                                    <div key={stories.id}>{stories.title}</div>
-                                ))}
+                                <Result setValue={setValueFromSearch} close={closeVisibleSearch} result={include} story={searchStore.stories} />
                             </div>
                         )}
                     </div>

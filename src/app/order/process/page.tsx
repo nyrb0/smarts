@@ -8,9 +8,7 @@ import AddBtn from '@/app/assets/img/order/Plus.png';
 import Image from 'next/image';
 import { useContext, useState } from 'react';
 import Modal from '@/shared/UI/Modal/Modal';
-import IsOpenEdirAddressContext, {
-    ContextAddressEdit,
-} from '@/shared/context/order/isOpenEditAddress/IsOpenEdirAddress';
+import IsOpenEdirAddressContext, { ContextAddressEdit } from '@/shared/context/order/isOpenEditAddress/IsOpenEdirAddress';
 import { observer } from 'mobx-react-lite';
 import userOrder from '@/app/store/user/userOrder';
 import InputOrder from '@/shared/Order/components/Input/InputOrder';
@@ -24,7 +22,7 @@ const Edit = () => {
 
     return (
         <Modal isOpen={openEdit} close={() => setOpenEdit(false)}>
-            dmnnnn
+            jfjsv df
         </Modal>
     );
 };
@@ -33,6 +31,8 @@ const Process = () => {
     const [data, setData] = useState([]);
     const [warning, setWarning] = useState<string | null>(null);
     const [savedNotification, setSavedNotification] = useState(false);
+    const [isOffice, setIsOffice] = useState(false);
+    const [isAllFields, setIsAllFields] = useState(true);
     const [addresses, setAddresses] = useState({
         title: '',
         number: '',
@@ -44,9 +44,7 @@ const Process = () => {
             addressNumber: '',
         },
     });
-    const [addAddress, setAddress] = useState(false);
-
-    const getData = async () => {};
+    const [isAddAddress, setIsAddress] = useState(false);
     const notification = (ms: number) => {
         setSavedNotification(true);
         setTimeout(() => {
@@ -54,26 +52,49 @@ const Process = () => {
             setWarning(null);
         }, ms);
     };
+    const toServerAddress = async (data: typeof addresses) => {
+        try {
+            fetch(`/api/users/${user.userFullData?.id}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+        } catch (err) {
+            throw new Error('Ошибка при получение данных');
+        } finally {
+        }
+    };
+
+    const testRegex = (value: string, onSuccess: () => void, errorText: string) => {
+        const regex = /^[a-zA-Z0-9]*$/;
+        if (regex.test(value)) {
+            if (!isAllFields) {
+                setIsAllFields(true);
+            }
+            setWarning('');
+        } else {
+            if (isAllFields) {
+                setIsAllFields(false);
+            }
+            setWarning(errorText);
+        }
+        onSuccess();
+        // setWarning('Only letters and numbers are allowed!');
+    };
 
     const handleToAddAddres = () => {
         const { title, number, orderLocation, place } = addresses;
         const { region, city, street, addressNumber } = place;
-        if (
-            !title.trim() ||
-            !number.trim() ||
-            !orderLocation.trim() ||
-            !region.trim() ||
-            !city.trim() ||
-            !street.trim() ||
-            !addressNumber.trim()
-        ) {
+        if (!title.trim() || !number.trim() || !orderLocation.trim() || !region.trim() || !city.trim() || !street.trim() || !addressNumber.trim()) {
             setWarning('Заполните все поля!');
             return;
         }
         setWarning('Успешно добавлено');
         setWarning(null);
         notification(2000);
-        toServerAddress();
+        toServerAddress(addresses);
         setAddresses({
             title: '',
             number: '',
@@ -87,46 +108,54 @@ const Process = () => {
         });
     };
 
-    const toServerAddress = async () => {
-        try {
-            fetch(`/api/users/${user.userFullData?.id}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(addAddress),
-            });
-        } catch (err) {
-            throw new Error('Ошибка при получение данных');
-        } finally {
-        }
-    };
-
     // console.log(JSON.stringify(userOrder.addresses));
     return (
         <div className={`${styledProcess.process} container`}>
             {savedNotification && <Modal isOpen={savedNotification}>{warning}</Modal>}
-            {addAddress && (
-                <Modal isOpen={addAddress} close={() => setAddress(false)}>
+            {isAddAddress && (
+                <Modal isOpen={isAddAddress} close={() => setIsAddress(false)}>
                     <form action='' className={styledProcess.added}>
                         <label className={`${styledProcess.add} dfc`}>Добавьте адресс</label>
                         <InputOrder
                             value={addresses.title}
-                            onChange={(v: string) => setAddresses(prev => ({ ...prev, title: v }))}
+                            onChange={(v: string) =>
+                                testRegex(
+                                    v,
+                                    () => {
+                                        setAddresses(prev => ({ ...prev, title: v }));
+                                    },
+                                    'vn'
+                                )
+                            }
                             placeholder={'Название'}
                             required
                         />
                         <InputOrder
                             value={addresses.number}
-                            onChange={(v: string) => setAddresses(prev => ({ ...prev, number: v }))}
+                            onChange={(v: string) =>
+                                testRegex(
+                                    v,
+                                    () => {
+                                        setWarning('');
+                                        setAddresses(prev => ({ ...prev, number: v }));
+                                    },
+                                    'В поле "название" нельзя писать символы'
+                                )
+                            }
                             placeholder={'Номер'}
+                            required
+                        />
+                        <InputOrder
+                            value={addresses.place.city}
+                            onChange={(v: string) => setAddresses(prev => ({ ...prev, place: { ...prev.place, city: v } }))}
+                            placeholder={'Город'}
                             required
                         />
                         <div className={`${styledProcess.theNumberAddress} df`}>
                             <div style={{ width: '100%' }}>
                                 <InputOrder
-                                    value={addresses.title}
-                                    onChange={(v: string) => setAddresses(prev => ({ ...prev, title: v }))}
+                                    value={addresses.place.street}
+                                    onChange={(v: string) => setAddresses(prev => ({ ...prev, place: { ...prev.place, street: v } }))}
                                     placeholder={'Улица'}
                                     required
                                 />
@@ -134,25 +163,24 @@ const Process = () => {
                             <div style={{ width: '100%' }}>
                                 <InputOrder
                                     value={addresses.place.addressNumber}
-                                    onChange={(v: string) =>
-                                        setAddresses(prev => ({ ...prev, place: { ...prev.place, addressNumber: v } }))
-                                    }
+                                    onChange={(v: string) => setAddresses(prev => ({ ...prev, place: { ...prev.place, addressNumber: v } }))}
                                     required
                                     placeholder={'Номер дома'}
                                 />
                             </div>
                         </div>
-                        <div className={`${styledProcess.btns} dfj`}>
-                            <Button
-                                style={{ background: '#000', color: 'white', border: 6 }}
-                                onClick={() => setAddresses(prev => ({ ...prev }))}
-                            >
+                        <div className={`${styledProcess.btns} dfc`}>
+                            <Button style={{ background: '#000', color: 'white', border: 6 }} onClick={() => setIsOffice(false)}>
                                 Офис
                             </Button>
-                            <Button style={{ background: '', color: '#000', border: 6 }}>Дом</Button>
+                            <Button style={{ background: '', color: '#000', border: 6 }} onClick={() => setIsOffice(true)}>
+                                Дом
+                            </Button>
                         </div>
-                        <p className={styledProcess.warning}>jfsbvh{warning}</p>
-                        <Button style={{ background: '#000', color: 'white', border: 6 }}>Добавить</Button>
+                        <p className={styledProcess.warning}>{warning}</p>
+                        <div className={styledProcess.btn}>
+                            <Button style={{ background: '#000', color: 'white', border: 6 }}>Добавить</Button>
+                        </div>
                     </form>
                 </Modal>
             )}
@@ -170,7 +198,7 @@ const Process = () => {
                     <CardAddress stage={order} location='office' key={order.code} />
                 ))}
             </div>
-            <button onClick={() => setAddress(true)}>
+            <button onClick={() => setIsAddress(true)}>
                 <Image src={AddBtn} alt='add button' className='dfc' />
             </button>
         </div>

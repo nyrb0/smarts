@@ -37,7 +37,7 @@ const OrderProcess = observer(() => {
     const [next, setNext] = useState(false);
     const [war, setWar] = useState('');
     const [discount, setDiscount] = useState(0);
-    let allSum = cartProducts.productStorage?.reduce((sum, el) => el.price.som + sum, 0);
+    let allSum = cartProducts.productStorage?.reduce((sum, el) => el.price[theCurrency] + sum, 0);
     const [allSumWithDiscount, setAllSumWithDiscount] = useState(allSum);
     const calculateDiscount = (sum: number, percent: number) => {
         if (sum < 0 || percent < 0) {
@@ -74,7 +74,7 @@ const OrderProcess = observer(() => {
             setWar('Сумма заказа должна быть больше 0');
             return false;
         }
-        if (!user.userFullData?.have_money?.usd) {
+        if (!user.userFullData?.have_money?.[theCurrency]) {
             setWar('Данные о деньгах пользователя недоступны');
             return false;
         }
@@ -82,18 +82,19 @@ const OrderProcess = observer(() => {
     };
 
     const toSendOrder = () => {
-        if (!validateOrderConditions()) return;
+        if (!validateOrderConditions()) {
+            router.push('/order/process');
+            return;
+        }
         if (user.userFullData?.have_money?.[theCurrency]) {
             const money = user.userFullData.have_money;
             const enoughtMoney = money?.[theCurrency] - allSumWithDiscount;
+
             if (enoughtMoney < 0) {
                 setWar('У вас не хватает баланс');
                 return false;
             }
-            userMoney.takeMoney(user.userFullData.id, { have_money: { ...money, usd: 0 } });
-        }
-        if (next) {
-            router.push('/order/process');
+            // userMoney.takeMoney(user.userFullData.id, { have_money: { ...money, usd: 0 } });
         }
         setNext(true);
         const isPromo = isCurrectPromos(promoCode, promo.promo);

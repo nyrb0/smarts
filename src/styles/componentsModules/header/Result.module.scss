@@ -1,0 +1,36 @@
+.result {
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    font-size: 14px;
+    font-weight: 400;
+    position: relative;
+    z-index: 99;
+    .viewStory {
+        opacity: 0.7;
+        display: flex;
+        justify-content: flex-end;
+        font-size: 13px;
+        cursor: pointer;
+    }
+
+    .empty {
+        text-align: center;
+        opacity: 0.7;
+        padding: 5px 0;
+    }
+}
+
+.itemStory {
+    cursor: pointer;
+    padding: 4px 0;
+    &:hover {
+        border-radius: 3px;
+        background-color: #dcdcdc;
+    }
+    .icon {
+        transform: translateY(2px);
+    }
+}

@@ -10,7 +10,7 @@ import { observer } from 'mobx-react-lite';
 import Global from '../store/GlobalStorage/Global';
 import CurrencyContext, { CurrencyCon } from '@/shared/context/currency/CurrencyContext';
 
-const Home = observer(() => {
+const HomeComponent = observer(() => {
     const [data, setData] = useState<null | Phone[]>(null);
 
     const context = useContext(CurrencyCon);
@@ -48,6 +48,8 @@ const Home = observer(() => {
         handleSaveCurrency(s);
     };
 
+    const okSearch = () => {};
+
     useEffect(() => {
         getData();
         // getPopular();
@@ -75,4 +77,13 @@ const Home = observer(() => {
         </main>
     );
 });
+
+const Home = () => {
+    return (
+        <CurrencyContext>
+            <HomeComponent />
+        </CurrencyContext>
+    );
+};
+
 export default Home;

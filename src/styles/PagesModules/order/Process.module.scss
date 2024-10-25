@@ -21,7 +21,15 @@
         gap: 10px;
     }
     .btns {
-        width: 100px;
         gap: 10px;
+    }
+    .warning {
+        padding: 10px 0;
+        text-align: center;
+        color: red;
+        font-size: 14;
+    }
+    .btn {
+        height: 50px;
     }
 }

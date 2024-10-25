@@ -15,19 +15,33 @@ class SearchStore {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ title }),
-            }).then(res => {
-                if (!res) {
-                    throw new Error('Failed to save the store');
-                }
-            });
-
-            // Optional: You can reload the stories or add the new story directly
-            this.getStore();
+                body: JSON.stringify({ name: title }),
+            })
+                .then(res => {
+                    if (!res) {
+                        throw new Error('Failed to save the store');
+                    }
+                    return res.json();
+                })
+                .then(data => {
+                    this.stories = data;
+                });
         } catch (err) {
             throw err;
         }
     }
+    async toDeleteStoreAll() {
+        try {
+            fetch('/api/search-store/delete-all', {
+                method: 'DELETE',
+            }).then(data => {
+                this.stories = [];
+            });
+        } catch (err) {
+            throw err;
+        }
+    }
+
     async getStore(title?: string) {
         try {
             const res = await fetch('/api/search-store');

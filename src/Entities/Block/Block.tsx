@@ -19,6 +19,7 @@ import { FC, useContext, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { currencyChoose } from '@/Features/CurrencyChoose';
 import { CurrencyCon } from '@/shared/context/currency/CurrencyContext';
+import Currency from '../Currencies/Currency';
 interface BlockI {
     data: Phone | null;
 }
@@ -28,7 +29,7 @@ const Block: FC<BlockI> = ({ data: teh }) => {
 
     const context = useContext(CurrencyCon);
     if (!context) throw new Error('Error in context currency');
-    const { currency, setCurrency } = context;
+    const { currency } = context;
 
     // const savedResursUser = async () => {
     //     try {
@@ -70,12 +71,7 @@ const Block: FC<BlockI> = ({ data: teh }) => {
                 <div key={teh.id} className={styles.block}>
                     <div className={styles.inner}>
                         <div className={`${styles.like} df`}>
-                            <Image
-                                src={likeProducts}
-                                alt='like procducts'
-                                style={{ fill: 'red' }}
-                                onClick={() => setServerUser(teh)}
-                            />
+                            <Image src={likeProducts} alt='like procducts' style={{ fill: 'red' }} onClick={() => setServerUser(teh)} />
                         </div>
                         <div className={`${styles.thePhone} dfc`}>
                             {teh.image?.url ? (
@@ -86,12 +82,7 @@ const Block: FC<BlockI> = ({ data: teh }) => {
                         </div>
                         <div className={styles.name}>{teh.name}</div>
                         <div className={styles.price}>
-                            {currency === 'rub'
-                                ? teh?.price?.rub
-                                : currency === 'som'
-                                ? teh?.price?.som
-                                : teh?.price?.usd}
-                            {currencyChoose(currency)}
+                            <Currency money={teh.price} />
                         </div>
                         <div className={`${styles.btn} dfc`}>
                             <span>
