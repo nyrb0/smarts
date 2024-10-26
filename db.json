@@ -268,5 +268,31 @@
             "id": "1267"
         }
     ],
-    "search-store": []
+    "search-store": [],
+    "address": [
+        {
+            "id": "2",
+            "orderLocation": true,
+            "title": "Express cargo",
+            "number": "9095834758347",
+            "place": {
+                "region": "Чуй",
+                "city": "Бишкек",
+                "street": "шабдан баатыра",
+                "addressNumber": "210k"
+            }
+        },
+        {
+            "id": "e68d",
+            "title": "gfdgd",
+            "number": "gsgsfd",
+            "orderLocation": false,
+            "place": {
+                "region": "",
+                "city": "gdfsgsd",
+                "street": "gsdgd",
+                "addressNumber": "gsdfgds"
+            }
+        }
+    ]
 }

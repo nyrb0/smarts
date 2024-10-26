@@ -10,10 +10,10 @@ import { useContext, useState } from 'react';
 import Modal from '@/shared/UI/Modal/Modal';
 import IsOpenEdirAddressContext, { ContextAddressEdit } from '@/shared/context/order/isOpenEditAddress/IsOpenEdirAddress';
 import { observer } from 'mobx-react-lite';
-import userOrder from '@/app/store/user/userOrder';
+import userOrder from '@/app/store/user/address';
 import InputOrder from '@/shared/Order/components/Input/InputOrder';
 import Button from '@/shared/UI/Button/Button';
-import user from '@/app/store/user/user';
+import Mark from '@/shared/image/gif/mark ok.gif';
 
 const Edit = () => {
     const openEditCon = useContext(ContextAddressEdit);
@@ -28,15 +28,13 @@ const Edit = () => {
 };
 
 const Process = () => {
-    const [data, setData] = useState([]);
     const [warning, setWarning] = useState<string | null>(null);
     const [savedNotification, setSavedNotification] = useState(false);
     const [isOffice, setIsOffice] = useState(false);
-    const [isAllFields, setIsAllFields] = useState(true);
     const [addresses, setAddresses] = useState({
         title: '',
         number: '',
-        orderLocation: '',
+        orderLocation: isOffice,
         place: {
             region: '',
             city: '',
@@ -54,7 +52,7 @@ const Process = () => {
     };
     const toServerAddress = async (data: typeof addresses) => {
         try {
-            fetch(`/api/users/${user.userFullData?.id}`, {
+            fetch(`/api/address`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -67,38 +65,39 @@ const Process = () => {
         }
     };
 
+    const regex = /^[a-zA-Zа-яА-Я0-9]*$/;
+
     const testRegex = (value: string, onSuccess: () => void, errorText: string) => {
-        const regex = /^[a-zA-Z0-9]*$/;
         if (regex.test(value)) {
-            if (!isAllFields) {
-                setIsAllFields(true);
-            }
             setWarning('');
         } else {
-            if (isAllFields) {
-                setIsAllFields(false);
-            }
             setWarning(errorText);
         }
         onSuccess();
-        // setWarning('Only letters and numbers are allowed!');
     };
 
     const handleToAddAddres = () => {
         const { title, number, orderLocation, place } = addresses;
         const { region, city, street, addressNumber } = place;
-        if (!title.trim() || !number.trim() || !orderLocation.trim() || !region.trim() || !city.trim() || !street.trim() || !addressNumber.trim()) {
+        const fields = { title, number, region, city, street, addressNumber };
+        const object = Object.values(fields);
+        if (object.every(isEmpty => !isEmpty.trim())) {
             setWarning('Заполните все поля!');
             return;
         }
-        setWarning('Успешно добавлено');
+        if (!object.every(field => regex.test(field))) {
+            setWarning('Пишите без символов!');
+            return;
+        }
         setWarning(null);
+        setWarning('Успешно добавлено');
+        setIsAddress(false);
         notification(2000);
         toServerAddress(addresses);
         setAddresses({
             title: '',
             number: '',
-            orderLocation: '',
+            orderLocation: false,
             place: {
                 region: '',
                 city: '',
@@ -108,99 +107,142 @@ const Process = () => {
         });
     };
 
-    // console.log(JSON.stringify(userOrder.addresses));
     return (
         <div className={`${styledProcess.process} container`}>
-            {savedNotification && <Modal isOpen={savedNotification}>{warning}</Modal>}
-            {isAddAddress && (
-                <Modal isOpen={isAddAddress} close={() => setIsAddress(false)}>
-                    <form action='' className={styledProcess.added}>
-                        <label className={`${styledProcess.add} dfc`}>Добавьте адресс</label>
-                        <InputOrder
-                            value={addresses.title}
-                            onChange={(v: string) =>
-                                testRegex(
-                                    v,
-                                    () => {
-                                        setAddresses(prev => ({ ...prev, title: v }));
-                                    },
-                                    'vn'
-                                )
-                            }
-                            placeholder={'Название'}
-                            required
-                        />
-                        <InputOrder
-                            value={addresses.number}
-                            onChange={(v: string) =>
-                                testRegex(
-                                    v,
-                                    () => {
-                                        setWarning('');
-                                        setAddresses(prev => ({ ...prev, number: v }));
-                                    },
-                                    'В поле "название" нельзя писать символы'
-                                )
-                            }
-                            placeholder={'Номер'}
-                            required
-                        />
-                        <InputOrder
-                            value={addresses.place.city}
-                            onChange={(v: string) => setAddresses(prev => ({ ...prev, place: { ...prev.place, city: v } }))}
-                            placeholder={'Город'}
-                            required
-                        />
-                        <div className={`${styledProcess.theNumberAddress} df`}>
-                            <div style={{ width: '100%' }}>
-                                <InputOrder
-                                    value={addresses.place.street}
-                                    onChange={(v: string) => setAddresses(prev => ({ ...prev, place: { ...prev.place, street: v } }))}
-                                    placeholder={'Улица'}
-                                    required
-                                />
-                            </div>
-                            <div style={{ width: '100%' }}>
-                                <InputOrder
-                                    value={addresses.place.addressNumber}
-                                    onChange={(v: string) => setAddresses(prev => ({ ...prev, place: { ...prev.place, addressNumber: v } }))}
-                                    required
-                                    placeholder={'Номер дома'}
-                                />
-                            </div>
+            <Modal isOpen={savedNotification} visibleX={false}>
+                <div className={`${styledProcess.thank} dfc`}>
+                    <div>
+                        <div className='dfc'>
+                            <Image src={Mark} alt='mark' />
                         </div>
-                        <div className={`${styledProcess.btns} dfc`}>
-                            <Button style={{ background: '#000', color: 'white', border: 6 }} onClick={() => setIsOffice(false)}>
-                                Офис
-                            </Button>
-                            <Button style={{ background: '', color: '#000', border: 6 }} onClick={() => setIsOffice(true)}>
-                                Дом
-                            </Button>
+                        <div className={styledProcess.thankText}>Добавлен ваш адресс</div>
+                    </div>
+                </div>
+            </Modal>
+
+            <Modal isOpen={isAddAddress} close={() => setIsAddress(false)}>
+                <form action='' className={styledProcess.added}>
+                    <label className={`${styledProcess.add} dfc`}>Добавьте адресс</label>
+                    <InputOrder
+                        value={addresses.title}
+                        onChange={(v: string) =>
+                            testRegex(
+                                v,
+                                () => {
+                                    setAddresses(prev => ({ ...prev, title: v }));
+                                },
+                                'В поле "Название" нельзя писать символы'
+                            )
+                        }
+                        placeholder={'Название'}
+                        required
+                    />
+
+                    <InputOrder
+                        value={addresses.number}
+                        onChange={(v: string) =>
+                            testRegex(
+                                v,
+                                () => {
+                                    setAddresses(prev => ({ ...prev, number: v }));
+                                },
+                                'В поле "Номер" нельзя писать символы'
+                            )
+                        }
+                        placeholder={'Номер'}
+                        required
+                    />
+
+                    <InputOrder
+                        value={addresses.place.city}
+                        onChange={(v: string) =>
+                            testRegex(
+                                v,
+                                () => {
+                                    setAddresses(prev => ({ ...prev, place: { ...prev.place, city: v } }));
+                                },
+                                'В поле "Город" нельзя писать символы'
+                            )
+                        }
+                        placeholder={'Город'}
+                        required
+                    />
+
+                    <div className={`${styledProcess.theNumberAddress} df`}>
+                        <div style={{ width: '100%' }}>
+                            <InputOrder
+                                value={addresses.place.street}
+                                onChange={(v: string) =>
+                                    testRegex(
+                                        v,
+                                        () => {
+                                            setAddresses(prev => ({ ...prev, place: { ...prev.place, street: v } }));
+                                        },
+                                        'В поле "Улица" нельзя писать символы'
+                                    )
+                                }
+                                placeholder={'Улица'}
+                                required
+                            />
                         </div>
-                        <p className={styledProcess.warning}>{warning}</p>
-                        <div className={styledProcess.btn}>
-                            <Button style={{ background: '#000', color: 'white', border: 6 }}>Добавить</Button>
+                        <div style={{ width: '100%' }}>
+                            <InputOrder
+                                value={addresses.place.addressNumber}
+                                onChange={(v: string) =>
+                                    testRegex(
+                                        v,
+                                        () => {
+                                            setAddresses(prev => ({ ...prev, place: { ...prev.place, addressNumber: v } }));
+                                        },
+                                        'В поле "Номер дома" нельзя писать символы'
+                                    )
+                                }
+                                required
+                                placeholder={'Номер дома'}
+                            />
                         </div>
-                    </form>
-                </Modal>
-            )}
+                    </div>
+                    <div className={`${styledProcess.btns} dfc`}>
+                        <Button
+                            style={{ background: isOffice ? '#000' : '', color: isOffice ? '#fff' : '#000', border: 6 }}
+                            onClick={() => setIsOffice(true)}
+                        >
+                            Офис
+                        </Button>
+                        <Button
+                            style={{ background: isOffice ? '' : '#000', color: isOffice ? '#000' : '#fff', border: 6 }}
+                            onClick={() => setIsOffice(false)}
+                        >
+                            Дом
+                        </Button>
+                    </div>
+                    <p className={styledProcess.warning}>{warning}</p>
+                    <div className={styledProcess.btn} onClick={() => handleToAddAddres()}>
+                        <Button style={{ background: '#000', color: 'white', border: 6 }}>Добавить</Button>
+                    </div>
+                </form>
+            </Modal>
             <IsOpenEdirAddressContext>
                 <Edit />
             </IsOpenEdirAddressContext>
-            <div className={`${styledProcess.stages} dfj`}>
-                <StagesOrder stages='payment' isTheStage={true} />
-                <StagesOrder stages='shipping' isTheStage={false} />
-                <StagesOrder stages='payment' isTheStage={false} />
-            </div>
             <div className={styledProcess.select}>Выбирайте адресс</div>
             <div>
                 {userOrder.addresses.map(order => (
-                    <CardAddress stage={order} location='office' key={order.code} />
+                    <CardAddress stage={order} key={order.code} />
                 ))}
             </div>
-            <button onClick={() => setIsAddress(true)}>
-                <Image src={AddBtn} alt='add button' className='dfc' />
-            </button>
+            <div className={`${styledProcess.btnAdd} dfc`}>
+                <button onClick={() => setIsAddress(true)}>
+                    <Image src={AddBtn} alt='add button' className={styledProcess.plusBtn} />
+                    <p style={{ marginTop: 8 }}>Добавить адресс</p>
+                </button>
+            </div>
+            <div className={`${styledProcess.nextBtn} df`}>
+                <div className={`${styledProcess.cnr} df`}>
+                    <Button style={{ background: '#fff', color: '#000', border: 6 }}>Назад</Button>
+                    <Button style={{ background: '#000', color: '#fff', border: 6 }}>Дальше</Button>
+                </div>
+            </div>
         </div>
     );
 };

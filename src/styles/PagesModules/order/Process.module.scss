@@ -1,15 +1,22 @@
 .process {
-    .stages {
-        margin-top: 10px;
-        display: flex;
-        margin-bottom: 72px;
-    }
     .select {
         font-weight: 600;
         font-size: 20px;
         line-height: 120%;
         color: #17183b;
         margin-bottom: 32px;
+    }
+    .nextBtn {
+        justify-content: flex-end;
+        margin-top: 64px;
+        & .cnr {
+            height: 64px;
+            width: 208px + 208px + 24px;
+            gap: 24px;
+        }
+    }
+    .btnAdd {
+        margin-top: 48px - 24px;
     }
 }
 
@@ -32,4 +39,17 @@
     .btn {
         height: 50px;
     }
+}
+
+.thank {
+    & img {
+        width: 60px;
+        height: 60px;
+        object-fit: contain;
+    }
+}
+
+.stages {
+    margin-top: 10px;
+    margin-bottom: 72px;
 }

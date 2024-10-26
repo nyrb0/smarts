@@ -3,7 +3,6 @@ import resultS from '@/styles/componentsModules/header/Result.module.scss';
 import { FC, useState } from 'react';
 import { MdOutlineReplay } from 'react-icons/md';
 import { CiSearch } from 'react-icons/ci';
-import Link from 'next/link';
 import searchStore from '@/app/store/searchStore/searchStore';
 import { useRouter } from 'next/navigation';
 

@@ -13,20 +13,4 @@ export type usersType = {
     email: string;
     number: string;
     education: string;
-    order: usersOrder;
-};
-
-export type usersOrder = {
-    code: string;
-    number: string;
-    title: string;
-    place: UsersOrderPlace;
-    orderLocation: string;
-};
-
-export type UsersOrderPlace = {
-    region: string;
-    city: string;
-    street: string;
-    addressNumber: string;
 };

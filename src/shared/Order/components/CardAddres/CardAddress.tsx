@@ -6,24 +6,13 @@ import editIcon from '@/app/assets/img/order/Edit.png';
 import delIcon from '@/app/assets/img/order/Close.png';
 import Edit from '@/app/profile/edit/page';
 import Image from 'next/image';
+import { usersOrder } from '@/shared/types/order/order.type';
 
 interface CardAddressProps {
-    stage: {
-        code: string;
-        title: string;
-        place: PlaceProps;
-        number: string;
-    };
-    location: 'office' | 'home';
-}
-interface PlaceProps {
-    region: string;
-    city: string;
-    street: string;
-    addressNumber: string;
+    stage: usersOrder;
 }
 
-const CardAddress: FC<CardAddressProps> = ({ stage, location }) => {
+const CardAddress: FC<CardAddressProps> = ({ stage }) => {
     return (
         <div className={`${stylesCardAddress.address} dfj`}>
             <div className='df'>
@@ -35,7 +24,7 @@ const CardAddress: FC<CardAddressProps> = ({ stage, location }) => {
                         <div>
                             {stage.code} {stage.title}
                         </div>
-                        <div className={stylesCardAddress.isPlace}>{location}</div>
+                        <div className={stylesCardAddress.isPlace}>{stage.orderLocation ? 'Дом' : 'Офис'}</div>
                     </div>
                     <div className={stylesCardAddress.theCarrectAddres}>
                         {stage.place.region},{stage.place.city},{stage.place.street}, {stage.place.addressNumber}

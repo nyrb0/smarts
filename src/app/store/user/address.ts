@@ -1,6 +1,6 @@
 import { makeAutoObservable } from 'mobx';
 import user from './user';
-import { usersOrder, usersType } from '@/shared/types/User/User.types';
+import { usersOrder } from '@/shared/types/order/order.type';
 
 class UserOrder {
     addresses: usersOrder[] = [];
@@ -14,13 +14,11 @@ class UserOrder {
 
     async getAddressesUser() {
         try {
-            const res = await fetch(`/api/user/af6e`, {
-                method: 'GET',
-            });
-            const data: usersType = await res.json();
-            this.addresses.push(data.order);
+            const res = await fetch(`/api/address`);
+            const data = await res.json();
+            this.addresses = data;
         } catch (err) {
-            throw new Error('Ошибка');
+            throw new Error('Ошибка при получение информации адресса');
         }
     }
 }

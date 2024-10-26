@@ -3,8 +3,8 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "dev": "next dev",
         "server": "json-server --watch db.json --port 3000",
+        "dev": "next dev",
         "build": "next build",
         "start": "next start",
         "lint": "next lint"
@@ -33,6 +33,7 @@
         "@types/node": "^20",
         "@types/react": "^18",
         "@types/react-dom": "^18",
+        "concurrently": "^9.0.1",
         "eslint": "^8",
         "eslint-config-next": "14.2.8",
         "typescript": "^5"

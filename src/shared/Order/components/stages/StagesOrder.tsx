@@ -5,10 +5,10 @@ import { FC } from 'react';
 import { OrderStagesStyled, OrderStagesTheStages, OrderStagesTitleStyled } from './StagesOrder.styled';
 import Image from 'next/image';
 
-interface StagesOrderProps {
+export type StagesOrderProps = {
     stages: 'shipping' | 'location' | 'payment';
     isTheStage: boolean;
-}
+};
 
 const iconMapping = {
     location: LocationIcon,
@@ -24,7 +24,7 @@ const nameMapping = {
 
 const StagesOrder: FC<StagesOrderProps> = ({ stages, isTheStage }) => {
     return (
-        <OrderStagesStyled isTheStages={isTheStage}>
+        <OrderStagesStyled $isTheStage={isTheStage}>
             <Image src={iconMapping[stages]} alt={`${stages} иконка`} />
             <div style={{ marginLeft: 5 }}>
                 <OrderStagesTheStages>Этап</OrderStagesTheStages>

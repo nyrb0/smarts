@@ -1,15 +1,5 @@
-import { makeAutoObservable } from 'mobx';
-
-class Global {
-    selecred: string = 'popular';
-
-    constructor() {
-        makeAutoObservable(this);
-    }
-
-    setSelected(s: string) {
-        this.selecred = s;
-    }
+class GlobalStorage {
+    constructor() {}
 }
 
-export default new Global();
+export default new GlobalStorage();

@@ -1,11 +1,7 @@
 import styled from 'styled-components';
 
-type OrderStagesType = {
-    isTheStages: boolean;
-};
-
-const OrderStagesStyled = styled.div<OrderStagesType>`
-    opacity: ${style => (style.isTheStages ? '1' : '0.4')};
+const OrderStagesStyled = styled.div<{ $isTheStage: boolean }>`
+    opacity: ${style => (style.$isTheStage ? '1' : '0.4')};
     display: flex;
     align-items: center;
 `;
