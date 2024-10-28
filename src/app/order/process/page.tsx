@@ -6,7 +6,7 @@ import styledProcess from '@/styles/PagesModules/order/Process.module.scss';
 // icons
 import AddBtn from '@/app/assets/img/order/Plus.png';
 import Image from 'next/image';
-import { useContext, useState } from 'react';
+import { FC, useContext, useState } from 'react';
 import Modal from '@/shared/UI/Modal/Modal';
 import IsOpenEdirAddressContext, { ContextAddressEdit } from '@/shared/context/order/isOpenEditAddress/IsOpenEdirAddress';
 import { observer } from 'mobx-react-lite';
@@ -14,15 +14,27 @@ import userOrder from '@/app/store/user/address';
 import InputOrder from '@/shared/Order/components/Input/InputOrder';
 import Button from '@/shared/UI/Button/Button';
 import Mark from '@/shared/image/gif/mark ok.gif';
+import { useRouter } from 'next/navigation';
+import { usersOrder } from '@/shared/types/order/order.type';
 
-const Edit = () => {
-    const openEditCon = useContext(ContextAddressEdit);
-    if (!openEditCon) throw new Error('Error in ');
-    const { openEdit, setOpenEdit } = openEditCon;
+interface EditProps {
+    isOpenEdit: boolean;
+    close: () => void;
+    data: usersOrder | null;
+}
 
+const Edit: FC<EditProps> = ({ isOpenEdit, close, data }) => {
+    const [address, setAddres] = useState(data);
+
+    // const openEditCon = useContext(ContextAddressEdit);
+    // if (!openEditCon) throw new Error('Error in ');
+    // const { openEdit, setOpenEdit } = openEditCon;
+    if (!address) {
+        return <p>Ошибка при получения данных</p>;
+    }
     return (
-        <Modal isOpen={openEdit} close={() => setOpenEdit(false)}>
-            jfjsv df
+        <Modal isOpen={isOpenEdit} close={close}>
+            <InputOrder value={address.title} onChange={(v: string) => null} placeholder={'Название'} required />
         </Modal>
     );
 };
@@ -31,6 +43,8 @@ const Process = () => {
     const [warning, setWarning] = useState<string | null>(null);
     const [savedNotification, setSavedNotification] = useState(false);
     const [isOffice, setIsOffice] = useState(false);
+    const [isOpenEditAddress, setIsopenEditAddress] = useState(false);
+    const [theOneAddress, setTheOneAddress] = useState<usersOrder | null>(null);
     const [addresses, setAddresses] = useState({
         title: '',
         number: '',
@@ -50,6 +64,8 @@ const Process = () => {
             setWarning(null);
         }, ms);
     };
+
+    const router = useRouter();
     const toServerAddress = async (data: typeof addresses) => {
         try {
             fetch(`/api/address`, {
@@ -94,6 +110,7 @@ const Process = () => {
         setIsAddress(false);
         notification(2000);
         toServerAddress(addresses);
+
         setAddresses({
             title: '',
             number: '',
@@ -105,6 +122,9 @@ const Process = () => {
                 addressNumber: '',
             },
         });
+    };
+    const nextToStages = () => {
+        router.push('/order/process/delivery');
     };
 
     return (
@@ -223,12 +243,26 @@ const Process = () => {
                 </form>
             </Modal>
             <IsOpenEdirAddressContext>
-                <Edit />
+                <Edit isOpenEdit={isOpenEditAddress} close={() => setIsopenEditAddress(false)} data={theOneAddress} />
             </IsOpenEdirAddressContext>
             <div className={styledProcess.select}>Выбирайте адресс</div>
             <div>
                 {userOrder.addresses.map(order => (
-                    <CardAddress stage={order} key={order.code} />
+                    <div
+                        key={order.id}
+                        onClick={() => {
+                            setTheOneAddress(order);
+                            setIsopenEditAddress(true);
+                        }}
+                    >
+                        <CardAddress
+                            stage={order}
+                            toEdit={() => {
+                                setIsopenEditAddress(true);
+                            }}
+                            toDel={() => {}}
+                        />
+                    </div>
                 ))}
             </div>
             <div className={`${styledProcess.btnAdd} dfc`}>
@@ -239,8 +273,12 @@ const Process = () => {
             </div>
             <div className={`${styledProcess.nextBtn} df`}>
                 <div className={`${styledProcess.cnr} df`}>
-                    <Button style={{ background: '#fff', color: '#000', border: 6 }}>Назад</Button>
-                    <Button style={{ background: '#000', color: '#fff', border: 6 }}>Дальше</Button>
+                    <Button style={{ background: '#fff', color: '#000', border: 6 }} onClick={() => null}>
+                        Назад
+                    </Button>
+                    <Button style={{ background: '#000', color: '#fff', border: 6 }} onClick={nextToStages}>
+                        Дальше
+                    </Button>
                 </div>
             </div>
         </div>

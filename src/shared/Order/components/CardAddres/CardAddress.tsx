@@ -10,9 +10,11 @@ import { usersOrder } from '@/shared/types/order/order.type';
 
 interface CardAddressProps {
     stage: usersOrder;
+    toEdit: () => void;
+    toDel: () => void;
 }
 
-const CardAddress: FC<CardAddressProps> = ({ stage }) => {
+const CardAddress: FC<CardAddressProps> = ({ stage, toEdit, toDel }) => {
     return (
         <div className={`${stylesCardAddress.address} dfj`}>
             <div className='df'>
@@ -22,7 +24,7 @@ const CardAddress: FC<CardAddressProps> = ({ stage }) => {
                 <div className={`${stylesCardAddress.inner} `}>
                     <div className={`${stylesCardAddress.location} dfa`}>
                         <div>
-                            {stage.code} {stage.title}
+                            {stage.id} {stage.title}
                         </div>
                         <div className={stylesCardAddress.isPlace}>{stage.orderLocation ? 'Дом' : 'Офис'}</div>
                     </div>
@@ -33,8 +35,8 @@ const CardAddress: FC<CardAddressProps> = ({ stage }) => {
                 </div>
             </div>
             <div className={`${stylesCardAddress.edits} dfj`}>
-                <Image src={editIcon} alt='edit' />
-                <Image src={delIcon} alt='del' />
+                <Image src={editIcon} alt='edit' onClick={toEdit} />
+                <Image src={delIcon} alt='del' onClick={toDel} />
             </div>
         </div>
     );

@@ -1,5 +1,5 @@
 export type usersOrder = {
-    code: string;
+    id: string;
     number: string;
     title: string;
     place: UsersOrderPlace;
