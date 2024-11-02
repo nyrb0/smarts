@@ -139,7 +139,6 @@ const Process = () => {
                     </div>
                 </div>
             </Modal>
-
             <Modal isOpen={isAddAddress} close={() => setIsAddress(false)}>
                 <form action='' className={styledProcess.added}>
                     <label className={`${styledProcess.add} dfc`}>Добавьте адресс</label>
@@ -157,7 +156,6 @@ const Process = () => {
                         placeholder={'Название'}
                         required
                     />
-
                     <InputOrder
                         value={addresses.number}
                         onChange={(v: string) =>

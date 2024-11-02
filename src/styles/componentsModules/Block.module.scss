@@ -33,5 +33,10 @@
                 height: 48px;
             }
         }
+        .thePhone {
+            & img {
+                width: 100%;
+            }
+        }
     }
 }

@@ -12,9 +12,9 @@ class User {
     theUser: usersType | null = null;
 
     constructor() {
+        makeAutoObservable(this);
         this.fetchUserData(cookieMy('userData1') || '');
         this.getUser();
-        makeAutoObservable(this);
     }
 
     like(p: Phone) {
@@ -30,7 +30,6 @@ class User {
         const del = this.userFullData?.saved.filter(d => d.id !== p.id);
         if (del) this.liked(del);
     }
-
     async liked(users: Phone[]) {
         try {
             console.log('Отправляемые данные:', this.userAllFullData);
@@ -49,6 +48,7 @@ class User {
             throw e;
         }
     }
+
     async unLiked(user: usersType) {
         try {
             console.log('Отправляемые данные:', this.userAllFullData);
@@ -82,6 +82,7 @@ class User {
             }
             const data: usersType[] = await res.json();
             const userFind = data.find(use => use.userName === d);
+
             runInAction(() => {
                 this.userFullData = userFind || null;
                 this.userAllFullData = data;
@@ -91,22 +92,25 @@ class User {
         }
     }
 
-    // async getAddressesUser() {
-    //     try {
-    //         const res = await fetch(`/api/user/${this.userFullData?.id}`, {
-    //             method: 'GET',
-    //         });
-
-    //         const data: usersType = await res.json();
-    //         this.addresses.push(data.order);
-    //     } catch (err) {
-    //         throw new Error('Ошибка');
-    //     }
-    // }
-
     removeData(data: usersType) {
         this.userData = null;
         Cookies.remove('userData1');
+    }
+    async toggleSubscribe(nick_name: string, { subsrcibes, id }: { subsrcibes: string[]; id: string }) {
+        const isSubs = subsrcibes.includes(nick_name);
+        const updatedSubscriptions = isSubs ? subsrcibes.filter(s => s !== nick_name) : [...(subsrcibes || []), nick_name];
+        try {
+            await fetch(`/api/user/${id}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ subscriptions: updatedSubscriptions }),
+            });
+        } catch (e) {
+            console.error('Ошибка при изменении подписки:', e);
+            throw e;
+        }
     }
 }
 

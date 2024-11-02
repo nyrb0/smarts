@@ -71,7 +71,7 @@ const Block: FC<BlockI> = ({ data: teh }) => {
                 <div key={teh.id} className={styles.block}>
                     <div className={styles.inner}>
                         <div className={`${styles.like} df`}>
-                            <Image src={likeProducts} alt='like procducts' style={{ fill: 'red' }} onClick={() => setServerUser(teh)} />
+                            <Image src={likeProducts} alt='like procducts' width={10} onClick={() => setServerUser(teh)} />
                         </div>
                         <div className={`${styles.thePhone} dfc`}>
                             {teh.image?.url ? (

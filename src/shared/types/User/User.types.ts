@@ -13,4 +13,5 @@ export type usersType = {
     email: string;
     number: string;
     education: string;
+    subscriptions: string[];
 };

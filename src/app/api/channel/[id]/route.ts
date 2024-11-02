@@ -8,7 +8,7 @@ export const PATCH = async (req: Request, { params }: { params: { id: string } }
     }
 
     try {
-        const data = await fetch(`http://localhost:3000/user/${id}`, {
+        const data = await fetch(`http://localhost:3000/channel/${id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -27,7 +27,7 @@ export const GET = async (req: Request, { params }: { params: { id: string } }) 
         return NextResponse.json({ message: 'Missing required fields' }, { status: 400 });
     }
     try {
-        const data = await fetch(`http://localhost:3000/user/${id}`);
+        const data = await fetch(`http://localhost:3000/channel/${id}`);
         if (!data.ok) {
             const errorData = await data.json();
             return NextResponse.json({ message: errorData.message || 'Failed to fetch user' }, { status: data.status });
@@ -40,7 +40,6 @@ export const GET = async (req: Request, { params }: { params: { id: string } }) 
 };
 
 export const POST = async (req: Request, { params }: { params: { id: string } }) => {
-    // const { saved, user } = await req.json();
     const updateData = await req.json();
     const { id } = params;
     if (!id) {
@@ -48,7 +47,7 @@ export const POST = async (req: Request, { params }: { params: { id: string } })
     }
 
     try {
-        const data = await fetch(`http://localhost:3000/user/${id}`, {
+        const data = await fetch(`http://localhost:3000/channel/${id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',

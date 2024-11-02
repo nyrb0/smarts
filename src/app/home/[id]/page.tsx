@@ -35,6 +35,7 @@ import { Rating } from '@mui/material';
 import { generateId } from '@/Features/generateId';
 import { currencyChoose } from '@/Features/CurrencyChoose';
 import CurrencyContext, { CurrencyCon } from '@/shared/context/currency/CurrencyContext';
+import Channel from './components/Channel/Channel';
 
 interface PageGlobalDinamic {
     params: {
@@ -439,7 +440,9 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
                     </div>
                 </div>
             </div>
-
+            <div className={`${style.channel} container`}>
+                <Channel />
+            </div>
             <div className={`${style.review} container`}>
                 <Review dataAboutRev={data.review} />
                 <div className={style.comment}>

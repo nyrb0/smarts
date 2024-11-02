@@ -30,18 +30,19 @@ const HomeComponent = observer(() => {
         pixel: 'Pixel',
         popular: 'popular',
     };
+
     const currencyList = ['rub', 'som', 'usd'];
     const brands = Object.keys(brand);
 
     const selected = Global;
 
     async function getData() {
-        const res = await axios(`http://localhost:3000/${selected.selecred}`);
+        const res = await axios(`http://localhost:3000/iphone`);
         const data = await res.data;
         setData(data);
     }
     const changeSel = (s: string) => {
-        selected.setSelected(s);
+        // selected.setSelected(s);
     };
 
     const changeCurrency = (s: string) => {
@@ -53,7 +54,7 @@ const HomeComponent = observer(() => {
     useEffect(() => {
         getData();
         // getPopular();
-    }, [selected.selecred]);
+    }, []);
 
     return (
         <main className={styles.home}>

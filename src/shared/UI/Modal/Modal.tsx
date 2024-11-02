@@ -13,13 +13,7 @@ const Modal: FC<ModalI> = observer(({ isOpen, close, children, visibleX = true }
     return (
         <>
             {isOpen && (
-                <div
-                    className={styleModal.modal}
-                    // onClick={(e: any) => {
-                    //     e.stopPropagation();
-                    //     close();
-                    // }}
-                >
+                <div className={styleModal.modal} onClick={close}>
                     <div className={styleModal.content}>
                         {visibleX && (
                             <div className={styleModal.close} onClick={close}>
