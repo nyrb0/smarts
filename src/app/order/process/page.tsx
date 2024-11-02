@@ -1,6 +1,6 @@
 'use client';
-import CardAddress from '@/shared/Order/components/CardAddres/CardAddress';
-import StagesOrder from '@/shared/Order/components/stages/StagesOrder';
+import CardAddress from '@/shared/components/Order/components/CardAddres/CardAddress';
+import StagesOrder from '@/shared/components/Order/components/stages/StagesOrder';
 import styledProcess from '@/styles/PagesModules/order/Process.module.scss';
 
 // icons
@@ -11,7 +11,7 @@ import Modal from '@/shared/UI/Modal/Modal';
 import IsOpenEdirAddressContext, { ContextAddressEdit } from '@/shared/context/order/isOpenEditAddress/IsOpenEdirAddress';
 import { observer } from 'mobx-react-lite';
 import userOrder from '@/app/store/user/address';
-import InputOrder from '@/shared/Order/components/Input/InputOrder';
+import InputOrder from '@/shared/components/Order/components/Input/InputOrder';
 import Button from '@/shared/UI/Button/Button';
 import Mark from '@/shared/image/gif/mark ok.gif';
 import { useRouter } from 'next/navigation';

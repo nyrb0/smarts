@@ -1,473 +1,482 @@
 {
-    "iphone": [
-        {
-            "id": "20",
-            "name": "Iphone 16 pro max",
-            "image": {
-                "url": "https://asiastore.kg/image/cache/catalog/1newpage/apple/iphone/iphone16/16promax/deserttitanium/691-1200x1200.jpg",
-                "gold": {
-                    "1": "https://asiastore.kg/image/cache/catalog/1newpage/apple/iphone/iphone16/16promax/deserttitanium/691-1200x1200.jpg",
-                    "2": "https://asiastore.kg/image/cache/catalog/1newpage/apple/iphone/iphone16/16promax/deserttitanium/69-1200x1200.jpg",
-                    "3": "https://asiastore.kg/image/cache/catalog/1newpage/apple/iphone/iphone16/16promax/deserttitanium/693-1200x1200.jpg",
-                    "4": "https://asiastore.kg/image/cache/catalog/1newpage/apple/iphone/iphone16/16promax/deserttitanium/694-1200x1200.jpg"
-                },
-                "black": {
-                    "1": "https://asiastore.kg/image/cachewebp/catalog/1newpage/apple/iphone/iphone16/16promax/blacktitanium/69122.14.06-1200x1200.webp",
-                    "2": "https://asiastore.kg/image/cachewebp/catalog/1newpage/apple/iphone/iphone16/16promax/blacktitanium/69422.14.06-1200x1200.webp",
-                    "3": "https://asiastore.kg/image/cache/catalog/1newpage/apple/iphone/iphone16/16promax/blacktitanium/69222.14.07-1200x1200.jpg",
-                    "4": "https://asiastore.kg/image/cachewebp/catalog/1newpage/apple/iphone/iphone16/16promax/blacktitanium/69322.14.06-1200x1200.webp"
-                },
-                "gray": {
-                    "1": "https://asiastore.kg/image/cache/catalog/1newpage/apple/iphone/iphone16/16promax/naturaltitanium/691-1200x1200.jpg",
-                    "2": "https://asiastore.kg/image/cache/catalog/1newpage/apple/iphone/iphone16/16promax/naturaltitanium/692-1200x1200.jpg",
-                    "3": "https://asiastore.kg/image/cache/catalog/1newpage/apple/iphone/iphone16/16promax/naturaltitanium/693-1200x1200.jpg",
-                    "4": "https://asiastore.kg/image/cache/catalog/1newpage/apple/iphone/iphone16/16promax/naturaltitanium/694-1200x1200.jpg"
-                }
-            },
-            "level": 16,
-            "isImproved": 4,
-            "price": {
-                "rub": 120000,
-                "usd": 1300,
-                "som": 110000
-            },
-            "processor": "Apple A18 Pro",
-            "camera": "4 (48 MP + 12 MP + 48 MP)",
-            "weigth": 225,
-            "battery": 4676,
-            "ios": "18",
-            "screen": "2796х1290",
-            "review": [
-                {
-                    "category": "Отличное",
-                    "votes": 5
-                },
-                {
-                    "category": "Средний",
-                    "votes": 3
-                },
-                {
-                    "category": "Ниже среднего",
-                    "votes": 1
-                },
-                {
-                    "category": "Нормально",
-                    "votes": 2
-                },
-                {
-                    "category": "Плохо",
-                    "votes": 3
-                }
-            ],
-            "selected": {
-                "color": null,
-                "storage": null
-            },
-            "comments": [
-                {
-                    "id": "1727283355261-980",
-                    "user": "нурбо",
-                    "votesStars": 3,
-                    "comment": "jbvhsdvhsdbkvjwdbv",
-                    "date": {
-                        "day": 25,
-                        "month": 8,
-                        "year": 2024,
-                        "hours": 22,
-                        "minutes": 55,
-                        "second": 54
-                    }
-                },
-                {
-                    "id": "1729759947412-4689",
-                    "user": "ny1bo",
-                    "votesStars": 2,
-                    "comment": "ggsgfd",
-                    "date": {
-                        "day": 24,
-                        "month": 9,
-                        "year": 2024,
-                        "hours": 14,
-                        "minutes": 52,
-                        "second": 24
-                    }
-                },
-                {
-                    "id": "1730261155805-4890",
-                    "user": null,
-                    "votesStars": 1,
-                    "comment": "полная хуйня не покупайте",
-                    "date": {
-                        "day": 30,
-                        "month": 9,
-                        "year": 2024,
-                        "hours": 10,
-                        "minutes": 5,
-                        "second": 55
-                    }
-                }
-            ]
+  "iphone": [
+    {
+      "id": "20",
+      "name": "Iphone 16 pro max",
+      "image": {
+        "url": "https://asiastore.kg/image/cache/catalog/1newpage/apple/iphone/iphone16/16promax/deserttitanium/691-1200x1200.jpg",
+        "gold": {
+          "1": "https://asiastore.kg/image/cache/catalog/1newpage/apple/iphone/iphone16/16promax/deserttitanium/691-1200x1200.jpg",
+          "2": "https://asiastore.kg/image/cache/catalog/1newpage/apple/iphone/iphone16/16promax/deserttitanium/69-1200x1200.jpg",
+          "3": "https://asiastore.kg/image/cache/catalog/1newpage/apple/iphone/iphone16/16promax/deserttitanium/693-1200x1200.jpg",
+          "4": "https://asiastore.kg/image/cache/catalog/1newpage/apple/iphone/iphone16/16promax/deserttitanium/694-1200x1200.jpg"
+        },
+        "black": {
+          "1": "https://asiastore.kg/image/cachewebp/catalog/1newpage/apple/iphone/iphone16/16promax/blacktitanium/69122.14.06-1200x1200.webp",
+          "2": "https://asiastore.kg/image/cachewebp/catalog/1newpage/apple/iphone/iphone16/16promax/blacktitanium/69422.14.06-1200x1200.webp",
+          "3": "https://asiastore.kg/image/cache/catalog/1newpage/apple/iphone/iphone16/16promax/blacktitanium/69222.14.07-1200x1200.jpg",
+          "4": "https://asiastore.kg/image/cachewebp/catalog/1newpage/apple/iphone/iphone16/16promax/blacktitanium/69322.14.06-1200x1200.webp"
+        },
+        "gray": {
+          "1": "https://asiastore.kg/image/cache/catalog/1newpage/apple/iphone/iphone16/16promax/naturaltitanium/691-1200x1200.jpg",
+          "2": "https://asiastore.kg/image/cache/catalog/1newpage/apple/iphone/iphone16/16promax/naturaltitanium/692-1200x1200.jpg",
+          "3": "https://asiastore.kg/image/cache/catalog/1newpage/apple/iphone/iphone16/16promax/naturaltitanium/693-1200x1200.jpg",
+          "4": "https://asiastore.kg/image/cache/catalog/1newpage/apple/iphone/iphone16/16promax/naturaltitanium/694-1200x1200.jpg"
         }
-    ],
-    "popular": [
+      },
+      "level": 16,
+      "isImproved": 4,
+      "price": {
+        "rub": 120000,
+        "usd": 1300,
+        "som": 110000
+      },
+      "processor": "Apple A18 Pro",
+      "camera": "4 (48 MP + 12 MP + 48 MP)",
+      "weigth": 225,
+      "battery": 4676,
+      "ios": "18",
+      "screen": "2796х1290",
+      "review": [
         {
-            "id": "100",
-            "name": "Iphone 16 pro max",
-            "image": {
-                "url": "https://nanoreview.net/common/images/phone/apple-iphone-16-pro-max-mini@2x.jpeg"
-            },
-            "level": 16,
-            "isImproved": 4,
-            "price": {
-                "rub": 120000,
-                "usd": 1300,
-                "som": 110000
-            },
-            "processor": "Apple A18 Pro",
-            "camera": "4 (48 MP + 12 MP + 48 MP)",
-            "weigth": 225,
-            "battery": 4676,
-            "ios": "18",
-            "screen": "2796х1290"
+          "category": "Отличное",
+          "votes": 5
         },
         {
-            "id": "101",
-            "name": "Iphone 16",
-            "image": {
-                "url": "https://nanoreview.net/common/images/phone/apple-iphone-16-pro-mini@2x.jpeg"
-            },
-            "isImproved": 1,
-            "level": 16,
-            "price": {
-                "rub": 100000,
-                "usd": 1150,
-                "som": 90000
-            },
-            "processor": "Apple A18 Pro",
-            "camera": "4 (48 MP + 12 MP + 48 MP)",
-            "weigth": 225,
-            "battery": 3577,
-            "ios": "18",
-            "screen": "1217x2638"
+          "category": "Средний",
+          "votes": 3
         },
         {
-            "id": "102",
-            "name": "Samsung Galaxy S24 Ultra",
-            "image": {
-                "url": "https://nanoreview.net/common/images/phone/samsung-galaxy-s24-ultra-mini@2x.jpeg"
-            },
-            "isImproved": 3,
-            "level": 22,
-            "price": {
-                "rub": 120000,
-                "usd": 13000,
-                "som": 120000
-            },
-            "processor": "Qualcomm Snapdragon 8 Gen 3 (for Galaxy)",
-            "camera": "4 (200 MP + 50 MP + 12 MP + 12 MP)",
-            "weigth": 232,
-            "battery": 5000,
-            "ios": null,
-            "android": "Android 14",
-            "screen": "1440x3088"
+          "category": "Ниже среднего",
+          "votes": 1
         },
         {
-            "id": "103",
-            "name": "Xiaomi Poco C40",
-            "image": {
-                "url": "https://nanoreview.net/common/images/phone/xiaomi-poco-c40-mini@2x.jpeg"
-            },
-            "isImproved": 1,
-            "level": 2,
-            "price": {
-                "rub": 120000,
-                "usd": 13000,
-                "som": 120000
-            },
-            "processor": "JLQ JR510",
-            "camera": "2 (13 MP + 2 MP)",
-            "weigth": 232,
-            "battery": 6000,
-            "ios": null,
-            "android": "Android 11",
-            "screen": "1440x3088"
+          "category": "Нормально",
+          "votes": 2
         },
         {
-            "id": "104",
-            "name": "MediaTek Dimensity 1080",
-            "image": {
-                "url": "https://nanoreview.net/common/images/phone/samsung-galaxy-a34-5g-mini@2x.jpeg"
-            },
-            "isImproved": 1,
-            "level": 1,
-            "price": {
-                "rub": 60000,
-                "usd": 450,
-                "som": 60000
-            },
-            "processor": "MediaTek Dimensity 1080",
-            "camera": "3 (48 MP + 8 MP + 5 MP)",
-            "weigth": 199,
-            "battery": 6000,
-            "ios": null,
-            "android": "Android 14",
-            "screen": "1080x2340"
+          "category": "Плохо",
+          "votes": 3
         }
-    ],
-    "user": [
+      ],
+      "selected": {
+        "color": null,
+        "storage": null
+      },
+      "comments": [
         {
-            "id": "af6e",
-            "name": "Нурбо",
-            "userName": "ny1bo",
-            "lastName": "Кадыров",
-            "password": "qwerty_as",
-            "subscriptions": [],
-            "have_money": {
-                "rub": 20,
-                "usd": 0,
-                "som": 239499
+          "id": "1727283355261-980",
+          "user": "нурбо",
+          "votesStars": 3,
+          "comment": "jbvhsdvhsdbkvjwdbv",
+          "date": {
+            "day": 25,
+            "month": 8,
+            "year": 2024,
+            "hours": 22,
+            "minutes": 55,
+            "second": 54
+          }
+        },
+        {
+          "id": "1729759947412-4689",
+          "user": "ny1bo",
+          "votesStars": 2,
+          "comment": "ggsgfd",
+          "date": {
+            "day": 24,
+            "month": 9,
+            "year": 2024,
+            "hours": 14,
+            "minutes": 52,
+            "second": 24
+          }
+        },
+        {
+          "id": "1730261155805-4890",
+          "user": null,
+          "votesStars": 1,
+          "comment": "полная хуйня не покупайте",
+          "date": {
+            "day": 30,
+            "month": 9,
+            "year": 2024,
+            "hours": 10,
+            "minutes": 5,
+            "second": 55
+          }
+        }
+      ]
+    }
+  ],
+  "popular": [
+    {
+      "id": "100",
+      "name": "Iphone 16 pro max",
+      "image": {
+        "url": "https://nanoreview.net/common/images/phone/apple-iphone-16-pro-max-mini@2x.jpeg"
+      },
+      "level": 16,
+      "isImproved": 4,
+      "price": {
+        "rub": 120000,
+        "usd": 1300,
+        "som": 110000
+      },
+      "processor": "Apple A18 Pro",
+      "camera": "4 (48 MP + 12 MP + 48 MP)",
+      "weigth": 225,
+      "battery": 4676,
+      "ios": "18",
+      "screen": "2796х1290"
+    },
+    {
+      "id": "101",
+      "name": "Iphone 16",
+      "image": {
+        "url": "https://nanoreview.net/common/images/phone/apple-iphone-16-pro-mini@2x.jpeg"
+      },
+      "isImproved": 1,
+      "level": 16,
+      "price": {
+        "rub": 100000,
+        "usd": 1150,
+        "som": 90000
+      },
+      "processor": "Apple A18 Pro",
+      "camera": "4 (48 MP + 12 MP + 48 MP)",
+      "weigth": 225,
+      "battery": 3577,
+      "ios": "18",
+      "screen": "1217x2638"
+    },
+    {
+      "id": "102",
+      "name": "Samsung Galaxy S24 Ultra",
+      "image": {
+        "url": "https://nanoreview.net/common/images/phone/samsung-galaxy-s24-ultra-mini@2x.jpeg"
+      },
+      "isImproved": 3,
+      "level": 22,
+      "price": {
+        "rub": 120000,
+        "usd": 13000,
+        "som": 120000
+      },
+      "processor": "Qualcomm Snapdragon 8 Gen 3 (for Galaxy)",
+      "camera": "4 (200 MP + 50 MP + 12 MP + 12 MP)",
+      "weigth": 232,
+      "battery": 5000,
+      "ios": null,
+      "android": "Android 14",
+      "screen": "1440x3088"
+    },
+    {
+      "id": "103",
+      "name": "Xiaomi Poco C40",
+      "image": {
+        "url": "https://nanoreview.net/common/images/phone/xiaomi-poco-c40-mini@2x.jpeg"
+      },
+      "isImproved": 1,
+      "level": 2,
+      "price": {
+        "rub": 120000,
+        "usd": 13000,
+        "som": 120000
+      },
+      "processor": "JLQ JR510",
+      "camera": "2 (13 MP + 2 MP)",
+      "weigth": 232,
+      "battery": 6000,
+      "ios": null,
+      "android": "Android 11",
+      "screen": "1440x3088"
+    },
+    {
+      "id": "104",
+      "name": "MediaTek Dimensity 1080",
+      "image": {
+        "url": "https://nanoreview.net/common/images/phone/samsung-galaxy-a34-5g-mini@2x.jpeg"
+      },
+      "isImproved": 1,
+      "level": 1,
+      "price": {
+        "rub": 60000,
+        "usd": 450,
+        "som": 60000
+      },
+      "processor": "MediaTek Dimensity 1080",
+      "camera": "3 (48 MP + 8 MP + 5 MP)",
+      "weigth": 199,
+      "battery": 6000,
+      "ios": null,
+      "android": "Android 14",
+      "screen": "1080x2340"
+    }
+  ],
+  "user": [
+    {
+      "id": "af6e",
+      "name": "Нурбо",
+      "userName": "ny1bo",
+      "lastName": "Кадыров",
+      "password": "qwerty_as",
+      "my_channels": [
+        {
+          "id": "fa3sf",
+          "name": "Mobile raketa",
+          "img": ""
+        }
+      ],
+      "subscriptions": [
+        "@noname2"
+      ],
+      "have_money": {
+        "rub": 20,
+        "usd": 0,
+        "som": 239499
+      },
+      "saved": [
+        {
+          "id": "100",
+          "name": "Iphone 16 pro max",
+          "image": {
+            "url": "https://nanoreview.net/common/images/phone/apple-iphone-16-pro-max-mini@2x.jpeg"
+          },
+          "level": 16,
+          "isImproved": 4,
+          "price": {
+            "rub": 120000,
+            "usd": 1300,
+            "som": 110000
+          },
+          "processor": "Apple A18 Pro",
+          "camera": "4 (48 MP + 12 MP + 48 MP)",
+          "weigth": 225,
+          "battery": 4676,
+          "ios": "18",
+          "screen": "2796х1290"
+        }
+      ],
+      "education": "среднее",
+      "email": "ny1boo@gmail.com",
+      "city": "Бишкек",
+      "number": "0700269301",
+      "country": "Кыргызстан",
+      "order": {
+        "code": "2",
+        "orderLocation": "home",
+        "title": "Express cargo",
+        "number": "9095834758347",
+        "place": {
+          "region": "Чуй",
+          "city": "Бишкек",
+          "street": "шабдан баатыра",
+          "addressNumber": "210k"
+        }
+      }
+    }
+  ],
+  "orders": [],
+  "ordersProducts": [
+    {
+      "count": 0,
+      "userId": "",
+      "procucts": [
+        {
+          "id": "",
+          "img": "",
+          "name": ""
+        }
+      ],
+      "id": "1267"
+    }
+  ],
+  "search-store": [
+    {
+      "id": "6d02",
+      "name": "r"
+    }
+  ],
+  "address": [
+    {
+      "id": "2",
+      "orderLocation": true,
+      "title": "Express cargo",
+      "number": "9095834758347",
+      "place": {
+        "region": "Чуй",
+        "city": "Бишкек",
+        "street": "шабдан баатыра",
+        "addressNumber": "210k"
+      }
+    },
+    {
+      "id": "e68d",
+      "title": "gfdgd",
+      "number": "gsgsfd",
+      "orderLocation": false,
+      "place": {
+        "region": "",
+        "city": "gdfsgsd",
+        "street": "gsdgd",
+        "addressNumber": "gsdfgds"
+      }
+    }
+  ],
+  "channel": [
+    {
+      "id": "fasf",
+      "author": "",
+      "nick_name": "",
+      "name": "Mobile shop",
+      "subsrcibes": 30000,
+      "tenology": [],
+      "view": 0,
+      "data": "",
+      "desciption": "Описание",
+      "country": "Кыргызстан",
+      "email": "ny1boo@gmail.com",
+      "main_url": null,
+      "social": {
+        "ins": null,
+        "tt": null,
+        "vk": null,
+        "tg": null,
+        "offical": null
+      },
+      "date": null
+    },
+    {
+      "id": "fa3sf",
+      "author": "",
+      "nick_name": "@noname2",
+      "name": "Mobile raketa",
+      "subsrcibes": 23423,
+      "tenology": [
+        {
+          "id": "20",
+          "name": "Iphone 16 pro max",
+          "image": {
+            "url": "https://asiastore.kg/image/cache/catalog/1newpage/apple/iphone/iphone16/16promax/deserttitanium/691-1200x1200.jpg",
+            "gold": {
+              "1": "https://asiastore.kg/image/cache/catalog/1newpage/apple/iphone/iphone16/16promax/deserttitanium/691-1200x1200.jpg",
+              "2": "https://asiastore.kg/image/cache/catalog/1newpage/apple/iphone/iphone16/16promax/deserttitanium/69-1200x1200.jpg",
+              "3": "https://asiastore.kg/image/cache/catalog/1newpage/apple/iphone/iphone16/16promax/deserttitanium/693-1200x1200.jpg",
+              "4": "https://asiastore.kg/image/cache/catalog/1newpage/apple/iphone/iphone16/16promax/deserttitanium/694-1200x1200.jpg"
             },
-            "saved": [
-                {
-                    "id": "100",
-                    "name": "Iphone 16 pro max",
-                    "image": {
-                        "url": "https://nanoreview.net/common/images/phone/apple-iphone-16-pro-max-mini@2x.jpeg"
-                    },
-                    "level": 16,
-                    "isImproved": 4,
-                    "price": {
-                        "rub": 120000,
-                        "usd": 1300,
-                        "som": 110000
-                    },
-                    "processor": "Apple A18 Pro",
-                    "camera": "4 (48 MP + 12 MP + 48 MP)",
-                    "weigth": 225,
-                    "battery": 4676,
-                    "ios": "18",
-                    "screen": "2796х1290"
-                }
-            ],
-            "education": "среднее",
-            "email": "ny1boo@gmail.com",
-            "city": "Бишкек",
-            "number": "0700269301",
-            "country": "Кыргызстан",
-            "order": {
-                "code": "2",
-                "orderLocation": "home",
-                "title": "Express cargo",
-                "number": "9095834758347",
-                "place": {
-                    "region": "Чуй",
-                    "city": "Бишкек",
-                    "street": "шабдан баатыра",
-                    "addressNumber": "210k"
-                }
+            "black": {
+              "1": "https://asiastore.kg/image/cachewebp/catalog/1newpage/apple/iphone/iphone16/16promax/blacktitanium/69122.14.06-1200x1200.webp",
+              "2": "https://asiastore.kg/image/cachewebp/catalog/1newpage/apple/iphone/iphone16/16promax/blacktitanium/69422.14.06-1200x1200.webp",
+              "3": "https://asiastore.kg/image/cache/catalog/1newpage/apple/iphone/iphone16/16promax/blacktitanium/69222.14.07-1200x1200.jpg",
+              "4": "https://asiastore.kg/image/cachewebp/catalog/1newpage/apple/iphone/iphone16/16promax/blacktitanium/69322.14.06-1200x1200.webp"
+            },
+            "gray": {
+              "1": "https://asiastore.kg/image/cache/catalog/1newpage/apple/iphone/iphone16/16promax/naturaltitanium/691-1200x1200.jpg",
+              "2": "https://asiastore.kg/image/cache/catalog/1newpage/apple/iphone/iphone16/16promax/naturaltitanium/692-1200x1200.jpg",
+              "3": "https://asiastore.kg/image/cache/catalog/1newpage/apple/iphone/iphone16/16promax/naturaltitanium/693-1200x1200.jpg",
+              "4": "https://asiastore.kg/image/cache/catalog/1newpage/apple/iphone/iphone16/16promax/naturaltitanium/694-1200x1200.jpg"
             }
-        }
-    ],
-    "orders": [],
-    "ordersProducts": [
-        {
-            "count": 0,
-            "userId": "",
-            "procucts": [
-                {
-                    "id": "",
-                    "img": "",
-                    "name": ""
-                }
-            ],
-            "id": "1267"
-        }
-    ],
-    "search-store": [
-        {
-            "id": "6d02",
-            "name": "r"
-        }
-    ],
-    "address": [
-        {
-            "id": "2",
-            "orderLocation": true,
-            "title": "Express cargo",
-            "number": "9095834758347",
-            "place": {
-                "region": "Чуй",
-                "city": "Бишкек",
-                "street": "шабдан баатыра",
-                "addressNumber": "210k"
-            }
-        },
-        {
-            "id": "e68d",
-            "title": "gfdgd",
-            "number": "gsgsfd",
-            "orderLocation": false,
-            "place": {
-                "region": "",
-                "city": "gdfsgsd",
-                "street": "gsdgd",
-                "addressNumber": "gsdfgds"
-            }
-        }
-    ],
-    "channel": [
-        {
-            "id": "fasf",
-            "author": "",
-            "nick_name": "",
-            "name": "Mobile shop",
-            "subsrcibes": 30000,
-            "tenology": [],
-            "view": 0,
-            "data": "",
-            "desciption": "Описание",
-            "country": "Кыргызстан",
-            "email": "ny1boo@gmail.com",
-            "main_url": null,
-            "social": {
-                "ins": null,
-                "tt": null,
-                "vk": null,
-                "tg": null,
-                "offical": null
+          },
+          "level": 16,
+          "isImproved": 4,
+          "price": {
+            "rub": 120000,
+            "usd": 1300,
+            "som": 110000
+          },
+          "processor": "Apple A18 Pro",
+          "camera": "4 (48 MP + 12 MP + 48 MP)",
+          "weigth": 225,
+          "battery": 4676,
+          "ios": "18",
+          "screen": "2796х1290",
+          "review": [
+            {
+              "category": "Отличное",
+              "votes": 5
             },
-            "date": null
-        },
-        {
-            "id": "fa3sf",
-            "author": "",
-            "nick_name": "@noname2",
-            "name": "Mobile raketa",
-            "subsrcibes": 23423,
-            "tenology": [
-                {
-                    "id": "20",
-                    "name": "Iphone 16 pro max",
-                    "image": {
-                        "url": "https://asiastore.kg/image/cache/catalog/1newpage/apple/iphone/iphone16/16promax/deserttitanium/691-1200x1200.jpg",
-                        "gold": {
-                            "1": "https://asiastore.kg/image/cache/catalog/1newpage/apple/iphone/iphone16/16promax/deserttitanium/691-1200x1200.jpg",
-                            "2": "https://asiastore.kg/image/cache/catalog/1newpage/apple/iphone/iphone16/16promax/deserttitanium/69-1200x1200.jpg",
-                            "3": "https://asiastore.kg/image/cache/catalog/1newpage/apple/iphone/iphone16/16promax/deserttitanium/693-1200x1200.jpg",
-                            "4": "https://asiastore.kg/image/cache/catalog/1newpage/apple/iphone/iphone16/16promax/deserttitanium/694-1200x1200.jpg"
-                        },
-                        "black": {
-                            "1": "https://asiastore.kg/image/cachewebp/catalog/1newpage/apple/iphone/iphone16/16promax/blacktitanium/69122.14.06-1200x1200.webp",
-                            "2": "https://asiastore.kg/image/cachewebp/catalog/1newpage/apple/iphone/iphone16/16promax/blacktitanium/69422.14.06-1200x1200.webp",
-                            "3": "https://asiastore.kg/image/cache/catalog/1newpage/apple/iphone/iphone16/16promax/blacktitanium/69222.14.07-1200x1200.jpg",
-                            "4": "https://asiastore.kg/image/cachewebp/catalog/1newpage/apple/iphone/iphone16/16promax/blacktitanium/69322.14.06-1200x1200.webp"
-                        },
-                        "gray": {
-                            "1": "https://asiastore.kg/image/cache/catalog/1newpage/apple/iphone/iphone16/16promax/naturaltitanium/691-1200x1200.jpg",
-                            "2": "https://asiastore.kg/image/cache/catalog/1newpage/apple/iphone/iphone16/16promax/naturaltitanium/692-1200x1200.jpg",
-                            "3": "https://asiastore.kg/image/cache/catalog/1newpage/apple/iphone/iphone16/16promax/naturaltitanium/693-1200x1200.jpg",
-                            "4": "https://asiastore.kg/image/cache/catalog/1newpage/apple/iphone/iphone16/16promax/naturaltitanium/694-1200x1200.jpg"
-                        }
-                    },
-                    "level": 16,
-                    "isImproved": 4,
-                    "price": {
-                        "rub": 120000,
-                        "usd": 1300,
-                        "som": 110000
-                    },
-                    "processor": "Apple A18 Pro",
-                    "camera": "4 (48 MP + 12 MP + 48 MP)",
-                    "weigth": 225,
-                    "battery": 4676,
-                    "ios": "18",
-                    "screen": "2796х1290",
-                    "review": [
-                        {
-                            "category": "Отличное",
-                            "votes": 5
-                        },
-                        {
-                            "category": "Средний",
-                            "votes": 3
-                        },
-                        {
-                            "category": "Ниже среднего",
-                            "votes": 1
-                        },
-                        {
-                            "category": "Нормально",
-                            "votes": 2
-                        },
-                        {
-                            "category": "Плохо",
-                            "votes": 3
-                        }
-                    ],
-                    "selected": {
-                        "color": null,
-                        "storage": null
-                    },
-                    "comments": [
-                        {
-                            "id": "1727283355261-980",
-                            "user": "нурбо",
-                            "votesStars": 3,
-                            "comment": "jbvhsdvhsdbkvjwdbv",
-                            "date": {
-                                "day": 25,
-                                "month": 8,
-                                "year": 2024,
-                                "hours": 22,
-                                "minutes": 55,
-                                "second": 54
-                            }
-                        },
-                        {
-                            "id": "1729759947412-4689",
-                            "user": "ny1bo",
-                            "votesStars": 2,
-                            "comment": "ggsgfd",
-                            "date": {
-                                "day": 24,
-                                "month": 9,
-                                "year": 2024,
-                                "hours": 14,
-                                "minutes": 52,
-                                "second": 24
-                            }
-                        },
-                        {
-                            "id": "1730261155805-4890",
-                            "user": null,
-                            "votesStars": 1,
-                            "comment": "полная хуйня не покупайте",
-                            "date": {
-                                "day": 30,
-                                "month": 9,
-                                "year": 2024,
-                                "hours": 10,
-                                "minutes": 5,
-                                "second": 55
-                            }
-                        }
-                    ]
-                }
-            ],
-            "main_url": "hbvhsdbvhsbvshb",
-            "social": {
-                "ins": "intagra.com",
-                "tt": "tiktok.com",
-                "vk": "vk.com",
-                "tg": "tg.com",
-                "offical": "offical.com"
+            {
+              "category": "Средний",
+              "votes": 3
             },
-            "country": "Кыргызстан",
-            "email": "ny1boo@gmail.com",
-            "view": 0,
-            "data": "",
-            "desciption": "Описание",
-            "date": null
+            {
+              "category": "Ниже среднего",
+              "votes": 1
+            },
+            {
+              "category": "Нормально",
+              "votes": 2
+            },
+            {
+              "category": "Плохо",
+              "votes": 3
+            }
+          ],
+          "selected": {
+            "color": null,
+            "storage": null
+          },
+          "comments": [
+            {
+              "id": "1727283355261-980",
+              "user": "нурбо",
+              "votesStars": 3,
+              "comment": "jbvhsdvhsdbkvjwdbv",
+              "date": {
+                "day": 25,
+                "month": 8,
+                "year": 2024,
+                "hours": 22,
+                "minutes": 55,
+                "second": 54
+              }
+            },
+            {
+              "id": "1729759947412-4689",
+              "user": "ny1bo",
+              "votesStars": 2,
+              "comment": "ggsgfd",
+              "date": {
+                "day": 24,
+                "month": 9,
+                "year": 2024,
+                "hours": 14,
+                "minutes": 52,
+                "second": 24
+              }
+            },
+            {
+              "id": "1730261155805-4890",
+              "user": null,
+              "votesStars": 1,
+              "comment": "полная хуйня не покупайте",
+              "date": {
+                "day": 30,
+                "month": 9,
+                "year": 2024,
+                "hours": 10,
+                "minutes": 5,
+                "second": 55
+              }
+            }
+          ]
         }
-    ]
+      ],
+      "main_url": "hbvhsdbvhsbvshb",
+      "social": {
+        "ins": "intagra.com",
+        "tt": "tiktok.com",
+        "vk": "vk.com",
+        "tg": "tg.com",
+        "offical": "offical.com"
+      },
+      "country": "Кыргызстан",
+      "email": "ny1boo@gmail.com",
+      "view": 0,
+      "data": "",
+      "desciption": "Описание",
+      "date": null
+    }
+  ]
 }

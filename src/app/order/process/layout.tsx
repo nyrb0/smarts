@@ -1,5 +1,5 @@
 'use client';
-import StagesOrder from '@/shared/Order/components/stages/StagesOrder';
+import StagesOrder from '@/shared/components/Order/components/stages/StagesOrder';
 import { Metadata } from 'next';
 import styledProcess from '@/styles/PagesModules/order/Process.module.scss';
 import { usePathname } from 'next/navigation';

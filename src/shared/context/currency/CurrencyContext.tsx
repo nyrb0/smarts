@@ -8,7 +8,7 @@ interface CurInterface {
 export const CurrencyCon = createContext<CurInterface | null>(null);
 
 const CurrencyContext: FC<{ children: ReactNode }> = ({ children }) => {
-    const [currency, setCurrency] = useState(localStorage.getItem('currency') || '');
+    const [currency, setCurrency] = useState(localStorage.getItem('currency') || 'som');
     const handleSaveCurrency = (v: string) => {
         localStorage.setItem('currency', v);
         setCurrency(v);

@@ -17,6 +17,8 @@ import { BiSolidShoppingBags } from 'react-icons/bi';
 import { ImStatsBars2 } from 'react-icons/im';
 import { CiCalendarDate } from 'react-icons/ci';
 import { BiWorld } from 'react-icons/bi';
+import { RiShareForwardLine } from 'react-icons/ri';
+import { MdEmojiFlags } from 'react-icons/md';
 
 //img
 import me from '@/shared/image/me.jpg';
@@ -30,12 +32,23 @@ import { observer } from 'mobx-react-lite';
 import user from '@/app/store/user/user';
 import { usePathname } from 'next/navigation';
 import Search from '@/shared/UI/Search/Search';
+import styled from 'styled-components';
+import { FaBedPulse } from 'react-icons/fa6';
+import ShereSocial from '@/shared/components/Shere/ShereSocial';
 
 const { format } = new Intl.NumberFormat('ru-RU', {
     notation: 'compact',
     compactDisplay: 'short',
     maximumFractionDigits: 0,
 });
+
+const StyledButton = styled.button`
+    background-color: #323232;
+    padding: 10px;
+
+    color: #fff;
+    border-radius: 15px;
+`;
 const ProfileChannel = observer(({ data, setOpen }: { data: ChannelTypes; setOpen: () => void }) => {
     const { userFullData, toggleSubscribe } = user;
     if (!userFullData) return null;
@@ -91,9 +104,11 @@ const ChannelPage = ({ params: { id } }: { params: { id: string } }) => {
     const [data, setData] = useState<ChannelTypes | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
-    const [isOpenAbout, setIsOpenAbout] = useState(false);
-    const [searchValue, setSearchValue] = useState('');
 
+    const [isOpen, setIsOpen] = useState({ isOpenAbout: false, isShere: false });
+    const [searchValue, setSearchValue] = useState('');
+    // const [isOpenAbout, setIsOpenAbout] = useState(false);
+    // const [isShere, setShere] = useState(false);
     // if (loading) return <div>Loading...</div>;
     // if (error) return <div>{error}</div>;
 
@@ -134,11 +149,37 @@ const ChannelPage = ({ params: { id } }: { params: { id: string } }) => {
     const pathName = usePathname();
     if (!data) return null;
     const keySocial = Object.keys(data.social);
-
+    const EmailComponents = () => {
+        const [viewEmail, setViewEmail] = useState(false);
+        return (
+            <>
+                {!viewEmail && (
+                    <StyledButton
+                        onClick={() => {
+                            setViewEmail(true);
+                            setIsOpen(prev => ({ ...prev, isOpenAbout: true }));
+                        }}
+                    >
+                        Показать адресс электронной почты
+                    </StyledButton>
+                )}
+                {viewEmail && <p>{data.email}</p>}
+            </>
+        );
+    };
     return (
         <div className={`${stylesChannel.channel} container`}>
-            <Modal isOpen={isOpenAbout} close={() => setIsOpenAbout(false)}>
+            <Modal isOpen={isOpen.isOpenAbout} close={() => setIsOpen(prev => ({ isShere: false, isOpenAbout: false }))}>
                 <div className={stylesChannel.about}>
+                    <div className={stylesChannel.share}>
+                        <ShereSocial
+                            theUrl='fs'
+                            isOpen={isOpen.isShere}
+                            maxWidth={480}
+                            close={() => setIsOpen(prev => ({ ...prev, isShere: false }))}
+                            indexUp={1}
+                        />
+                    </div>
                     <h3>О канале</h3>
                     <p className={stylesChannel.desc}>
                         <span>{data.name}</span>9тут описание
@@ -164,7 +205,8 @@ const ChannelPage = ({ params: { id } }: { params: { id: string } }) => {
                     <h3 style={{ marginTop: 20 }}>О канале</h3>
                     <div>
                         <div className={`${stylesChannel.aboutChannel} dfa`}>
-                            <TfiEmail /> <p>{data.email}</p>
+                            <TfiEmail />
+                            <EmailComponents />
                         </div>
                         <div className={`${stylesChannel.aboutChannel} dfa`}>
                             <TfiWorld />
@@ -189,9 +231,21 @@ const ChannelPage = ({ params: { id } }: { params: { id: string } }) => {
                             <BiWorld /> <p>{data.country}</p>
                         </div>
                     </div>
+                    <div className={`${stylesChannel.btnsModal} dfj`}>
+                        <StyledButton onClick={() => setIsOpen(prev => ({ ...prev, isShere: true }))} className='dfa' style={{ gap: 10 }}>
+                            <RiShareForwardLine size={20} />
+                            Поделиться каналом
+                        </StyledButton>
+                        <StyledButton onClick={() => {}} className='dfa' style={{ gap: 10 }}>
+                            <MdEmojiFlags size={20} />
+                            Пожаловаться на канал
+                        </StyledButton>
+                    </div>
                 </div>
             </Modal>
-            <ProfileChannel data={data} setOpen={() => setIsOpenAbout(true)} />
+
+            <ProfileChannel data={data} setOpen={() => setIsOpen(prev => ({ ...prev, isOpenAbout: true }))} />
+
             <div className={stylesChannel.search}>
                 <Search value={searchValue} onChanges={handlerChange} placeholder={'поиск'} onKeyDown={() => null} />
             </div>

@@ -34,6 +34,7 @@
             height: 32px;
             & span {
                 position: relative;
+
                 & .cartCount {
                     width: 20px;
                     height: 20px;
@@ -48,18 +49,25 @@
                 }
             }
             .menuProfile {
-                position: relative;
                 .menuProfileBottom {
-                    position: absolute;
-                    right: 0;
-                    bottom: -90px;
-                    background-color: #fff;
-                    border: 1px solid black;
-                    width: 150px;
-                    border-radius: 6px;
-                    min-width: 100px;
-                    z-index: 99;
-                    padding: 5px;
+                    & .wrapper {
+                        font-size: 14px;
+                        position: fixed;
+                        right: 26px;
+                        top: 77px;
+                        background-color: #fff;
+                        border: 1px solid black;
+                        border-radius: 6px;
+                        min-width: 100px;
+                        z-index: 99;
+                        padding: 5px;
+                        .channel {
+                            & .my {
+                                font-size: 13px;
+                                margin: 4px 0;
+                            }
+                        }
+                    }
                 }
             }
         }

@@ -31,6 +31,7 @@ import Result from './components/ResultSearch/Result';
 import { Phone } from '@/shared/types/Phones/TypePhone.types';
 import Link from 'next/link';
 import user from '@/app/store/user/user';
+import MyChannel from '@/shared/components/MyChannel';
 
 interface HeaderI {}
 
@@ -185,9 +186,19 @@ const Headers: FC<HeaderI> = observer(() => {
                             </div>
                             {openProfileMenu && (
                                 <div className={styles.menuProfileBottom}>
-                                    <CurrencyContext>
-                                        <ListCurrency />
-                                    </CurrencyContext>
+                                    <div className={styles.wrapper}>
+                                        <CurrencyContext>
+                                            <ListCurrency />
+                                        </CurrencyContext>
+                                        <div className={styles.channel}>
+                                            <p className={styles.my}>Мои каналы:</p>
+                                            {user.userFullData?.my_channels ? (
+                                                user.userFullData?.my_channels.map(user => <MyChannel channel={user} key={''} />)
+                                            ) : (
+                                                <p className={styles.my}>-Пусто</p>
+                                            )}
+                                        </div>
+                                    </div>
                                 </div>
                             )}
                         </span>

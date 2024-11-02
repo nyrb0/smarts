@@ -6,7 +6,7 @@ import { observer } from 'mobx-react-lite';
 import CurrencyContext, { CurrencyCon } from '@/shared/context/currency/CurrencyContext';
 import { ChangeEvent, useContext, useEffect, useState } from 'react';
 import { Phone } from '@/shared/types/Phones/TypePhone.types';
-import InputOrder from '@/shared/Order/components/Input/InputOrder';
+import InputOrder from '@/shared/components/Order/components/Input/InputOrder';
 import Button from '@/shared/UI/Button/Button';
 import user from '../store/user/user';
 import { bonusCode, promoCode } from '@/Features/promoCodes';
