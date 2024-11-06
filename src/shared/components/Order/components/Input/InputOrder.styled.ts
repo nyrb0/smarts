@@ -10,16 +10,18 @@ const OrderInputStyled = styled.input`
     font-size: 14px;
     margin-bottom: 24px;
 `;
-
-const OrderButtonInputStyled = styled.button`
+interface OrderButtonInputStyledProps {
+    colorBtn: string;
+}
+const OrderButtonInputStyled = styled.button<Partial<OrderButtonInputStyledProps>>`
     font-weight: 500;
     font-size: 12px;
     text-align: center;
     border: 1px solid var(--main-black);
     border-radius: 6px;
-    background: transparent;
+    background: ${props => (props.colorBtn ? props.colorBtn : 'transparent')};
     padding: 8px;
-    width: 76px;
+    min-width: 76px;
     height: 32px;
     position: absolute;
     top: 15px;

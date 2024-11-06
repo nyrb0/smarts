@@ -5,6 +5,11 @@ import { cookieMy } from '@/Features/cookie';
 import { Phone } from '@/shared/types/Phones/TypePhone.types';
 import axios from 'axios';
 
+interface HandleServerUserParams {
+    method: 'GET' | 'POST' | 'PATCH' | 'PUT';
+    error: string;
+}
+
 class User {
     userData: string | null = Cookies.get('userData1') || null;
     userFullData: usersType | null = null;
@@ -30,6 +35,27 @@ class User {
         const del = this.userFullData?.saved.filter(d => d.id !== p.id);
         if (del) this.liked(del);
     }
+
+    // async handleServerUser(id: string = '', body: any = undefined, { method, error }: HandleServerUserParams) {
+    //     try {
+    //         const response = await fetch(`/api/user/${id}`, {
+    //             method: method,
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //             },
+    //             body: method === 'GET' ? undefined : JSON.stringify(body),
+    //         });
+
+    //         if (!response.ok) {
+    //             const errorData = await response.json();
+    //             throw new Error(errorData?.message || 'Ошибка при запросе данных');
+    //         }
+    //     } catch (e) {
+    //         console.error(error, e);
+    //         throw e;
+    //     }
+    // }
+
     async liked(users: Phone[]) {
         try {
             console.log('Отправляемые данные:', this.userAllFullData);
@@ -99,6 +125,7 @@ class User {
     async toggleSubscribe(nick_name: string, { subsrcibes, id }: { subsrcibes: string[]; id: string }) {
         const isSubs = subsrcibes.includes(nick_name);
         const updatedSubscriptions = isSubs ? subsrcibes.filter(s => s !== nick_name) : [...(subsrcibes || []), nick_name];
+        // this.handleServerUser(id, { subscriptions: updatedSubscriptions }, { method: 'PATCH', error: 'Ошибка при изменении подписки:' });
         try {
             await fetch(`/api/user/${id}`, {
                 method: 'PATCH',

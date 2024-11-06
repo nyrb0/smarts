@@ -22,6 +22,7 @@ import { MdEmojiFlags } from 'react-icons/md';
 
 //img
 import me from '@/shared/image/me.jpg';
+
 // components
 import { ChannelTypes } from '@/shared/types/User/Channel.types';
 import Btn from '@/shared/UI/Button/Button';
@@ -35,6 +36,7 @@ import Search from '@/shared/UI/Search/Search';
 import styled from 'styled-components';
 import { FaBedPulse } from 'react-icons/fa6';
 import ShereSocial from '@/shared/components/Shere/ShereSocial';
+import channelStore from '@/app/store/channel/channelStore';
 
 const { format } = new Intl.NumberFormat('ru-RU', {
     notation: 'compact',
@@ -56,10 +58,11 @@ const ProfileChannel = observer(({ data, setOpen }: { data: ChannelTypes; setOpe
     const handleSubscribe = async () => {
         await toggleSubscribe(data.nick_name, { subsrcibes: userFullData.subscriptions, id: userFullData.id });
     };
-
     const keysSocial = Object.keys(data.social);
     const eachLinksCount = keysSocial.reduce((acc, key) => (data.social[key as keyof typeof data.social] ? acc + 1 : acc), 0);
+    if (!userFullData) return;
 
+    const isOwner = userFullData.userName === data.author;
     return (
         <div className={`${stylesChannel.profile}  dfa`}>
             <Image src={me} alt='Profile channel' />
@@ -81,20 +84,37 @@ const ProfileChannel = observer(({ data, setOpen }: { data: ChannelTypes; setOpe
                     ) : null}
                 </div>
                 <div className={stylesChannel.btn}>
-                    <Btn
-                        onClick={() => {
-                            setIsActive(active => !active);
-                            handleSubscribe();
-                        }}
-                        style={{
-                            background: isActive ? 'transparent' : '#000',
-                            color: isActive ? '#000' : '#fff',
-                            border: 20,
-                        }}
-                    >
-                        Подписаться
-                    </Btn>
+                    {isOwner && (
+                        <Btn
+                            onClick={() => {
+                                setIsActive(active => !active);
+                                handleSubscribe();
+                            }}
+                            style={{
+                                background: isActive ? 'transparent' : '#000',
+                                color: isActive ? '#000' : '#fff',
+                                border: 20,
+                            }}
+                        >
+                            Подписаться
+                        </Btn>
+                    )}
                 </div>
+            </div>
+            <div>
+                <Btn
+                    onClick={() => {
+                        setIsActive(active => !active);
+                        handleSubscribe();
+                    }}
+                    style={{
+                        background: isActive ? 'transparent' : '#000',
+                        color: isActive ? '#000' : '#fff',
+                        border: 20,
+                    }}
+                >
+                    Редактировать
+                </Btn>
             </div>
         </div>
     );
@@ -105,13 +125,14 @@ const ChannelPage = ({ params: { id } }: { params: { id: string } }) => {
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
 
+    const shareText = `Привет это канал ${data?.name}, мы открылись!!`;
+
     const [isOpen, setIsOpen] = useState({ isOpenAbout: false, isShere: false });
     const [searchValue, setSearchValue] = useState('');
     // const [isOpenAbout, setIsOpenAbout] = useState(false);
     // const [isShere, setShere] = useState(false);
     // if (loading) return <div>Loading...</div>;
     // if (error) return <div>{error}</div>;
-
     const icons = {
         tg: TgIcon,
         vk: VkIcon,
@@ -148,6 +169,7 @@ const ChannelPage = ({ params: { id } }: { params: { id: string } }) => {
 
     const pathName = usePathname();
     if (!data) return null;
+    channelStore.viewUp(data?.id, data?.view);
     const keySocial = Object.keys(data.social);
     const EmailComponents = () => {
         const [viewEmail, setViewEmail] = useState(false);
@@ -173,7 +195,8 @@ const ChannelPage = ({ params: { id } }: { params: { id: string } }) => {
                 <div className={stylesChannel.about}>
                     <div className={stylesChannel.share}>
                         <ShereSocial
-                            theUrl='fs'
+                            textShare={shareText}
+                            theUrl={location.href}
                             isOpen={isOpen.isShere}
                             maxWidth={480}
                             close={() => setIsOpen(prev => ({ ...prev, isShere: false }))}
@@ -243,9 +266,7 @@ const ChannelPage = ({ params: { id } }: { params: { id: string } }) => {
                     </div>
                 </div>
             </Modal>
-
             <ProfileChannel data={data} setOpen={() => setIsOpen(prev => ({ ...prev, isOpenAbout: true }))} />
-
             <div className={stylesChannel.search}>
                 <Search value={searchValue} onChanges={handlerChange} placeholder={'поиск'} onKeyDown={() => null} />
             </div>
