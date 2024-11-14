@@ -30,7 +30,7 @@ const Regis = () => {
     const isAuthUser = Cookies.get('userData1');
     useEffect(() => {
         if (isAuthUser) {
-            router.push('/page');
+            router.push('/');
         }
     }, [isAuthUser]);
 
@@ -86,6 +86,7 @@ const Regis = () => {
             lastName,
             password: password1,
         };
+
         try {
             const data = await fetch('/api/user', {
                 method: 'POST',

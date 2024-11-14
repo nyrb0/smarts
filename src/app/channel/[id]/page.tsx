@@ -37,6 +37,7 @@ import styled from 'styled-components';
 import { FaBedPulse } from 'react-icons/fa6';
 import ShereSocial from '@/shared/components/Shere/ShereSocial';
 import channelStore from '@/app/store/channel/channelStore';
+import LoadImage from '@/shared/components/LoadImage/LoadImage';
 
 const { format } = new Intl.NumberFormat('ru-RU', {
     notation: 'compact',
@@ -47,11 +48,11 @@ const { format } = new Intl.NumberFormat('ru-RU', {
 const StyledButton = styled.button`
     background-color: #323232;
     padding: 10px;
-
     color: #fff;
     border-radius: 15px;
 `;
 const ProfileChannel = observer(({ data, setOpen }: { data: ChannelTypes; setOpen: () => void }) => {
+    const [openEditImage, setOpenEditImage] = useState(false);
     const { userFullData, toggleSubscribe } = user;
     if (!userFullData) return null;
     const [isActive, setIsActive] = useState(userFullData.subscriptions.some(s => s === data.nick_name));
@@ -61,11 +62,16 @@ const ProfileChannel = observer(({ data, setOpen }: { data: ChannelTypes; setOpe
     const keysSocial = Object.keys(data.social);
     const eachLinksCount = keysSocial.reduce((acc, key) => (data.social[key as keyof typeof data.social] ? acc + 1 : acc), 0);
     if (!userFullData) return;
-
     const isOwner = userFullData.userName === data.author;
     return (
         <div className={`${stylesChannel.profile}  dfa`}>
-            <Image src={me} alt='Profile channel' />
+            <img src={data.image_profile} alt='Profile channel' onClick={() => setOpenEditImage(true)} />
+            <LoadImage
+                theImage={me}
+                stateOpen={{ state: openEditImage, close: () => setOpenEditImage(false) }}
+                pathLoad={`channel/fa3sf`}
+                body={'image_profile'}
+            />
             <div className={stylesChannel.info}>
                 <div className={stylesChannel.name}>
                     <p>{data.name}</p>
@@ -84,7 +90,7 @@ const ProfileChannel = observer(({ data, setOpen }: { data: ChannelTypes; setOpe
                     ) : null}
                 </div>
                 <div className={stylesChannel.btn}>
-                    {isOwner && (
+                    {isOwner ? (
                         <Btn
                             onClick={() => {
                                 setIsActive(active => !active);
@@ -98,23 +104,21 @@ const ProfileChannel = observer(({ data, setOpen }: { data: ChannelTypes; setOpe
                         >
                             Подписаться
                         </Btn>
+                    ) : (
+                        <div>
+                            <Btn
+                                onClick={() => {}}
+                                style={{
+                                    background: isActive ? 'transparent' : '#000',
+                                    color: isActive ? '#000' : '#fff',
+                                    border: 20,
+                                }}
+                            >
+                                Редактировать
+                            </Btn>
+                        </div>
                     )}
                 </div>
-            </div>
-            <div>
-                <Btn
-                    onClick={() => {
-                        setIsActive(active => !active);
-                        handleSubscribe();
-                    }}
-                    style={{
-                        background: isActive ? 'transparent' : '#000',
-                        color: isActive ? '#000' : '#fff',
-                        border: 20,
-                    }}
-                >
-                    Редактировать
-                </Btn>
             </div>
         </div>
     );
@@ -124,7 +128,6 @@ const ChannelPage = ({ params: { id } }: { params: { id: string } }) => {
     const [data, setData] = useState<ChannelTypes | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
-
     const shareText = `Привет это канал ${data?.name}, мы открылись!!`;
 
     const [isOpen, setIsOpen] = useState({ isOpenAbout: false, isShere: false });
@@ -166,11 +169,12 @@ const ChannelPage = ({ params: { id } }: { params: { id: string } }) => {
         };
         getData();
     }, []);
-
+    const { userFullData } = user;
     const pathName = usePathname();
-    if (!data) return null;
-    channelStore.viewUp(data?.id, data?.view);
+    if (!data || !userFullData) return null;
+    channelStore.viewUp(data.id, data.view);
     const keySocial = Object.keys(data.social);
+    const isOwner = userFullData.userName === data.author;
     const EmailComponents = () => {
         const [viewEmail, setViewEmail] = useState(false);
         return (
@@ -259,10 +263,12 @@ const ChannelPage = ({ params: { id } }: { params: { id: string } }) => {
                             <RiShareForwardLine size={20} />
                             Поделиться каналом
                         </StyledButton>
-                        <StyledButton onClick={() => {}} className='dfa' style={{ gap: 10 }}>
-                            <MdEmojiFlags size={20} />
-                            Пожаловаться на канал
-                        </StyledButton>
+                        {isOwner && (
+                            <StyledButton onClick={() => {}} className='dfa' style={{ gap: 10 }}>
+                                <MdEmojiFlags size={20} />
+                                Пожаловаться на канал
+                            </StyledButton>
+                        )}
                     </div>
                 </div>
             </Modal>

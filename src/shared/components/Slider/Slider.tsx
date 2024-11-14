@@ -10,7 +10,6 @@ const Slider: FC<SliderProps> = ({ slides }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const imagesPerSlide = 3;
     const totalSlides = Math.ceil(slides.length / imagesPerSlide);
-
     const nextSlide = () => {
         setCurrentIndex(prevIndex => (prevIndex + 1) % totalSlides);
     };

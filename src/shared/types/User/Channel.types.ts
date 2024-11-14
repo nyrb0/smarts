@@ -8,6 +8,7 @@ export type ChannelTypes = {
     subsrcibes: number;
     tenology: Phone[];
     view: number;
+    image_profile: string;
     data: string;
     desciption: string;
     date: number;

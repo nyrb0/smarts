@@ -5,6 +5,7 @@ export type usersType = {
     id: string;
     userName: string;
     name: string;
+    image_profile: string;
     lastName?: string;
     have_money: Price;
     password: string;
