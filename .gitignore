@@ -35,12 +35,12 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-db.json
 
 # components
 src/test.tsx
 
 fakedb.json
+db.json
 
 
 
