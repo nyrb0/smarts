@@ -44,7 +44,6 @@ const LoadImage: FC<LoanImageProps> = ({ pathLoad, body, stateOpen, theImage }) 
             return null;
         }
     };
-
     const saveImage = async () => {
         if (!selectedFile) {
             alert('Выберите изображение!');
@@ -57,6 +56,8 @@ const LoadImage: FC<LoanImageProps> = ({ pathLoad, body, stateOpen, theImage }) 
         setPreview(null);
         toLoadServer('delete', body);
     };
+
+    const moveZeros = (arr: any[]) => [...arr.filter(f => f !== 0), arr.filter(f => f === 0)];
 
     return (
         <Modal
@@ -106,5 +107,4 @@ const LoadImage: FC<LoanImageProps> = ({ pathLoad, body, stateOpen, theImage }) 
         </Modal>
     );
 };
-
 export default LoadImage;

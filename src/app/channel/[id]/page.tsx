@@ -63,6 +63,7 @@ const ProfileChannel = observer(({ data, setOpen }: { data: ChannelTypes; setOpe
     const eachLinksCount = keysSocial.reduce((acc, key) => (data.social[key as keyof typeof data.social] ? acc + 1 : acc), 0);
     if (!userFullData) return;
     const isOwner = userFullData.userName === data.author;
+
     return (
         <div className={`${stylesChannel.profile}  dfa`}>
             <img src={data.image_profile} alt='Profile channel' onClick={() => setOpenEditImage(true)} />

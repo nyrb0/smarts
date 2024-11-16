@@ -106,7 +106,6 @@ const Headers: FC<HeaderI> = observer(() => {
         await setInclude(data.filter(s => s.name && s.name.toLowerCase().includes(searchValue.toLowerCase())));
         setSearchValue(value);
     };
-    console.log(include, 'include');
 
     const closeModalCart = () => {
         setCartModal(false);

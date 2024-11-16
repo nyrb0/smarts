@@ -1,5 +1,4 @@
 import { Phone } from '../Phones/TypePhone.types';
-
 export type ChannelTypes = {
     id: string;
     author: string;
