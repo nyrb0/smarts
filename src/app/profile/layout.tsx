@@ -14,14 +14,13 @@ import me from '@/shared/image/me.jpg';
 import { FaCamera } from 'react-icons/fa6';
 import sendProfile from '@/shared//icons/sendProfile.png';
 import user from '../store/user/user';
-import { cookieMy } from '../../Features/cookie';
 import Link from 'next/link';
 // import { div } from 'framer-motion/client';
 
 function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
     const router = useRouter();
 
-    if (!cookieMy('userData1')) {
+    if (!localStorage.getItem('userData1')) {
         router.push('/auth');
     }
     const logOutHandler = (c: string) => {
@@ -31,6 +30,7 @@ function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
 
     const menu = {
         aboutme: 'Обо мне',
+
         edit: 'Редактирование',
         notifications: 'Уведомления',
         saved: 'Сохраненные',

@@ -7,6 +7,6 @@ export function isValidUsername(username: string) {
 }
 
 export const logOut = (cookie: string) => {
-    Cookies.remove(cookie);
+    localStorage.removeItem(cookie);
     console.log('Выход успешно выполнен');
 };

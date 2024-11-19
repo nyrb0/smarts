@@ -6,15 +6,12 @@ export const config = {
 };
 
 export function middleware(req: NextRequest) {
-    const isAuth = req.cookies.get('UserData1')?.value;
-
+    // const isAuth = localStorage.getItem('userData1');
     // if (!isAuth) {
     //     return NextResponse.redirect(new URL('/auth', req.url));
     // }
-
-    // if (isAuth && req.nextUrl.pathname === '/auth') {
+    // if (req.nextUrl.pathname === '/auth' && isAuth) {
     //     return NextResponse.redirect(new URL('/', req.url));
     // }
-
-    return NextResponse.next();
+    // return NextResponse.next();
 }

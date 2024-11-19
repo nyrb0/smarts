@@ -1,7 +1,5 @@
 import { usersType } from '@/shared/types/User/User.types';
 import { makeAutoObservable, runInAction } from 'mobx';
-import Cookies from 'js-cookie';
-import { cookieMy } from '@/Features/cookie';
 import { Phone } from '@/shared/types/Phones/TypePhone.types';
 import axios from 'axios';
 
@@ -11,14 +9,14 @@ interface HandleServerUserParams {
 }
 
 class User {
-    userData: string | null = Cookies.get('userData1') || null;
+    userData: string | null = localStorage.getItem('userData1') || null;
     userFullData: usersType | null = null;
     userAllFullData: usersType[] = [];
     theUser: usersType | null = null;
 
     constructor() {
         makeAutoObservable(this);
-        this.fetchUserData(cookieMy('userData1') || '');
+        this.fetchUserData(localStorage.getItem('userData1') || '');
         this.getUser();
     }
 
@@ -68,7 +66,7 @@ class User {
                 body: JSON.stringify({ saved: users }),
             });
             runInAction(() => {
-                this.fetchUserData(cookieMy('userData1') || '');
+                this.fetchUserData(localStorage.getItem('userData1') || '');
             });
         } catch (e) {
             throw e;
@@ -87,7 +85,7 @@ class User {
                 body: JSON.stringify({ saved: [...this.userFullData.saved, user.saved] }),
             });
             runInAction(() => {
-                this.fetchUserData(cookieMy('userData1') || '');
+                this.fetchUserData(localStorage.getItem('userData1') || '');
             });
         } catch (e) {
             throw e;
@@ -120,7 +118,7 @@ class User {
 
     removeData(data: usersType) {
         this.userData = null;
-        Cookies.remove('userData1');
+        localStorage.removeItem('userData1');
     }
     async toggleSubscribe(nick_name: string, { subsrcibes, id }: { subsrcibes: string[]; id: string }) {
         const isSubs = subsrcibes.includes(nick_name);

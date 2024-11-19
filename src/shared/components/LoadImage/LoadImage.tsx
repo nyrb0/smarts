@@ -9,14 +9,16 @@ import { MdOutlinePhotoCamera } from 'react-icons/md';
 import { MdDelete } from 'react-icons/md';
 import Image, { StaticImageData } from 'next/image';
 
+import me from '@/shared/image/me.jpg';
+
 interface LoanImageProps {
     stateOpen: { state: boolean; close: () => void };
     pathLoad: string;
     body: string;
-    theImage: StaticImageData;
+    currentImagge: string;
 }
 
-const LoadImage: FC<LoanImageProps> = ({ pathLoad, body, stateOpen, theImage }) => {
+const LoadImage: FC<LoanImageProps> = ({ pathLoad, body, stateOpen, currentImagge }) => {
     const [selectedFile, setSelectedFile] = useState<null | string>(null);
     const [preview, setPreview] = useState<null | string>(null);
 
@@ -49,8 +51,10 @@ const LoadImage: FC<LoanImageProps> = ({ pathLoad, body, stateOpen, theImage }) 
             alert('Выберите изображение!');
             return;
         }
-        const data = await toLoadServer('post', body);
+        const data = await toLoadServer('patch', body);
         setPreview(data);
+        stateOpen.close();
+        location.reload();
     };
     const removeImage = async () => {
         setPreview(null);
@@ -69,10 +73,10 @@ const LoadImage: FC<LoanImageProps> = ({ pathLoad, body, stateOpen, theImage }) 
         >
             <div className={stLoad.file}>
                 <div className={`${stLoad.profileImage} ${selectedFile ? 'dfja' : 'dfc'}`}>
-                    {preview || theImage ? (
+                    {currentImagge ? (
                         <div style={{ position: 'relative' }}>
                             <p>{selectedFile ? 'Старое:' : 'Текущий:'}</p>
-                            <Image src={preview || theImage} alt='photo' />
+                            <Image src={currentImagge} alt='photo' width={50} height={50} />
                             <MdDelete size={20} className={stLoad.delete} onClick={removeImage} />
                         </div>
                     ) : null}

@@ -20,9 +20,6 @@ import { BiWorld } from 'react-icons/bi';
 import { RiShareForwardLine } from 'react-icons/ri';
 import { MdEmojiFlags } from 'react-icons/md';
 
-//img
-import me from '@/shared/image/me.jpg';
-
 // components
 import { ChannelTypes } from '@/shared/types/User/Channel.types';
 import Btn from '@/shared/UI/Button/Button';
@@ -38,6 +35,9 @@ import { FaBedPulse } from 'react-icons/fa6';
 import ShereSocial from '@/shared/components/Shere/ShereSocial';
 import channelStore from '@/app/store/channel/channelStore';
 import LoadImage from '@/shared/components/LoadImage/LoadImage';
+import Input from '@/shared/UI/Input/Input';
+import InputGray from '@/shared/UI/Input/IntGray/InputGray';
+import TextArea from '@/shared/components/textArea/TextArea';
 
 const { format } = new Intl.NumberFormat('ru-RU', {
     notation: 'compact',
@@ -51,7 +51,7 @@ const StyledButton = styled.button`
     color: #fff;
     border-radius: 15px;
 `;
-const ProfileChannel = observer(({ data, setOpen }: { data: ChannelTypes; setOpen: () => void }) => {
+const ProfileChannel = observer(({ data, setOpen, openEdit }: { data: ChannelTypes; setOpen: () => void; openEdit: () => void }) => {
     const [openEditImage, setOpenEditImage] = useState(false);
     const { userFullData, toggleSubscribe } = user;
     if (!userFullData) return null;
@@ -68,7 +68,7 @@ const ProfileChannel = observer(({ data, setOpen }: { data: ChannelTypes; setOpe
         <div className={`${stylesChannel.profile}  dfa`}>
             <img src={data.image_profile} alt='Profile channel' onClick={() => setOpenEditImage(true)} />
             <LoadImage
-                theImage={me}
+                currentImagge={data.image_profile}
                 stateOpen={{ state: openEditImage, close: () => setOpenEditImage(false) }}
                 pathLoad={`channel/fa3sf`}
                 body={'image_profile'}
@@ -91,7 +91,7 @@ const ProfileChannel = observer(({ data, setOpen }: { data: ChannelTypes; setOpe
                     ) : null}
                 </div>
                 <div className={stylesChannel.btn}>
-                    {isOwner ? (
+                    {!isOwner ? (
                         <Btn
                             onClick={() => {
                                 setIsActive(active => !active);
@@ -108,7 +108,7 @@ const ProfileChannel = observer(({ data, setOpen }: { data: ChannelTypes; setOpe
                     ) : (
                         <div>
                             <Btn
-                                onClick={() => {}}
+                                onClick={() => openEdit()}
                                 style={{
                                     background: isActive ? 'transparent' : '#000',
                                     color: isActive ? '#000' : '#fff',
@@ -130,8 +130,10 @@ const ChannelPage = ({ params: { id } }: { params: { id: string } }) => {
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     const shareText = `Привет это канал ${data?.name}, мы открылись!!`;
+    const [dataInt, setDataInt] = useState({ name: '', desc: '' });
 
     const [isOpen, setIsOpen] = useState({ isOpenAbout: false, isShere: false });
+    const [isEdit, setIsEdit] = useState(false);
     const [searchValue, setSearchValue] = useState('');
     // const [isOpenAbout, setIsOpenAbout] = useState(false);
     // const [isShere, setShere] = useState(false);
@@ -144,7 +146,6 @@ const ChannelPage = ({ params: { id } }: { params: { id: string } }) => {
         ins: InsIcon,
         offical: InsIcon,
     };
-
     const nameSocial = {
         tg: 'Телеграмм',
         vk: 'ВКонтакте',
@@ -184,7 +185,7 @@ const ChannelPage = ({ params: { id } }: { params: { id: string } }) => {
                     <StyledButton
                         onClick={() => {
                             setViewEmail(true);
-                            setIsOpen(prev => ({ ...prev, isOpenAbout: true }));
+                            // setIsOpen(prev => ({ ...prev, isOpenAbout: true }));
                         }}
                     >
                         Показать адресс электронной почты
@@ -273,7 +274,41 @@ const ChannelPage = ({ params: { id } }: { params: { id: string } }) => {
                     </div>
                 </div>
             </Modal>
-            <ProfileChannel data={data} setOpen={() => setIsOpen(prev => ({ ...prev, isOpenAbout: true }))} />
+            <Modal isOpen={isEdit} close={() => setIsEdit(false)}>
+                <div className={stylesChannel.editChannel}>
+                    <div>
+                        <InputGray value={dataInt.name} holder='Имя канала' onChange={(e: string) => setDataInt(prev => ({ ...prev, name: e }))} />
+                    </div>
+                    <div>
+                        <InputGray value={dataInt.name} holder='Никнэйм' onChange={(e: string) => setDataInt(prev => ({ ...prev, name: e }))} />
+                    </div>
+                    <p className={stylesChannel.lengthDesc}>
+                        <span style={{ color: dataInt.desc.length >= 500 ? 'red' : '' }}>{dataInt.desc.length}</span>/500
+                    </p>
+                    <TextArea
+                        value={dataInt.desc}
+                        onChange={(e: string) => {
+                            setDataInt(prev => ({ ...prev, desc: e }));
+                        }}
+                        holder='Описание'
+                    />
+                    <div className={`${stylesChannel.btnSave} dfc`}>
+                        <span>
+                            <Btn
+                                onClick={() => null}
+                                style={{
+                                    background: '#000',
+                                    color: '#fff',
+                                    border: 8,
+                                }}
+                            >
+                                Сохранить
+                            </Btn>
+                        </span>
+                    </div>
+                </div>
+            </Modal>
+            <ProfileChannel openEdit={() => setIsEdit(true)} data={data} setOpen={() => setIsOpen(prev => ({ ...prev, isOpenAbout: true }))} />
             <div className={stylesChannel.search}>
                 <Search value={searchValue} onChanges={handlerChange} placeholder={'поиск'} onKeyDown={() => null} />
             </div>
