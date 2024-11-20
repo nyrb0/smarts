@@ -122,6 +122,10 @@
 }
 
 .editChannel {
+    & h2 {
+        text-align: center;
+        padding-bottom: 20px;
+    }
     .lengthDesc {
         font-size: 12px;
         opacity: 0.8;
@@ -133,5 +137,8 @@
         & span {
             width: 200px;
         }
+    }
+    .select {
+        margin-top: 10px;
     }
 }

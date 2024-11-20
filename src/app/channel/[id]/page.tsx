@@ -36,8 +36,10 @@ import ShereSocial from '@/shared/components/Shere/ShereSocial';
 import channelStore from '@/app/store/channel/channelStore';
 import LoadImage from '@/shared/components/LoadImage/LoadImage';
 import Input from '@/shared/UI/Input/Input';
-import InputGray from '@/shared/UI/Input/IntGray/InputGray';
+import InputGray from '@/shared/UI/Input/InputPrime/InputPrime';
 import TextArea from '@/shared/components/textArea/TextArea';
+import CusSelect from '@/shared/UI/Select/CusSelect';
+import SelectBorder from '@/shared/UI/Select/Transparent_border/SelectBorder';
 
 const { format } = new Intl.NumberFormat('ru-RU', {
     notation: 'compact',
@@ -112,10 +114,10 @@ const ProfileChannel = observer(({ data, setOpen, openEdit }: { data: ChannelTyp
                                 style={{
                                     background: isActive ? 'transparent' : '#000',
                                     color: isActive ? '#000' : '#fff',
-                                    border: 20,
+                                    border: 10,
                                 }}
                             >
-                                Редактировать
+                                <span style={{ fontSize: 14 }}>Редактировать</span>
                             </Btn>
                         </div>
                     )}
@@ -131,7 +133,7 @@ const ChannelPage = ({ params: { id } }: { params: { id: string } }) => {
     const [error, setError] = useState<string | null>(null);
     const shareText = `Привет это канал ${data?.name}, мы открылись!!`;
     const [dataInt, setDataInt] = useState({ name: '', desc: '' });
-
+    const [counrySelect, setCountrySelect] = useState<string | undefined>(data?.country);
     const [isOpen, setIsOpen] = useState({ isOpenAbout: false, isShere: false });
     const [isEdit, setIsEdit] = useState(false);
     const [searchValue, setSearchValue] = useState('');
@@ -177,6 +179,10 @@ const ChannelPage = ({ params: { id } }: { params: { id: string } }) => {
     channelStore.viewUp(data.id, data.view);
     const keySocial = Object.keys(data.social);
     const isOwner = userFullData.userName === data.author;
+
+    const handleCounry = (e: string) => {
+        setCountrySelect(e);
+    };
     const EmailComponents = () => {
         const [viewEmail, setViewEmail] = useState(false);
         return (
@@ -195,6 +201,7 @@ const ChannelPage = ({ params: { id } }: { params: { id: string } }) => {
             </>
         );
     };
+    const country = ['Kyrgyzstan', 'Kazakstan', 'Russia', 'China', 'Uzbekstan'];
     return (
         <div className={`${stylesChannel.channel} container`}>
             <Modal isOpen={isOpen.isOpenAbout} close={() => setIsOpen(prev => ({ isShere: false, isOpenAbout: false }))}>
@@ -276,12 +283,10 @@ const ChannelPage = ({ params: { id } }: { params: { id: string } }) => {
             </Modal>
             <Modal isOpen={isEdit} close={() => setIsEdit(false)}>
                 <div className={stylesChannel.editChannel}>
-                    <div>
-                        <InputGray value={dataInt.name} holder='Имя канала' onChange={(e: string) => setDataInt(prev => ({ ...prev, name: e }))} />
-                    </div>
-                    <div>
-                        <InputGray value={dataInt.name} holder='Никнэйм' onChange={(e: string) => setDataInt(prev => ({ ...prev, name: e }))} />
-                    </div>
+                    <h2>Редактирование</h2>
+                    <InputGray value={dataInt.name} holder='Имя канала' onChange={(e: string) => setDataInt(prev => ({ ...prev, name: e }))} />
+                    <InputGray value={dataInt.name} holder='Никнэйм' onChange={(e: string) => setDataInt(prev => ({ ...prev, name: e }))} />
+                    <InputGray value={dataInt.name} holder='email' onChange={(e: string) => setDataInt(prev => ({ ...prev, name: e }))} />
                     <p className={stylesChannel.lengthDesc}>
                         <span style={{ color: dataInt.desc.length >= 500 ? 'red' : '' }}>{dataInt.desc.length}</span>/500
                     </p>
@@ -290,8 +295,12 @@ const ChannelPage = ({ params: { id } }: { params: { id: string } }) => {
                         onChange={(e: string) => {
                             setDataInt(prev => ({ ...prev, desc: e }));
                         }}
+                        styled={{ height: 80 }}
                         holder='Описание'
                     />
+                    <div className={stylesChannel.select}>
+                        <SelectBorder defaultValue={data.country} values={country} changes={handleCounry} sel={counrySelect} />
+                    </div>
                     <div className={`${stylesChannel.btnSave} dfc`}>
                         <span>
                             <Btn
