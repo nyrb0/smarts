@@ -8,8 +8,6 @@ import { Comments, Phone, ReviewCount } from '@/shared/types/Phones/TypePhone.ty
 // modules
 import Image from 'next/image';
 import { ChangeEvent, FC, useContext, useEffect, useState } from 'react';
-import Cookies from 'js-cookie';
-
 // img
 import CPUicon from '@/shared/icons/characteristic/Screensize.png';
 import CameraIcon from '@/shared/icons/characteristic/smartphone-rotate-2-svgrepo-com 2 (2).png';
@@ -84,7 +82,7 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
     const [nextStart, setNextStars] = useState(false);
     const [commentValue, setCommentValue] = useState('');
     const userAboutData = user.userData;
-    const userCookie = Cookies.get('userData1');
+    const userCookie = localStorage.getItem('userData1') || '';
     const colors = ['black', 'purple', 'red', 'yellow', 'white'];
     const storages = ['128', '256', '512', '1024'];
     const date = new Date();

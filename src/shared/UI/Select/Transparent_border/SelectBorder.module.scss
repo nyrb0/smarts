@@ -21,10 +21,12 @@
     .options {
         position: absolute;
         border: 1px solid #a1a5ac;
-        bottom: -173px;
+        bottom: -124px;
         border-radius: 10px;
         left: 50%;
         transform: translateX(-50%);
+        height: 120px;
+        overflow-y: scroll;
         font-size: 14px;
         background-color: #fff;
         width: 100%;

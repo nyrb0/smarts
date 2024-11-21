@@ -16,10 +16,10 @@ const SelectBorder: FC<CusSelI> = ({ values, changes, sel, defaultValue }) => {
         setOpen(false);
         changes(s);
     };
-
     const isSelecredHandler = (defaultSel: string, value: string) => {
         return defaultSel === value;
     };
+
     return (
         <div className={st.select}>
             <div className={st.category} onClick={() => setOpen(prev => !prev)}>
