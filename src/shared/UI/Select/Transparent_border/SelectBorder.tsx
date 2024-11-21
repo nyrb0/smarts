@@ -16,6 +16,10 @@ const SelectBorder: FC<CusSelI> = ({ values, changes, sel, defaultValue }) => {
         setOpen(false);
         changes(s);
     };
+
+    const isSelecredHandler = (defaultSel: string, value: string) => {
+        return defaultSel === value;
+    };
     return (
         <div className={st.select}>
             <div className={st.category} onClick={() => setOpen(prev => !prev)}>
@@ -28,8 +32,8 @@ const SelectBorder: FC<CusSelI> = ({ values, changes, sel, defaultValue }) => {
                         {open &&
                             values.length &&
                             values.map(v => (
-                                <div key={v} className={st.values} onClick={() => clickOptions(v)}>
-                                    {v}
+                                <div key={v} className={`${st.values}`} onClick={() => clickOptions(v)}>
+                                    {v} {isSelecredHandler(defaultValue, v) && <span>•выбрано</span>}
                                 </div>
                             ))}
                     </div>

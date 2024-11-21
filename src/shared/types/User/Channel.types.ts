@@ -14,6 +14,7 @@ export type ChannelTypes = {
     country: string;
     email: string;
     main_url: string | null;
+    notification: boolean;
     social: {
         tg: string | null;
         vk: string | null;

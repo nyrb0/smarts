@@ -19,6 +19,8 @@ import { CiCalendarDate } from 'react-icons/ci';
 import { BiWorld } from 'react-icons/bi';
 import { RiShareForwardLine } from 'react-icons/ri';
 import { MdEmojiFlags } from 'react-icons/md';
+import { IoNotifications } from 'react-icons/io5';
+import { IoNotificationsOffSharp } from 'react-icons/io5';
 
 // components
 import { ChannelTypes } from '@/shared/types/User/Channel.types';
@@ -35,11 +37,7 @@ import { FaBedPulse } from 'react-icons/fa6';
 import ShereSocial from '@/shared/components/Shere/ShereSocial';
 import channelStore from '@/app/store/channel/channelStore';
 import LoadImage from '@/shared/components/LoadImage/LoadImage';
-import Input from '@/shared/UI/Input/Input';
-import InputGray from '@/shared/UI/Input/InputPrime/InputPrime';
-import TextArea from '@/shared/components/textArea/TextArea';
-import CusSelect from '@/shared/UI/Select/CusSelect';
-import SelectBorder from '@/shared/UI/Select/Transparent_border/SelectBorder';
+import EditChannel from '../components/EditChannel';
 
 const { format } = new Intl.NumberFormat('ru-RU', {
     notation: 'compact',
@@ -58,6 +56,7 @@ const ProfileChannel = observer(({ data, setOpen, openEdit }: { data: ChannelTyp
     const { userFullData, toggleSubscribe } = user;
     if (!userFullData) return null;
     const [isActive, setIsActive] = useState(userFullData.subscriptions.some(s => s === data.nick_name));
+    const [isNotificationOfChannel, setIsNotificationOfChannel] = useState<boolean>(data.notification);
     const handleSubscribe = async () => {
         await toggleSubscribe(data.nick_name, { subsrcibes: userFullData.subscriptions, id: userFullData.id });
     };
@@ -92,29 +91,48 @@ const ProfileChannel = observer(({ data, setOpen, openEdit }: { data: ChannelTyp
                         </>
                     ) : null}
                 </div>
-                <div className={stylesChannel.btn}>
+                <div className={stylesChannel.subscription}>
                     {!isOwner ? (
-                        <Btn
-                            onClick={() => {
-                                setIsActive(active => !active);
-                                handleSubscribe();
-                            }}
-                            style={{
-                                background: isActive ? 'transparent' : '#000',
-                                color: isActive ? '#000' : '#fff',
-                                border: 20,
-                            }}
-                        >
-                            Подписаться
-                        </Btn>
+                        <div className='df' style={{ gap: 10 }}>
+                            <div className={`${stylesChannel.btn}`}>
+                                <Btn
+                                    onClick={() => {
+                                        setIsActive(active => !active);
+                                        handleSubscribe();
+                                    }}
+                                    style={{
+                                        background: isActive ? 'transparent' : '#000',
+                                        color: isActive ? '#000' : '#fff',
+                                        border: 6,
+                                    }}
+                                >
+                                    {!isActive ? 'Подписаться' : 'Отписаться'}
+                                </Btn>
+                            </div>
+                            <div style={{ width: 35, height: 30 }}>
+                                <Btn
+                                    onClick={() => {
+                                        setIsActive(active => !active);
+                                        handleSubscribe();
+                                    }}
+                                    style={{
+                                        background: isActive ? 'transparent' : '#000',
+                                        color: isActive ? '#000' : '#fff',
+                                        border: 6,
+                                    }}
+                                >
+                                    <span className='dfca'>{isNotificationOfChannel ? <IoNotificationsOffSharp /> : <IoNotifications />}</span>
+                                </Btn>
+                            </div>
+                        </div>
                     ) : (
-                        <div>
+                        <div className={stylesChannel.btn}>
                             <Btn
                                 onClick={() => openEdit()}
                                 style={{
-                                    background: isActive ? 'transparent' : '#000',
-                                    color: isActive ? '#000' : '#fff',
-                                    border: 10,
+                                    background: 'transparent',
+                                    color: '#000',
+                                    border: 6,
                                 }}
                             >
                                 <span style={{ fontSize: 14 }}>Редактировать</span>
@@ -132,8 +150,6 @@ const ChannelPage = ({ params: { id } }: { params: { id: string } }) => {
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     const shareText = `Привет это канал ${data?.name}, мы открылись!!`;
-    const [dataInt, setDataInt] = useState({ name: '', desc: '' });
-    const [counrySelect, setCountrySelect] = useState<string | undefined>(data?.country);
     const [isOpen, setIsOpen] = useState({ isOpenAbout: false, isShere: false });
     const [isEdit, setIsEdit] = useState(false);
     const [searchValue, setSearchValue] = useState('');
@@ -180,9 +196,6 @@ const ChannelPage = ({ params: { id } }: { params: { id: string } }) => {
     const keySocial = Object.keys(data.social);
     const isOwner = userFullData.userName === data.author;
 
-    const handleCounry = (e: string) => {
-        setCountrySelect(e);
-    };
     const EmailComponents = () => {
         const [viewEmail, setViewEmail] = useState(false);
         return (
@@ -201,7 +214,7 @@ const ChannelPage = ({ params: { id } }: { params: { id: string } }) => {
             </>
         );
     };
-    const country = ['Kyrgyzstan', 'Kazakstan', 'Russia', 'China', 'Uzbekstan'];
+
     return (
         <div className={`${stylesChannel.channel} container`}>
             <Modal isOpen={isOpen.isOpenAbout} close={() => setIsOpen(prev => ({ isShere: false, isOpenAbout: false }))}>
@@ -281,42 +294,7 @@ const ChannelPage = ({ params: { id } }: { params: { id: string } }) => {
                     </div>
                 </div>
             </Modal>
-            <Modal isOpen={isEdit} close={() => setIsEdit(false)}>
-                <div className={stylesChannel.editChannel}>
-                    <h2>Редактирование</h2>
-                    <InputGray value={dataInt.name} holder='Имя канала' onChange={(e: string) => setDataInt(prev => ({ ...prev, name: e }))} />
-                    <InputGray value={dataInt.name} holder='Никнэйм' onChange={(e: string) => setDataInt(prev => ({ ...prev, name: e }))} />
-                    <InputGray value={dataInt.name} holder='email' onChange={(e: string) => setDataInt(prev => ({ ...prev, name: e }))} />
-                    <p className={stylesChannel.lengthDesc}>
-                        <span style={{ color: dataInt.desc.length >= 500 ? 'red' : '' }}>{dataInt.desc.length}</span>/500
-                    </p>
-                    <TextArea
-                        value={dataInt.desc}
-                        onChange={(e: string) => {
-                            setDataInt(prev => ({ ...prev, desc: e }));
-                        }}
-                        styled={{ height: 80 }}
-                        holder='Описание'
-                    />
-                    <div className={stylesChannel.select}>
-                        <SelectBorder defaultValue={data.country} values={country} changes={handleCounry} sel={counrySelect} />
-                    </div>
-                    <div className={`${stylesChannel.btnSave} dfc`}>
-                        <span>
-                            <Btn
-                                onClick={() => null}
-                                style={{
-                                    background: '#000',
-                                    color: '#fff',
-                                    border: 8,
-                                }}
-                            >
-                                Сохранить
-                            </Btn>
-                        </span>
-                    </div>
-                </div>
-            </Modal>
+            <EditChannel openClose={{ open: isEdit, close: () => setIsEdit(false) }} data={data} />
             <ProfileChannel openEdit={() => setIsEdit(true)} data={data} setOpen={() => setIsOpen(prev => ({ ...prev, isOpenAbout: true }))} />
             <div className={stylesChannel.search}>
                 <Search value={searchValue} onChanges={handlerChange} placeholder={'поиск'} onKeyDown={() => null} />

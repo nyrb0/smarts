@@ -42,9 +42,11 @@
                 }
                 margin-bottom: 10px;
             }
-            .btn {
-                width: 140px;
-                height: 40px;
+            .subscription {
+                .btn {
+                    height: 30px;
+                    width: 140px;
+                }
             }
         }
     }
@@ -118,27 +120,5 @@
         margin-top: 20px;
     }
     .share {
-    }
-}
-
-.editChannel {
-    & h2 {
-        text-align: center;
-        padding-bottom: 20px;
-    }
-    .lengthDesc {
-        font-size: 12px;
-        opacity: 0.8;
-        padding-bottom: 4px;
-    }
-
-    .btnSave {
-        margin-top: 20px;
-        & span {
-            width: 200px;
-        }
-    }
-    .select {
-        margin-top: 10px;
     }
 }
