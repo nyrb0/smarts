@@ -21,15 +21,21 @@
     .options {
         position: absolute;
         border: 1px solid #a1a5ac;
-        bottom: -124px;
+        bottom: -154px;
         border-radius: 10px;
         left: 50%;
         transform: translateX(-50%);
-        height: 120px;
+        height: 150px;
         overflow-y: scroll;
         font-size: 14px;
         background-color: #fff;
         width: 100%;
+
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        &::-webkit-scrollbar {
+            display: none;
+        }
         .values {
             text-align: center;
             width: 100%;

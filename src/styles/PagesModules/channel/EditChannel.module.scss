@@ -1,4 +1,11 @@
 .editChannel {
+    height: 500px;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar {
+        display: none;
+    }
     & h2 {
         text-align: center;
         padding-bottom: 20px;

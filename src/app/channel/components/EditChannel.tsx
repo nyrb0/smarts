@@ -1,7 +1,7 @@
 import Modal from '@/shared/UI/Modal/Modal';
 import { FC, useEffect, useState } from 'react';
 import stylesChannel from '@/styles/PagesModules/channel/EditChannel.module.scss';
-import InputGray from '@/shared/UI/Input/InputPrime/InputPrime';
+import InputPrime from '@/shared/UI/Input/InputPrime/InputPrime';
 import TextArea from '@/shared/components/textArea/TextArea';
 import Btn from '@/shared/UI/Button/Button';
 import SelectBorder from '@/shared/UI/Select/Transparent_border/SelectBorder';
@@ -9,12 +9,13 @@ import { ChannelTypes } from '@/shared/types/User/Channel.types';
 import { observer } from 'mobx-react-lite';
 import channelStore from '@/app/store/channel/channelStore';
 import axios from 'axios';
+import AddSocial from './addSocial';
+import { CountryType } from '@/shared/types/country/Country.type';
 
 interface EditChannelProps {
     openClose: { close: () => void; open: boolean };
     data: ChannelTypes;
 }
-
 const EditChannel: FC<EditChannelProps> = observer(({ openClose, data }) => {
     const [dataInt, setDataInt] = useState({
         name: data.name,
@@ -38,21 +39,20 @@ const EditChannel: FC<EditChannelProps> = observer(({ openClose, data }) => {
         const prevData = { name, desciption, email, nick_name, country };
         const isPrevValue = isPrevHandler(prevData, dataInt);
         if (Object.values(isPrevValue).length <= 0) return;
-
         // первый аргумент id, второй body
         channelStore.editSave(data.id, isPrevHandler(prevData, dataInt));
         location.reload();
     };
-    // поднимает выбранную страну на первое место
-    const upSelectCountry = (c: string[], s: string) => {
-        return;
-    };
+
     useEffect(() => {
         async function getCounty() {
             try {
                 const get = await axios.get('/api/country');
-                const dataCountry: string[] = await get.data;
-                const updatedCountryList = await [countrySelect, ...dataCountry.filter(f => f !== countrySelect)];
+                const dataCountry: CountryType[] = await get.data;
+                // это для того чтобы извлечь все файлы с api
+                const extractObjCountry = dataCountry.map(c => c.name);
+                // поднимает выбранную страну на первое место в списке
+                const updatedCountryList = await [countrySelect, ...extractObjCountry.filter(f => f !== countrySelect)];
                 setCountry(updatedCountryList);
             } catch (err) {
                 console.log(`Ошибка: ${err}`);
@@ -65,9 +65,9 @@ const EditChannel: FC<EditChannelProps> = observer(({ openClose, data }) => {
         <Modal isOpen={openClose.open} close={openClose.close}>
             <div className={stylesChannel.editChannel}>
                 <h2>Редактирование</h2>
-                <InputGray value={dataInt.name} holder='Имя канала' onChange={(e: string) => setDataInt(prev => ({ ...prev, name: e }))} />
-                <InputGray value={dataInt.nick_name} holder='Никнэйм' onChange={(e: string) => setDataInt(prev => ({ ...prev, nick_name: e }))} />
-                <InputGray value={dataInt.email} holder='email' onChange={(e: string) => setDataInt(prev => ({ ...prev, email: e }))} />
+                <InputPrime value={dataInt.name} holder='Имя канала' onChange={(e: string) => setDataInt(prev => ({ ...prev, name: e }))} />
+                <InputPrime value={dataInt.nick_name} holder='Никнэйм' onChange={(e: string) => setDataInt(prev => ({ ...prev, nick_name: e }))} />
+                <InputPrime value={dataInt.email} holder='email' onChange={(e: string) => setDataInt(prev => ({ ...prev, email: e }))} />
                 <p className={stylesChannel.lengthDesc}>
                     <span style={{ color: dataInt.desciption.length >= 500 ? 'red' : '' }}>{dataInt.desciption.length}</span>/500
                 </p>
@@ -96,6 +96,7 @@ const EditChannel: FC<EditChannelProps> = observer(({ openClose, data }) => {
                         </Btn>
                     </span>
                 </div>
+                <AddSocial data={{ id: data.id }} />
             </div>
         </Modal>
     );

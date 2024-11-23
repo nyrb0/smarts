@@ -1,7 +1,7 @@
 import { ChannelTypes } from '@/shared/types/User/Channel.types';
 import { makeAutoObservable } from 'mobx';
 
-type editSaveProps = Pick<ChannelTypes, 'name' | 'country' | 'desciption' | 'nick_name'>;
+type editSaveProps = Pick<ChannelTypes, 'name' | 'country' | 'desciption' | 'nick_name' | 'social'>;
 
 class ChannelStore {
     channelData: ChannelTypes[] = [];
