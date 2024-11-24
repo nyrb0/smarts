@@ -31,14 +31,17 @@ const EditChannel: FC<EditChannelProps> = observer(({ openClose, data }) => {
         setDataInt(prev => ({ ...prev, country: e }));
         setCountrySelect(e);
     };
+
     const isPrevHandler = (prev: any, d: any) => {
         return Object.fromEntries(Object.entries({ ...prev, ...d }).filter(([key, value]) => prev[key] !== d[key]));
     };
+
     const sendtoServer = () => {
         const { name, desciption, email, nick_name, country } = data;
         const prevData = { name, desciption, email, nick_name, country };
         const isPrevValue = isPrevHandler(prevData, dataInt);
         if (Object.values(isPrevValue).length <= 0) return;
+
         // первый аргумент id, второй body
         channelStore.editSave(data.id, isPrevHandler(prevData, dataInt));
         location.reload();
@@ -96,7 +99,7 @@ const EditChannel: FC<EditChannelProps> = observer(({ openClose, data }) => {
                         </Btn>
                     </span>
                 </div>
-                <AddSocial data={{ id: data.id,social:data.social }} />
+                <AddSocial data={{ id: data.id, social: data.social }} />
             </div>
         </Modal>
     );

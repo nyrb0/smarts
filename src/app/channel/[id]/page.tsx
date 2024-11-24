@@ -37,7 +37,7 @@ import { FaBedPulse } from 'react-icons/fa6';
 import ShereSocial from '@/shared/components/Shere/ShereSocial';
 import channelStore from '@/app/store/channel/channelStore';
 import LoadImage from '@/shared/components/LoadImage/LoadImage';
-import EditChannel from '../components/EditChannel';
+import EditChannel from '../../../Entities/channel/components/EditChannel';
 
 const { format } = new Intl.NumberFormat('ru-RU', {
     notation: 'compact',
