@@ -12,39 +12,42 @@ import { observer } from 'mobx-react-lite';
 import channelStore from '@/app/store/channel/channelStore';
 import Btn from '@/shared/UI/Button/Button';
 import { motion } from 'framer-motion';
+import user from '@/app/store/user/user';
+import { SocialType } from '@/shared/types/User/Channel.types';
 
 interface addSocical {
-    data: { id: string };
+    data: { id: string; social: SocialType };
 }
 
 const AddSocial: FC<addSocical> = observer(({ data }) => {
     const [links, setLinks] = useState({
-        tg: '',
-        vk: '',
-        tt: '',
-        ins: '',
-        offical: '',
+        tg: data.social.tg,
+        vk: data.social.vk,
+        tt: data.social.tt,
+        ins: data.social.ins,
+        offical: data.social.offical,
     });
+    const [isEdit, setIsEdit] = useState(false);
+    const { userFullData } = user;
     const [count, setCount] = useState(0);
-    console.log(count);
 
     const handleToServer = () => {
-        channelStore.editSave('3', { social: links });
+        console.log('i work', data.id);
+        channelStore.editSave(data.id, { social: links });
     };
     const handleCounter = () => {
         if (count === 2) return;
         setCount(prev => prev + 1);
     };
     const BlockSocialComponent = ({ name, image, field }: { name: string; image: StaticImageData; field: keyof typeof links }) => {
+        const changeLinks = (e: string) => {
+            setIsEdit(true);
+            setLinks(prev => ({ ...prev, [field]: e }));
+        };
         return (
             <div className={`${styles.social} dfa`}>
                 <Image src={image} alt='social' width={50} height={50} />
-                <InputPrime
-                    value={links[field]}
-                    styled={{ height: '10px', fonstS: 11, margin: '0 0 0 0' }}
-                    holder={name}
-                    onChange={(e: string) => setLinks(prev => ({ ...prev, [field]: e }))}
-                />
+                <InputPrime value={links[field]} styled={{ height: '10px', fonstS: 11, margin: '0 0 0 0' }} holder={name} onChange={changeLinks} />
             </div>
         );
     };
@@ -77,6 +80,22 @@ const AddSocial: FC<addSocical> = observer(({ data }) => {
                         }}
                     >
                         +
+                    </Btn>
+                </span>
+            </div>
+            <div className={`${styles.btnSave} dfc`}>
+                <span>
+                    <Btn
+                        onClick={handleToServer}
+                        style={{
+                            background: '#000',
+                            color: '#fff',
+                            border: 5,
+                            opacity: !isEdit ? 0.6 : 1,
+                        }}
+                        disabled={!isEdit}
+                    >
+                        Сохранить
                     </Btn>
                 </span>
             </div>

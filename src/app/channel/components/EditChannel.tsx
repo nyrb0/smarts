@@ -96,7 +96,7 @@ const EditChannel: FC<EditChannelProps> = observer(({ openClose, data }) => {
                         </Btn>
                     </span>
                 </div>
-                <AddSocial data={{ id: data.id }} />
+                <AddSocial data={{ id: data.id,social:data.social }} />
             </div>
         </Modal>
     );

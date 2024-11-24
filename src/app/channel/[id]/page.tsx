@@ -231,7 +231,7 @@ const ChannelPage = ({ params: { id } }: { params: { id: string } }) => {
                     </div>
                     <h3>О канале</h3>
                     <p className={stylesChannel.desc}>
-                        <span>{data.name}</span>9тут описание
+                        <span>{data.desciption}</span>
                     </p>
                     <div className={stylesChannel.links}>
                         <h4>Ссылки</h4>
@@ -274,7 +274,7 @@ const ChannelPage = ({ params: { id } }: { params: { id: string } }) => {
                             <ImStatsBars2 /> <p>{data.view} просмотров</p>
                         </div>
                         <div className={`${stylesChannel.aboutChannel} dfa`}>
-                            <CiCalendarDate /> <p>Дата регистрации: {data.date}12.10.2023</p>
+                            <CiCalendarDate /> <p>Дата регистрации: {data.date}</p>
                         </div>
                         <div className={`${stylesChannel.aboutChannel} dfa`}>
                             <BiWorld /> <p>{data.country}</p>
@@ -298,6 +298,20 @@ const ChannelPage = ({ params: { id } }: { params: { id: string } }) => {
             <ProfileChannel openEdit={() => setIsEdit(true)} data={data} setOpen={() => setIsOpen(prev => ({ ...prev, isOpenAbout: true }))} />
             <div className={stylesChannel.search}>
                 <Search value={searchValue} onChanges={handlerChange} placeholder={'поиск'} onKeyDown={() => null} />
+            </div>
+            <div className={`${stylesChannel.addProduct} dfc`}>
+                <span>
+                    <Btn
+                        onClick={() => null}
+                        style={{
+                            background: 'transparent',
+                            color: '#000',
+                            border: 6,
+                        }}
+                    >
+                        <span style={{ fontSize: 14 }}>Добавить товар</span>
+                    </Btn>
+                </span>
             </div>
             <div className={`${stylesChannel.smarts} dfc`}>
                 <CurrencyContext>

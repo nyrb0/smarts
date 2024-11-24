@@ -23,7 +23,6 @@ class ChannelStore {
             throw e;
         }
     }
-
     async editSave(id: string, body: Partial<editSaveProps>) {
         try {
             await fetch(`/api/channel/${id}`, {

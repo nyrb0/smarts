@@ -38,7 +38,6 @@ const ShereSocial: FC<ShereSocialProps> = ({ isOpen = false, maxWidth = 500, tex
             console.log('Ошибка при копировании:', err);
         }
     };
-
     const arrSlides: StaticImageData[] = [instagramImage, telegramImage, whatsapp];
 
     const arrSlides2: arrSlides[] = [

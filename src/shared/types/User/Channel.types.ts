@@ -15,11 +15,13 @@ export type ChannelTypes = {
     email: string;
     main_url: string | null;
     notification: boolean;
-    social: {
-        tg: string | null;
-        vk: string | null;
-        tt: string | null;
-        ins: string | null;
-        offical: string | null;
-    };
+    social: SocialType;
+};
+
+export type SocialType = {
+    tg: string;
+    vk: string;
+    tt: string;
+    ins: string;
+    offical: string;
 };
