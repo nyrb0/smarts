@@ -1,10 +1,11 @@
 'use client';
+
 import stylesOrder from '@/styles/PagesModules/Order.module.scss';
 import cartProducts from '../store/cart/cartProducts';
 import Cart from '@/widgets/Headers/components/Cart/Cart';
 import { observer } from 'mobx-react-lite';
 import CurrencyContext, { CurrencyCon } from '@/shared/context/currency/CurrencyContext';
-import { ChangeEvent, useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Phone } from '@/shared/types/Phones/TypePhone.types';
 import InputOrder from '@/shared/components/Order/components/Input/InputOrder';
 import Button from '@/shared/UI/Button/Button';
@@ -30,7 +31,7 @@ const CartProduct = observer(() => {
 
 type CurrencyTypes = 'rub' | 'usd' | 'som';
 const OrderProcess = observer(() => {
-    const theCurrency = localStorage.getItem('currency') as CurrencyTypes;
+    const theCurrency = (localStorage.getItem('currency') || 'som') as CurrencyTypes;
     const [promo, setPromo] = useState({ promo: '', bonus: '' });
     const [promoNotificate, setPromoNotificate] = useState({ promo: '', bonus: '' });
     const [next, setNext] = useState(false);
@@ -40,6 +41,8 @@ const OrderProcess = observer(() => {
     const [allSumWithDiscount, setAllSumWithDiscount] = useState(allSum);
     const bonusCode = ['@34322#*', '4bqq32j', 'nuaf111'];
     const promoCode = ['samyra23', 'nurbo', 'doni433', 'samu1ai'];
+    const procentDiscount = 10;
+
     const calculateDiscount = (sum: number, percent: number) => {
         if (sum < 0 || percent < 0) {
             throw new Error('Сумма и процент должны быть неотрицательными');
@@ -56,12 +59,12 @@ const OrderProcess = observer(() => {
         return n.some(n => n === theN);
     };
 
-    const isBonus = isCurrectPromos(bonusCode, promo.bonus);
     const promoCodeHandler = (procent: number) => {
         if (!promo.bonus) return;
+        const isBonus = isCurrectPromos(bonusCode, promo.bonus);
         if (isBonus) {
             setDiscount(calculateDiscount(allSum, procent));
-            setPromoNotificate(prev => ({ ...prev, bonus: 'Поздравляю вы получили скидку' }));
+            setPromoNotificate(prev => ({ ...prev, bonus: `Поздравляю вы получили ${procentDiscount}% скидку` }));
         }
     };
 
@@ -84,39 +87,24 @@ const OrderProcess = observer(() => {
         return true;
     };
 
-    const toSendOrder1 = () => {
-        if (!validateOrderConditions()) {
-            router.push('/order/process');
-            return;
-        }
-        if (user.userFullData.have_money.[theCurrency]) {
-            const money = user.userFullData.have_money;
-            const enoughtMoney = money?.[theCurrency] - allSumWithDiscount;
-            if (enoughtMoney < 0) {
-                setWar('У вас не хватает баланс');
-                return false;
-            }
-            // userMoney.takeMoney(user.userFullData.id, { have_money: { ...money, usd: 0 } });
-        }
-        setNext(true);
-        const isPromo = isCurrectPromos(promoCode, promo.promo);
-        if (isPromo) {
-            // добавление логики
-        }
-    };
     const toSendOrder = () => {
         if (!validateOrderConditions()) {
             router.push('/order/process');
             return;
         }
-        if (user.userFullData?.have_money?.[theCurrency]) {
-            const money = user.userFullData.have_money;
-            const enoughtMoney = money?.[theCurrency] - allSumWithDiscount;
+        const money = user.userFullData?.have_money[theCurrency];
+        if (money) {
+            const enoughtMoney = money - allSumWithDiscount;
             if (enoughtMoney < 0) {
                 setWar('У вас не хватает баланс');
                 return false;
             }
             // userMoney.takeMoney(user.userFullData.id, { have_money: { ...money, usd: 0 } });
+        }
+        // setNext(true);
+        const isPromo = isCurrectPromos(promoCode, promo.promo);
+        if (isPromo) {
+            // добавление логики
         }
     };
 
@@ -142,7 +130,7 @@ const OrderProcess = observer(() => {
                                 value={promo.bonus}
                                 onChange={(v: string) => setPromo(prev => ({ ...prev, bonus: v }))}
                                 placeholder={'Промокод'}
-                                onClick={() => promoCodeHandler(10)}
+                                onClick={() => promoCodeHandler(procentDiscount)}
                                 btnText='Скидка'
                             />
                         </div>
@@ -168,7 +156,6 @@ const OrderProcess = observer(() => {
                     <div className={stylesOrder.warning}>
                         <div className={stylesOrder.error}>{war}</div>
                         <div className={stylesOrder.bonus}>{promoNotificate.bonus}</div>
-                        <div className={stylesOrder.promo}>{promoNotificate.promo}</div>
                     </div>
                     <div className={stylesOrder.btnOrder}>
                         <Button style={{ background: '#000', color: 'white', border: 6 }} type='submit' onClick={toSendOrder}>

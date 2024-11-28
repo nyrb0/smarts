@@ -8,6 +8,7 @@ export interface PopularArr {
 export interface Phone {
     id: string;
     name: string;
+    channel: PhoneChannel;
     image: Image;
     level: number;
     isImproved: number;
@@ -26,6 +27,10 @@ export interface Phone {
         storage: string;
     };
     comments: Comments[];
+}
+
+export interface PhoneChannel {
+    id: string;
 }
 
 export interface Image {

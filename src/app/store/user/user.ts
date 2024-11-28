@@ -124,6 +124,7 @@ class User {
         const isSubs = subsrcibes.includes(nick_name);
         const updatedSubscriptions = isSubs ? subsrcibes.filter(s => s !== nick_name) : [...(subsrcibes || []), nick_name];
         // this.handleServerUser(id, { subscriptions: updatedSubscriptions }, { method: 'PATCH', error: 'Ошибка при изменении подписки:' });
+
         try {
             await fetch(`/api/user/${id}`, {
                 method: 'PATCH',

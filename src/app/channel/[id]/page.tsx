@@ -60,6 +60,7 @@ const ProfileChannel = observer(({ data, setOpen, openEdit }: { data: ChannelTyp
     const [isActive, setIsActive] = useState(userFullData.subscriptions.some(s => s === data.nick_name));
     const [isNotificationOfChannel, setIsNotificationOfChannel] = useState<boolean>(data.notification);
     const handleSubscribe = async () => {
+        setIsActive(active => !active);
         await toggleSubscribe(data.nick_name, { subsrcibes: userFullData.subscriptions, id: userFullData.id });
     };
     const keysSocial = Object.keys(data.social);
@@ -98,10 +99,7 @@ const ProfileChannel = observer(({ data, setOpen, openEdit }: { data: ChannelTyp
                         <div className='df' style={{ gap: 10 }}>
                             <div className={`${stylesChannel.btn}`}>
                                 <Btn
-                                    onClick={() => {
-                                        setIsActive(active => !active);
-                                        handleSubscribe();
-                                    }}
+                                    onClick={handleSubscribe}
                                     style={{
                                         background: isActive ? 'transparent' : '#000',
                                         color: isActive ? '#000' : '#fff',

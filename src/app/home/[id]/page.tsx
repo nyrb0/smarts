@@ -70,7 +70,7 @@ const CurrencyComponent: FC<{ data: Phone }> = ({ data }) => {
 
 const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
     const [data, setData] = useState<Phone | null>(null);
-    const [chooseColors, setChooseColors] = useState<'gold' | 'black' | 'url'>('black');
+    const [chooseColors, setChooseColors] = useState<'gold' | 'black' | 'url' | 'gray'>('black');
     const [chooseStorage, setChooseStorage] = useState<string>('');
     const [warning, setWarning] = useState('');
     const [warningTime, setWarningTime] = useState<boolean>(false);
@@ -439,10 +439,10 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
                 </div>
             </div>
             <div className={`${style.channel} container`}>
-                <Channel />
+                <Channel id={data.channel.id} />
             </div>
             <div className={`${style.review} container`}>
-                <Review dataAboutRev={data.review} />
+                <Review dataAboutRev={data.review} comments={data.comments} />
                 <div className={style.comment}>
                     <input type='text' placeholder='Оставь комментарии' onChange={changeValueComment} value={commentValue} />
                     <div className={`dfc`}>
