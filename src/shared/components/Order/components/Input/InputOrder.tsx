@@ -13,7 +13,7 @@ interface InputPropsWithButton extends InputPropsBase {
     isVisibleButton: true;
     onClick: () => void;
     btnText: string;
-    colorBtn: string;
+    colorBtn?: string;
 }
 
 interface InputPropsWithoutButton extends InputPropsBase {
@@ -22,7 +22,7 @@ interface InputPropsWithoutButton extends InputPropsBase {
     btnText?: never;
     colorBtn?: never;
 }
-type InputPropsI = InputPropsWithButton | InputPropsWithoutButton;
+type InputPropsI = InputPropsWithoutButton | InputPropsWithButton;
 
 const InputOrder: FC<InputPropsI> = ({ value, onChange, placeholder, isVisibleButton = false, onClick, required = false, btnText, colorBtn }) => {
     const changeValue = (e: ChangeEvent<HTMLInputElement>) => {

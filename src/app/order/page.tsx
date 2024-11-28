@@ -9,7 +9,6 @@ import { Phone } from '@/shared/types/Phones/TypePhone.types';
 import InputOrder from '@/shared/components/Order/components/Input/InputOrder';
 import Button from '@/shared/UI/Button/Button';
 import user from '../store/user/user';
-import { bonusCode, promoCode } from '@/Features/promoCodes';
 import { currencyChoose } from '@/Features/CurrencyChoose';
 import { useRouter } from 'next/navigation';
 import userMoney from '../store/user/userMoney';
@@ -39,6 +38,8 @@ const OrderProcess = observer(() => {
     const [discount, setDiscount] = useState(0);
     let allSum = cartProducts.productStorage?.reduce((sum, el) => el.price[theCurrency] + sum, 0);
     const [allSumWithDiscount, setAllSumWithDiscount] = useState(allSum);
+    const bonusCode = ['@34322#*', '4bqq32j', 'nuaf111'];
+    const promoCode = ['samyra23', 'nurbo', 'doni433', 'samu1ai'];
     const calculateDiscount = (sum: number, percent: number) => {
         if (sum < 0 || percent < 0) {
             throw new Error('Сумма и процент должны быть неотрицательными');
@@ -54,19 +55,21 @@ const OrderProcess = observer(() => {
     const isCurrectPromos = (n: string[], theN: string) => {
         return n.some(n => n === theN);
     };
+
     const isBonus = isCurrectPromos(bonusCode, promo.bonus);
     const promoCodeHandler = (procent: number) => {
         if (!promo.bonus) return;
         if (isBonus) {
             setDiscount(calculateDiscount(allSum, procent));
             setPromoNotificate(prev => ({ ...prev, bonus: 'Поздравляю вы получили скидку' }));
-            console.log(allSumWithDiscount);
         }
     };
 
     const context = useContext(CurrencyCon);
     if (!context) throw new Error('Error in currency error');
     const { currency } = context;
+
+    if (!user.userFullData) return;
 
     const validateOrderConditions = () => {
         if (next) return false;
@@ -81,15 +84,14 @@ const OrderProcess = observer(() => {
         return true;
     };
 
-    const toSendOrder = () => {
+    const toSendOrder1 = () => {
         if (!validateOrderConditions()) {
             router.push('/order/process');
             return;
         }
-        if (user.userFullData?.have_money?.[theCurrency]) {
+        if (user.userFullData.have_money.[theCurrency]) {
             const money = user.userFullData.have_money;
             const enoughtMoney = money?.[theCurrency] - allSumWithDiscount;
-
             if (enoughtMoney < 0) {
                 setWar('У вас не хватает баланс');
                 return false;
@@ -102,61 +104,78 @@ const OrderProcess = observer(() => {
             // добавление логики
         }
     };
+    const toSendOrder = () => {
+        if (!validateOrderConditions()) {
+            router.push('/order/process');
+            return;
+        }
+        if (user.userFullData?.have_money?.[theCurrency]) {
+            const money = user.userFullData.have_money;
+            const enoughtMoney = money?.[theCurrency] - allSumWithDiscount;
+            if (enoughtMoney < 0) {
+                setWar('У вас не хватает баланс');
+                return false;
+            }
+            // userMoney.takeMoney(user.userFullData.id, { have_money: { ...money, usd: 0 } });
+        }
+    };
 
     return (
         <div className={stylesOrder.process}>
             <div className={stylesOrder.containerOrderCard}>
                 <div className={stylesOrder.orderTitle}>Заказ</div>
-                <form className={`${stylesOrder.form}`}>
-                    <div className={stylesOrder.promo}>
-                        <label className={stylesOrder.label}>Промокод</label>
-                        <InputOrder
-                            isVisibleButton={false}
-                            value={promo.promo}
-                            onChange={(v: string) => setPromo(prev => ({ ...prev, promo: v }))}
-                            placeholder={'Промокод'}
-                        />
+                <form className={`${stylesOrder.form}`} onSubmit={toSendOrder}>
+                    <div>
+                        <div className={stylesOrder.promo}>
+                            <label className={stylesOrder.label}>Промокод</label>
+                            <InputOrder
+                                isVisibleButton={false}
+                                value={promo.promo}
+                                onChange={(v: string) => setPromo(prev => ({ ...prev, promo: v }))}
+                                placeholder={'Промокод'}
+                            />
+                        </div>
+                        <div className={stylesOrder.promo}>
+                            <label className={stylesOrder.label}>Ваша бонусная карта</label>
+                            <InputOrder
+                                isVisibleButton
+                                value={promo.bonus}
+                                onChange={(v: string) => setPromo(prev => ({ ...prev, bonus: v }))}
+                                placeholder={'Промокод'}
+                                onClick={() => promoCodeHandler(10)}
+                                btnText='Скидка'
+                            />
+                        </div>
                     </div>
-                    <div className={stylesOrder.promo}>
-                        <label className={stylesOrder.label}>Ваша бонусная карта</label>
-                        <InputOrder
-                            isVisibleButton
-                            value={promo.bonus}
-                            onChange={(v: string) => setPromo(prev => ({ ...prev, bonus: v }))}
-                            placeholder={'Промокод'}
-                            onClick={() => promoCodeHandler(10)}
-                        />
+                    <div className={`${stylesOrder.resultShop}`} style={{ fontWeight: 700, color: '#000' }}>
+                        <div className={stylesOrder.name}>Итого:</div>
+                        <div className={stylesOrder.sum}>
+                            {allSum}
+                            {currencyChoose(currency)}
+                        </div>
                     </div>
-                    {/* <button>vsvsjn</button> */}
+                    <div className={stylesOrder.resultShop}>
+                        <div className={stylesOrder.name}>Скидка:</div>
+                        <div className={stylesOrder.sum}>{discount} </div>
+                    </div>
+                    <div className={stylesOrder.resultShop} style={{ fontWeight: 700, color: '#000' }}>
+                        <div className={stylesOrder.name}>Общее:</div>
+                        <div className={stylesOrder.sum}>
+                            {allSumWithDiscount}
+                            {currencyChoose(currency)}
+                        </div>
+                    </div>
+                    <div className={stylesOrder.warning}>
+                        <div className={stylesOrder.error}>{war}</div>
+                        <div className={stylesOrder.bonus}>{promoNotificate.bonus}</div>
+                        <div className={stylesOrder.promo}>{promoNotificate.promo}</div>
+                    </div>
+                    <div className={stylesOrder.btnOrder}>
+                        <Button style={{ background: '#000', color: 'white', border: 6 }} type='submit' onClick={toSendOrder}>
+                            {!next ? 'Проверить' : 'Дальше'}
+                        </Button>
+                    </div>
                 </form>
-                <div className={`${stylesOrder.resultShop}`} style={{ fontWeight: 700, color: '#000' }}>
-                    <div className={stylesOrder.name}>Итого:</div>
-                    <div className={stylesOrder.sum}>
-                        {allSum}
-                        {currencyChoose(currency)}
-                    </div>
-                </div>
-                <div className={stylesOrder.resultShop}>
-                    <div className={stylesOrder.name}>Скидка:</div>
-                    <div className={stylesOrder.sum}>{discount} </div>
-                </div>
-                <div className={stylesOrder.resultShop} style={{ fontWeight: 700, color: '#000' }}>
-                    <div className={stylesOrder.name}>Общее:</div>
-                    <div className={stylesOrder.sum}>
-                        {allSumWithDiscount}
-                        {currencyChoose(currency)}
-                    </div>
-                </div>
-                <div className={stylesOrder.warning}>
-                    <div className={stylesOrder.error}>{war}</div>
-                    <div className={stylesOrder.bonus}>{promoNotificate.bonus}</div>
-                    <div className={stylesOrder.promo}>{promoNotificate.promo}</div>
-                </div>
-                <div className={stylesOrder.btnOrder}>
-                    <Button style={{ background: '#000', color: 'white', border: 6 }} onClick={toSendOrder}>
-                        {!next ? 'Проверить' : 'Дальше'}
-                    </Button>
-                </div>
             </div>
         </div>
     );

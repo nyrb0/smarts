@@ -5,7 +5,7 @@ import InputPrime from '@/shared/UI/Input/InputPrime/InputPrime';
 import TextArea from '@/shared/components/textArea/TextArea';
 import Btn from '@/shared/UI/Button/Button';
 import SelectBorder from '@/shared/UI/Select/Transparent_border/SelectBorder';
-import { ChannelTypes } from '@/shared/types/User/Channel.types';
+import { ChannelTypes } from '@/shared/types/channel/Channel.types';
 import { observer } from 'mobx-react-lite';
 import channelStore from '@/app/store/channel/channelStore';
 import axios from 'axios';

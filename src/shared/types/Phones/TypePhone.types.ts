@@ -17,6 +17,7 @@ export interface Phone {
     weigth: number;
     battery: number;
     ios?: any;
+    desc: string;
     screen: string;
     android: string;
     review?: ReviewCount[];
@@ -36,6 +37,12 @@ export interface Image {
         '4': string;
     };
     black: {
+        '1': string;
+        '2': string;
+        '3': string;
+        '4': string;
+    };
+    gray: {
         '1': string;
         '2': string;
         '3': string;

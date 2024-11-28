@@ -1,4 +1,4 @@
-import { ChannelTypes } from '@/shared/types/User/Channel.types';
+import { ChannelTypes } from '@/shared/types/channel/Channel.types';
 import { makeAutoObservable } from 'mobx';
 
 type editSaveProps = Pick<ChannelTypes, 'name' | 'country' | 'desciption' | 'nick_name' | 'social'>;

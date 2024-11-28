@@ -5,6 +5,7 @@ import stylesChannel from '@/styles/PagesModules/channel/Channel.module.scss';
 import Image from 'next/image';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+
 //icons
 import TgIcon from '@/app/assets/img/social/tg.png';
 import InsIcon from '@/app/assets/img/social/ins.png';
@@ -23,7 +24,7 @@ import { IoNotifications } from 'react-icons/io5';
 import { IoNotificationsOffSharp } from 'react-icons/io5';
 
 // components
-import { ChannelTypes } from '@/shared/types/User/Channel.types';
+import { ChannelTypes } from '@/shared/types/channel/Channel.types';
 import Btn from '@/shared/UI/Button/Button';
 import CurrencyContext from '@/shared/context/currency/CurrencyContext';
 import Modal from '@/shared/UI/Modal/Modal';
@@ -38,6 +39,7 @@ import ShereSocial from '@/shared/components/Shere/ShereSocial';
 import channelStore from '@/app/store/channel/channelStore';
 import LoadImage from '@/shared/components/LoadImage/LoadImage';
 import EditChannel from '../../../Entities/channel/components/EditChannel';
+import AddProduct from '@/Entities/channel/components/addProduct';
 
 const { format } = new Intl.NumberFormat('ru-RU', {
     notation: 'compact',
@@ -153,6 +155,7 @@ const ChannelPage = ({ params: { id } }: { params: { id: string } }) => {
     const [isOpen, setIsOpen] = useState({ isOpenAbout: false, isShere: false });
     const [isEdit, setIsEdit] = useState(false);
     const [searchValue, setSearchValue] = useState('');
+    const [isAddProduct, setIsAddProduct] = useState(false);
     // const [isOpenAbout, setIsOpenAbout] = useState(false);
     // const [isShere, setShere] = useState(false);
     // if (loading) return <div>Loading...</div>;
@@ -299,10 +302,11 @@ const ChannelPage = ({ params: { id } }: { params: { id: string } }) => {
             <div className={stylesChannel.search}>
                 <Search value={searchValue} onChanges={handlerChange} placeholder={'поиск'} onKeyDown={() => null} />
             </div>
+            <AddProduct data={data} isActive={{ isActive: isAddProduct, close: () => setIsAddProduct(false) }} />
             <div className={`${stylesChannel.addProduct} dfc`}>
                 <span>
                     <Btn
-                        onClick={() => null}
+                        onClick={() => setIsAddProduct(true)}
                         style={{
                             background: 'transparent',
                             color: '#000',

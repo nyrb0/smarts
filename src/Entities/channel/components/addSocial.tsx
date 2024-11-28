@@ -13,7 +13,7 @@ import channelStore from '@/app/store/channel/channelStore';
 import Btn from '@/shared/UI/Button/Button';
 import { motion } from 'framer-motion';
 import user from '@/app/store/user/user';
-import { SocialType } from '@/shared/types/User/Channel.types';
+import { SocialType } from '@/shared/types/channel/Channel.types';
 
 interface addSocical {
     data: { id: string; social: SocialType };

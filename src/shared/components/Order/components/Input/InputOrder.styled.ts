@@ -7,6 +7,7 @@ const OrderInputStyled = styled.input`
     width: 100%;
     padding: 10px 0 10px 10px;
     box-sizing: border-box;
+    background-color: transparent;
     font-size: 14px;
     margin-bottom: 24px;
 `;
