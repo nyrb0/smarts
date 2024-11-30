@@ -5,7 +5,7 @@ import cartProducts from '../store/cart/cartProducts';
 import Cart from '@/widgets/Headers/components/Cart/Cart';
 import { observer } from 'mobx-react-lite';
 import CurrencyContext, { CurrencyCon } from '@/shared/context/currency/CurrencyContext';
-import { useContext, useEffect, useState } from 'react';
+import { FormEvent, useContext, useEffect, useState } from 'react';
 import { Phone } from '@/shared/types/Phones/TypePhone.types';
 import InputOrder from '@/shared/components/Order/components/Input/InputOrder';
 import Button from '@/shared/UI/Button/Button';
@@ -34,14 +34,13 @@ const OrderProcess = observer(() => {
     const theCurrency = (localStorage.getItem('currency') || 'som') as CurrencyTypes;
     const [promo, setPromo] = useState({ promo: '', bonus: '' });
     const [promoNotificate, setPromoNotificate] = useState({ promo: '', bonus: '' });
-    const [next, setNext] = useState(false);
     const [war, setWar] = useState('');
-    const [discount, setDiscount] = useState(0);
-    let allSum = cartProducts.productStorage?.reduce((sum, el) => el.price[theCurrency] + sum, 0);
-    const [allSumWithDiscount, setAllSumWithDiscount] = useState(allSum);
+    const { allSum, discount, allSumWithDiscount } = cartProducts;
+    cartProducts.allSum = cartProducts.productStorage?.reduce((sum, el) => el.price[theCurrency] + sum, 0);
     const bonusCode = ['@34322#*', '4bqq32j', 'nuaf111'];
     const promoCode = ['samyra23', 'nurbo', 'doni433', 'samu1ai'];
     const procentDiscount = 10;
+    console.log(allSum);
 
     const calculateDiscount = (sum: number, percent: number) => {
         if (sum < 0 || percent < 0) {
@@ -52,7 +51,7 @@ const OrderProcess = observer(() => {
 
     const router = useRouter();
     useEffect(() => {
-        setAllSumWithDiscount(allSum - discount);
+        cartProducts.allSumWithDiscount = allSum - discount;
     }, [allSum, discount]);
 
     const isCurrectPromos = (n: string[], theN: string) => {
@@ -63,33 +62,34 @@ const OrderProcess = observer(() => {
         if (!promo.bonus) return;
         const isBonus = isCurrectPromos(bonusCode, promo.bonus);
         if (isBonus) {
-            setDiscount(calculateDiscount(allSum, procent));
+            cartProducts.discount = calculateDiscount(allSum, procent);
             setPromoNotificate(prev => ({ ...prev, bonus: `Поздравляю вы получили ${procentDiscount}% скидку` }));
         }
     };
-
     const context = useContext(CurrencyCon);
     if (!context) throw new Error('Error in currency error');
     const { currency } = context;
-
     if (!user.userFullData) return;
 
     const validateOrderConditions = () => {
-        if (next) return false;
         if (allSum <= 0) {
             setWar('Сумма заказа должна быть больше 0');
-            return false;
+            return true;
         }
         if (!user.userFullData?.have_money?.[theCurrency]) {
             setWar('Данные о деньгах пользователя недоступны');
-            return false;
+            return true;
         }
-        return true;
+        if (!cartProducts.productStorage.length) {
+            setWar('Выберите товар');
+            return true;
+        }
+        return false;
     };
 
-    const toSendOrder = () => {
-        if (!validateOrderConditions()) {
-            router.push('/order/process');
+    const toSendOrder = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        if (validateOrderConditions()) {
             return;
         }
         const money = user.userFullData?.have_money[theCurrency];
@@ -99,9 +99,9 @@ const OrderProcess = observer(() => {
                 setWar('У вас не хватает баланс');
                 return false;
             }
+            router.push('/order/process');
             // userMoney.takeMoney(user.userFullData.id, { have_money: { ...money, usd: 0 } });
         }
-        // setNext(true);
         const isPromo = isCurrectPromos(promoCode, promo.promo);
         if (isPromo) {
             // добавление логики
@@ -158,8 +158,8 @@ const OrderProcess = observer(() => {
                         <div className={stylesOrder.bonus}>{promoNotificate.bonus}</div>
                     </div>
                     <div className={stylesOrder.btnOrder}>
-                        <Button style={{ background: '#000', color: 'white', border: 6 }} type='submit' onClick={toSendOrder}>
-                            {!next ? 'Проверить' : 'Дальше'}
+                        <Button style={{ background: '#000', color: 'white', border: 6 }} type='submit'>
+                            Дальше
                         </Button>
                     </div>
                 </form>

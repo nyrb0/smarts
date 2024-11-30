@@ -42,7 +42,6 @@ const Channel: FC<ChannelProps> = observer(({ id }) => {
                 toggleSubscribe(data.nick_name, { subsrcibes: userFullData?.subscriptions, id: userFullData.id });
             }
         };
-
         return (
             <>
                 <Btn
@@ -58,12 +57,13 @@ const Channel: FC<ChannelProps> = observer(({ id }) => {
             </>
         );
     };
-
     return (
         <div className={`${style.channel} dfj `}>
             <div className={`${style.left} dfa`}>
                 <img src={data.image_profile} alt={data.name} />
-                <p className={style.name}>{data.name}</p>
+                <p className={style.name} onClick={() => navigation.push(`/channel/${id}`)}>
+                    {data.name}
+                </p>
                 <p className={style.subscribers}>{data.subsrcibes}</p>
             </div>
             <div className={style.channel}>

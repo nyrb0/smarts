@@ -16,28 +16,7 @@ import Button from '@/shared/UI/Button/Button';
 import Mark from '@/shared/image/gif/mark ok.gif';
 import { useRouter } from 'next/navigation';
 import { usersOrder } from '@/shared/types/order/order.type';
-
-interface EditProps {
-    isOpenEdit: boolean;
-    close: () => void;
-    data: usersOrder | null;
-}
-
-const Edit: FC<EditProps> = ({ isOpenEdit, close, data }) => {
-    const [address, setAddres] = useState(data);
-
-    // const openEditCon = useContext(ContextAddressEdit);
-    // if (!openEditCon) throw new Error('Error in ');
-    // const { openEdit, setOpenEdit } = openEditCon;
-    if (!address) {
-        return <p>Ошибка при получения данных</p>;
-    }
-    return (
-        <Modal isOpen={isOpenEdit} close={close}>
-            <InputOrder value={address.title} onChange={(v: string) => null} placeholder={'Название'} required />
-        </Modal>
-    );
-};
+import Edit from '@/Entities/order/Edit';
 
 const Process = () => {
     const [warning, setWarning] = useState<string | null>(null);
@@ -45,6 +24,8 @@ const Process = () => {
     const [isOffice, setIsOffice] = useState(false);
     const [isOpenEditAddress, setIsopenEditAddress] = useState(false);
     const [theOneAddress, setTheOneAddress] = useState<usersOrder | null>(null);
+    const [toEditAddress, setToEditAddress] = useState('');
+
     const [addresses, setAddresses] = useState({
         title: '',
         number: '',
@@ -80,7 +61,6 @@ const Process = () => {
         } finally {
         }
     };
-
     const regex = /^[a-zA-Zа-яА-Я0-9]*$/;
 
     const testRegex = (value: string, onSuccess: () => void, errorText: string) => {
@@ -185,7 +165,6 @@ const Process = () => {
                         placeholder={'Город'}
                         required
                     />
-
                     <div className={`${styledProcess.theNumberAddress} df`}>
                         <div style={{ width: '100%' }}>
                             <InputOrder
@@ -240,9 +219,18 @@ const Process = () => {
                     </div>
                 </form>
             </Modal>
-            <IsOpenEdirAddressContext>
-                <Edit isOpenEdit={isOpenEditAddress} close={() => setIsopenEditAddress(false)} data={theOneAddress} />
-            </IsOpenEdirAddressContext>
+            {toEditAddress && (
+                <Edit
+                    id={toEditAddress}
+                    openClosed={{
+                        isOpen: isOpenEditAddress,
+                        close: () => {
+                            setIsopenEditAddress(false);
+                        },
+                    }}
+                />
+            )}
+
             <div className={styledProcess.select}>Выбирайте адресс</div>
             <div>
                 {userOrder.addresses.map(order => (
@@ -250,12 +238,12 @@ const Process = () => {
                         key={order.id}
                         onClick={() => {
                             setTheOneAddress(order);
-                            setIsopenEditAddress(true);
                         }}
                     >
                         <CardAddress
                             stage={order}
                             toEdit={() => {
+                                setToEditAddress(order.id);
                                 setIsopenEditAddress(true);
                             }}
                             toDel={() => {}}
