@@ -29,6 +29,17 @@ const Edit: FC<EditProps> = ({ id, openClosed: { isOpen, close } }) => {
         get();
     }, [id]);
 
+    const editAddressHandler = async () => {
+        try {
+            const { status } = await axios.put(`/api/address/${id}`, address);
+            if (status !== 200) {
+                throw new Error('Ошибка запроса адресса');
+            }
+        } catch (err) {
+            throw new Error('Ошибка при изменении адресса');
+        }
+    };
+
     if (loading || !address) {
         return (
             <Modal
@@ -57,17 +68,41 @@ const Edit: FC<EditProps> = ({ id, openClosed: { isOpen, close } }) => {
                 <div className={style.edit}>
                     <h3>Редактировать</h3>
                     <p>Название</p>
-                    <InputOrder value={address.title || ''} onChange={(v: string) => null} placeholder={'Название'} />
+                    <InputOrder
+                        value={address.title || ''}
+                        onChange={(v: string) => setAddress(prev => (prev ? { ...prev, title: v } : prev))}
+                        placeholder={'Название'}
+                    />
                     <p>Номер</p>
-                    <InputOrder value={address.number || ''} onChange={(v: string) => null} placeholder={'Номер'} />
+                    <InputOrder
+                        value={address.number || ''}
+                        onChange={(v: string) => setAddress(prev => (prev ? { ...prev, number: v } : prev))}
+                        placeholder={'Номер'}
+                    />
                     <p>Адресс</p>
-                    <InputOrder value={address.place.addressNumber || ''} onChange={(v: string) => null} placeholder={'Адресс'} />
+                    <InputOrder
+                        value={address.place.addressNumber || ''}
+                        onChange={(v: string) => setAddress(prev => (prev ? { ...prev, place: { ...prev.place, addressNumber: v } } : prev))}
+                        placeholder={'Адресс'}
+                    />
                     <p>Город</p>
-                    <InputOrder value={address.place.city || ''} onChange={(v: string) => null} placeholder={'Город'} />
+                    <InputOrder
+                        value={address.place.city || ''}
+                        onChange={(v: string) => setAddress(prev => (prev ? { ...prev, place: { ...prev.place, city: v } } : prev))}
+                        placeholder={'Город'}
+                    />
                     <p>Регион</p>
-                    <InputOrder value={address.place.region || ''} onChange={(v: string) => null} placeholder={'Регион'} />
+                    <InputOrder
+                        value={address.place.region || ''}
+                        onChange={(v: string) => setAddress(prev => (prev ? { ...prev, place: { ...prev.place, region: v } } : prev))}
+                        placeholder={'Регион'}
+                    />
                     <p>Улица</p>
-                    <InputOrder value={address.place.street || ''} onChange={(v: string) => null} placeholder={'Улица'} />
+                    <InputOrder
+                        value={address.place.street || ''}
+                        onChange={(v: string) => setAddress(prev => (prev ? { ...prev, place: { ...prev.place, street: v } } : prev))}
+                        placeholder={'Улица'}
+                    />
                     <div className={`${style.btns} dfc`}>
                         <Button
                             style={{ background: address.orderLocation ? '#000' : '', color: address.orderLocation ? '#fff' : '#000', border: 6 }}
@@ -84,7 +119,7 @@ const Edit: FC<EditProps> = ({ id, openClosed: { isOpen, close } }) => {
                     </div>
                     <div className={`${style.saveBtn} dfc`}>
                         <span>
-                            <Button style={{ background: '#000', color: '#fff', border: 6 }} onClick={() => null}>
+                            <Button style={{ background: '#000', color: '#fff', border: 6 }} onClick={editAddressHandler}>
                                 Сохранить
                             </Button>
                         </span>
