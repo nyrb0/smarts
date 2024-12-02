@@ -60,3 +60,15 @@ export const PATCH = async (req: Request, { params: { id } }: { params: { id: st
         return NextResponse.json({ message: err }, { status: 400 });
     }
 };
+
+export const DELETE = async (req: Request, { params: { id } }: { params: { id: string } }) => {
+    try {
+        const data = await fetch(`http://localhost:3000/address/${id}`, {
+            method: 'DELETE',
+        });
+        const json = await data.json();
+        return NextResponse.json(json, { status: 200 });
+    } catch (err) {
+        return NextResponse.json({ message: err }, { status: 400 });
+    }
+};

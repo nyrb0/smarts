@@ -4,7 +4,6 @@ import { FC } from 'react';
 //icons
 import editIcon from '@/app/assets/img/order/Edit.png';
 import delIcon from '@/app/assets/img/order/Close.png';
-import Edit from '@/app/profile/edit/page';
 import Image from 'next/image';
 import { usersOrder } from '@/shared/types/order/order.type';
 

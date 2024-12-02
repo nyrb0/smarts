@@ -25,7 +25,7 @@ const Process = () => {
     const [isOpenEditAddress, setIsopenEditAddress] = useState(false);
     const [theOneAddress, setTheOneAddress] = useState<usersOrder | null>(null);
     const [toEditAddress, setToEditAddress] = useState('');
-
+    const { deleteAddress } = userOrder;
     const [addresses, setAddresses] = useState({
         title: '',
         number: '',
@@ -165,6 +165,20 @@ const Process = () => {
                         placeholder={'Город'}
                         required
                     />
+                    <InputOrder
+                        value={addresses.place.region}
+                        onChange={(v: string) =>
+                            testRegex(
+                                v,
+                                () => {
+                                    setAddresses(prev => ({ ...prev, place: { ...prev.place, region: v } }));
+                                },
+                                'В поле "Регион" нельзя писать символы'
+                            )
+                        }
+                        placeholder={'Регион'}
+                        required
+                    />
                     <div className={`${styledProcess.theNumberAddress} df`}>
                         <div style={{ width: '100%' }}>
                             <InputOrder
@@ -246,7 +260,7 @@ const Process = () => {
                                 setToEditAddress(order.id);
                                 setIsopenEditAddress(true);
                             }}
-                            toDel={() => {}}
+                            toDel={() => deleteAddress(order.id)}
                         />
                     </div>
                 ))}
