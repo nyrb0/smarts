@@ -14,7 +14,7 @@ const DeliveryPage = ({ shipmentData }: { shipmentData: any }) => {
             </div>
             <div className={`${stylesDelivery.nextBtn} df`}>
                 <div className={`${stylesDelivery.cnr} df`}>
-                    <Button style={{ background: '#fff', color: '#000', border: 6 }} onClick={() => null}>
+                    <Button style={{ background: '#fff', color: '#000', border: 6 }} onClick={() => history.back()}>
                         Назад
                     </Button>
                     <Button style={{ background: '#000', color: '#fff', border: 6 }} onClick={() => null}>
