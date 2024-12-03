@@ -25,7 +25,12 @@ const CardAddress: FC<CardAddressProps> = ({ stage, toEdit, toDel }) => {
                         <div>
                             {stage.id} {stage.title}
                         </div>
-                        <div className={stylesCardAddress.isPlace}>{stage.orderLocation ? 'Дом' : 'Офис'}</div>
+                        <div
+                            className={stylesCardAddress.isPlace}
+                            style={{ background: stage.orderLocation ? '#000' : 'transparent', color: stage.orderLocation ? '#fff' : '#000' }}
+                        >
+                            {stage.orderLocation ? 'Офис' : 'Дом'}
+                        </div>
                     </div>
                     <div className={stylesCardAddress.theCarrectAddres}>
                         {stage.place.region},{stage.place.city},{stage.place.street}, {stage.place.addressNumber}

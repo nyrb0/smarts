@@ -7,4 +7,13 @@
     .rates {
         margin-top: 32px;
     }
+    .nextBtn {
+        justify-content: flex-end;
+        margin-top: 64px;
+        & .cnr {
+            height: 64px;
+            width: 208px + 208px + 24px;
+            gap: 24px;
+        }
+    }
 }
