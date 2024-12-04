@@ -54,7 +54,7 @@ const CardStatus: FC<CardStatusProps> = ({ date = '1.12.2024' }) => {
                 </div>
                 <div className={styles.right}>{setCurrentDate(Date.now() + free.time)}</div>
             </div>
-            <div className={`${styles.card} `} style={{ opacity: `${selectedRate === fast.id ? 1 : opacityLevel}` }}>
+            <div className={`${styles.card}`} style={{ opacity: `${selectedRate === fast.id ? 1 : opacityLevel}` }}>
                 <div className={`${styles.left}`}>
                     <input value={fast.id} type='radio' onChange={e => handleChangeRate(e, fast.id)} checked={selectedRate === fast.id} />
                     <span>{fast.price === 0 ? 'Бесплатно' : `$${fast.price}`}</span>

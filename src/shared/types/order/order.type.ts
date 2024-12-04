@@ -1,3 +1,11 @@
+import { Phone } from '../Phones/TypePhone.types';
+
+export type OrderType = {
+    id: string;
+    products: Phone[];
+    addresses: usersOrder;
+};
+
 export type usersOrder = {
     id: string;
     number: string;

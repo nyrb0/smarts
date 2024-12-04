@@ -4,8 +4,10 @@ import stylesDelivery from '@/styles/PagesModules/order/Delivery.module.scss';
 import CardStatus from '../../../../Entities/order/components/CardStatus/CardStatus';
 import { useState } from 'react';
 import Button from '@/shared/UI/Button/Button';
+import { useRouter } from 'next/navigation';
 
 const DeliveryPage = ({ shipmentData }: { shipmentData: any }) => {
+    const router = useRouter();
     return (
         <div className={`${stylesDelivery.delivery} container `}>
             <h2 className={stylesDelivery.titleStages}>Методы доставки:</h2>
@@ -17,7 +19,7 @@ const DeliveryPage = ({ shipmentData }: { shipmentData: any }) => {
                     <Button style={{ background: '#fff', color: '#000', border: 6 }} onClick={() => history.back()}>
                         Назад
                     </Button>
-                    <Button style={{ background: '#000', color: '#fff', border: 6 }} onClick={() => null}>
+                    <Button style={{ background: '#000', color: '#fff', border: 6 }} onClick={() => router.push('/order/process/payment')}>
                         Дальше
                     </Button>
                 </div>
