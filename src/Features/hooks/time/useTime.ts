@@ -10,7 +10,6 @@ export const useTime = (initial: number = Date.now()) => {
 
         return format.replace('DD', day).replace('MM', month).replace('YYYY', year.toString()).replace('HH', hours).replace('mm', minutes);
     };
-
     const setCurrentDate = (time: number, format: string = 'DD.MM.YYYY') => {
         const date = new Date(time);
         return formatDate(format, date);
