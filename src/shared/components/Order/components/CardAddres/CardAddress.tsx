@@ -1,5 +1,5 @@
 import stylesCardAddress from '@/styles/componentsModules/Order/CardAddres.module.scss';
-import { FC } from 'react';
+import { ChangeEvent, FC } from 'react';
 
 //icons
 import editIcon from '@/app/assets/img/order/Edit.png';
@@ -11,14 +11,21 @@ interface CardAddressProps {
     stage: usersOrder;
     toEdit: () => void;
     toDel: () => void;
+    cheked: string;
+    onChange: (e: string) => void;
 }
 
-const CardAddress: FC<CardAddressProps> = ({ stage, toEdit, toDel }) => {
+const CardAddress: FC<CardAddressProps> = ({ stage, toEdit, toDel, cheked, onChange }) => {
     return (
         <div className={`${stylesCardAddress.address} dfj`}>
             <div className='df'>
                 <div className={stylesCardAddress.radio}>
-                    <input type='radio' />
+                    <input
+                        type='radio'
+                        value={stage.id}
+                        checked={stage.id === cheked}
+                        onChange={(e: ChangeEvent<HTMLInputElement>) => onChange(e.target.value)}
+                    />
                 </div>
                 <div className={`${stylesCardAddress.inner} `}>
                     <div className={`${stylesCardAddress.location} dfa`}>

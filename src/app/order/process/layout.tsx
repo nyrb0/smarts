@@ -24,9 +24,9 @@ export default function RootLayout({
     return (
         <div>
             <div className={`${styledProcess.stages} dfj container`}>
-                <StagesOrder stages='payment' isTheStage={currentPath === stages.ADDRESS} />
-                <StagesOrder stages='shipping' isTheStage={currentPath === stages.DELIVERY} />
-                <StagesOrder stages='payment' isTheStage={currentPath === stages.PAYMENT} />
+                <StagesOrder link='/order/process' stages='payment' isTheStage={currentPath === stages.ADDRESS} />
+                <StagesOrder link='/order/process/delivery' stages='shipping' isTheStage={currentPath === stages.DELIVERY} />
+                <StagesOrder link='/order/process/payment' stages='payment' isTheStage={currentPath === stages.PAYMENT} />
             </div>
             {children}
         </div>

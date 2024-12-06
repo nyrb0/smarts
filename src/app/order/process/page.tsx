@@ -23,7 +23,7 @@ const Process = () => {
     const [savedNotification, setSavedNotification] = useState(false);
     const [isOffice, setIsOffice] = useState(false);
     const [isOpenEditAddress, setIsopenEditAddress] = useState(false);
-    const [theOneAddress, setTheOneAddress] = useState<usersOrder | null>(null);
+    const [selectedAddress, setSelectedAddress] = useState(localStorage.getItem('addressSelecred') || '');
     const [toEditAddress, setToEditAddress] = useState('');
     const { deleteAddress } = userOrder;
     const [addresses, setAddresses] = useState({
@@ -103,8 +103,16 @@ const Process = () => {
             },
         });
     };
+
+    const handleSaveSelecredAddress = (e: string) => {
+        localStorage.setItem('addressSelecred', e);
+        setSelectedAddress(e);
+    };
+
     const nextToStages = () => {
-        router.push('/order/process/delivery');
+        if (selectedAddress) {
+            router.push('/order/process/delivery');
+        }
     };
 
     return (
@@ -244,17 +252,13 @@ const Process = () => {
                     }}
                 />
             )}
-
             <div className={styledProcess.select}>Выбирайте адресс</div>
             <div>
                 {userOrder.addresses.map(order => (
-                    <div
-                        key={order.id}
-                        onClick={() => {
-                            setTheOneAddress(order);
-                        }}
-                    >
+                    <div key={order.id} onClick={() => {}}>
                         <CardAddress
+                            onChange={handleSaveSelecredAddress}
+                            cheked={selectedAddress}
                             stage={order}
                             toEdit={() => {
                                 setToEditAddress(order.id);

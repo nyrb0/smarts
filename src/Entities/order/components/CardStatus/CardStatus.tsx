@@ -27,6 +27,7 @@ const rates = {
 const CardStatus: FC<CardStatusProps> = ({ date = '1.12.2024' }) => {
     const isSelectedRate = localStorage.getItem('isRate') || rates.free.id;
     const [selectedRate, setSelectedRate] = useState<string>(isSelectedRate);
+
     const handleChangeRate = (e: ChangeEvent<HTMLInputElement>, id: string) => {
         localStorage.setItem('isRate', id);
         setSelectedRate(e.target.value);
