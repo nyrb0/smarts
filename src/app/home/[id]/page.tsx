@@ -13,6 +13,7 @@ import CPUicon from '@/shared/icons/characteristic/Screensize.png';
 import CameraIcon from '@/shared/icons/characteristic/smartphone-rotate-2-svgrepo-com 2 (2).png';
 import FrontCamera from '@/shared/icons/characteristic/smartphone-rotate-2-svgrepo-com 2 (3).png';
 import BatteryIcon from '@/shared/icons/characteristic/smartphone-rotate-2-svgrepo-com 2 (4).png';
+import { CiCirclePlus } from 'react-icons/ci';
 import Mark from '@/shared/image/gif/mark ok.gif';
 
 // componnents
@@ -34,6 +35,7 @@ import { generateId } from '@/Features/generateId';
 import { currencyChoose } from '@/Features/CurrencyChoose';
 import CurrencyContext, { CurrencyCon } from '@/shared/context/currency/CurrencyContext';
 import Channel from './components/Channel/Channel';
+import PhotoComment from '@/Entities/comment/PhotoComment/PhotoComment';
 
 interface PageGlobalDinamic {
     params: {
@@ -81,6 +83,7 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
     const [stars, setStars] = useState(0);
     const [nextStart, setNextStars] = useState(false);
     const [commentValue, setCommentValue] = useState('');
+    const [commentPhoto, setCommetPhoto] = useState<{ id: string; img: string }[]>([]);
     const userAboutData = user.userData;
     const userCookie = localStorage.getItem('userData1') || '';
     const colors = ['black', 'purple', 'red', 'yellow', 'white'];
@@ -224,7 +227,7 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
         }
     };
 
-    // function duplicateEncode(word: string) {
+    // function duplicate(word: string) {
     //     const obj: { [key: string]: number } = {};
     //     word.split('').forEach(w => {
     //         if (obj[w]) {
@@ -240,6 +243,17 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
     //         .map((alone, _, arr) => (arr.filter(f => f === alone).length === 1 ? '(' : ')'))
     //         .join('');
     // }
+
+    const handleFilePhoto = (e: ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files) {
+            const selectedFiles = Array.from(e.target.files);
+            const previews = selectedFiles.map(file => ({ id: String(Date.now()), img: URL.createObjectURL(file) }));
+            setCommetPhoto(prev => [...prev, ...previews]);
+        }
+    };
+    const handleDeleteFilePhoto = (id: string) => {
+        setCommetPhoto(prev => prev.filter(p => p.id !== id));
+    };
 
     useEffect(() => {
         getDataDinamic();
@@ -445,6 +459,24 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
                 <Review dataAboutRev={data.review} comments={data.comments} />
                 <div className={style.comment}>
                     <input type='text' placeholder='Оставь комментарии' onChange={changeValueComment} value={commentValue} />
+                    <div className={style.addPhoto}>
+                        <input style={{ display: 'none' }} type='file' id='commentPhoto' onChange={handleFilePhoto} />
+                        <div className={`${!commentPhoto.length ? 'dfc' : 'dfa'}`}>
+                            <div className={`${style.photos} df`}>
+                                {commentPhoto.map(photo => (
+                                    <PhotoComment
+                                        data={photo.img}
+                                        alt={'фото коммента'}
+                                        deleteClick={() => handleDeleteFilePhoto(photo.id)}
+                                        key={photo.id}
+                                    />
+                                ))}
+                            </div>
+                            <label htmlFor='commentPhoto'>
+                                <CiCirclePlus size={50} />
+                            </label>
+                        </div>
+                    </div>
                     <div className={`dfc`}>
                         <span className={style.btn}>
                             <Btn
@@ -466,7 +498,6 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
                     <Comment com={c} key={i} deleteCom={deleteComent} userCommnent={userCookie} />
                 ))}
             </div>
-
             <Modal isOpen={nextStart} visibleX close={closeStars}>
                 <div className={`${style.rating} dfc`}>
                     <div>

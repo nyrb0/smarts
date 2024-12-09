@@ -40,13 +40,11 @@ const Comment: FC<CommentI> = ({ com, deleteCom, userCommnent }) => {
                 <div className={commentS.head}>
                     <div className={commentS.userName}>{com.user}</div>
                     <div className={commentS.date}>
-                        {com.date &&
-                            `${com.date?.day} ${months(com.date?.month)}, ${com.date?.year}, ${com.date.hours}:${
-                                com.date.minutes
-                            }`}
+                        {com.date && `${com.date?.day} ${months(com.date?.month)}, ${com.date?.year}, ${com.date.hours}:${com.date.minutes}`}
                     </div>
                 </div>
                 <div className={commentS.rating}>
+                    отмоыам
                     <Rating name='read-only' value={com.votesStars} readOnly />
                 </div>
                 <div className={commentS.theComment}>{com.comment}</div>

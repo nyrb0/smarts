@@ -101,6 +101,12 @@
             margin-top: 20px;
             width: 200px;
         }
+        .addPhoto {
+            margin-top: 15px;
+            .photos {
+                gap: 8px;
+            }
+        }
     }
 }
 
