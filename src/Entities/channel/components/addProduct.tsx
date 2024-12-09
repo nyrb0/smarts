@@ -13,7 +13,8 @@ interface addProductProps {
 const AddProduct: FC<addProductProps> = observer(({ isActive, data }) => {
     const { tenology } = data;
     const currentProducts = tenology;
-    const [createChannel, setCreateChannel] = useState<Phone>({
+    // type phone
+    const [createChannel, setCreateChannel] = useState({
         id: '1',
         name: '',
         image: {

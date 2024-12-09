@@ -4,6 +4,7 @@ import localFont from 'next/font/local';
 import '../styles/global.scss';
 import { useRouter } from 'next/router';
 import Footer from '@/widgets/Footer/Footer';
+import NotificationGlobal from '@/shared/components/notificationGlobal/NotificationGlobal';
 
 // const geistSans = localFont({
 //   src: "./fonts/GeistVF.woff",
@@ -41,6 +42,7 @@ export default function RootLayout({
     return (
         <html lang='en'>
             <body className={`${poppins.variable}`}>
+                <NotificationGlobal />
                 <Headers />
                 {children}
                 <Footer />

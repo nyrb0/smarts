@@ -1,0 +1,47 @@
+.wrapper {
+    font-size: 10px;
+    padding-right: 10px;
+    position: fixed;
+    z-index: 99;
+    top: 30px;
+    right: 0;
+    width: 180px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    .notification {
+        align-items: center;
+        .noti {
+            width: 130px;
+            word-wrap: break-word;
+            .title {
+                font-weight: 600;
+                font-size: 12px;
+                margin-bottom: 2px;
+            }
+            .x {
+                font-weight: 600;
+                position: absolute;
+                top: 0px;
+                right: 6px;
+                cursor: default;
+            }
+        }
+
+        padding: 8px;
+        box-sizing: border-box;
+        border-radius: 5px;
+        max-height: 100px;
+        height: 100%;
+        min-height: 40px;
+        background-color: #f6f6f6;
+        position: relative;
+
+        .status {
+            & img {
+                width: 20px;
+                height: 20px;
+            }
+        }
+    }
+}

@@ -4,7 +4,9 @@ import { ChangeEvent, FC, useEffect, useState } from 'react';
 
 interface CardStatusProps {
     date?: string;
+    onChange: (v: string) => void;
 }
+
 const rates = {
     free: {
         id: '4848',
@@ -24,13 +26,15 @@ const rates = {
         desc: 'Указать дату для получение',
     },
 };
-const CardStatus: FC<CardStatusProps> = ({ date = '1.12.2024' }) => {
+const CardStatus: FC<CardStatusProps> = ({ onChange }) => {
     const isSelectedRate = localStorage.getItem('isRate') || rates.free.id;
     const [selectedRate, setSelectedRate] = useState<string>(isSelectedRate);
 
     const handleChangeRate = (e: ChangeEvent<HTMLInputElement>, id: string) => {
+        const value = e.target.value;
         localStorage.setItem('isRate', id);
-        setSelectedRate(e.target.value);
+        onChange(value);
+        setSelectedRate(value);
     };
 
     const { currentTimeStamp, setCurrentDate, getFullDate } = useTime();
@@ -43,7 +47,9 @@ const CardStatus: FC<CardStatusProps> = ({ date = '1.12.2024' }) => {
         const selectedDate = new Date(event.target.value);
     };
 
-    useEffect(() => {}, []);
+    useEffect(() => {
+        onChange(isSelectedRate);
+    }, []);
 
     return (
         <div className={`${styles.cards} `}>

@@ -1,14 +1,7 @@
 import styleFooter from '@/styles/componentsModules/footer.module.scss';
 
 const Footer = () => {
-    const service = [
-        'Bonus program',
-        'Gift cards',
-        'Credit and payment',
-        'Service contracts',
-        'Non-cash account',
-        'Payment',
-    ];
+    const service = ['Bonus program', 'Gift cards', 'Credit and payment', 'Service contracts', 'Non-cash account', 'Payment'];
     const assistance = [
         'Find an order',
         'Terms of delivery',
@@ -24,8 +17,7 @@ const Footer = () => {
                     <div className={styleFooter.column1}>
                         <div className={styleFooter.name}>cyber</div>
                         <div className={styleFooter.desc}>
-                            We are a residential interior design firm located in Portland. Our boutique-studio offers
-                            more than
+                            We are a residential interior design firm located in Portland. Our boutique-studio offers more than
                         </div>
                     </div>
                     <div className={styleFooter.column}>

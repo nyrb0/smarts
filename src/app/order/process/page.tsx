@@ -17,6 +17,8 @@ import Mark from '@/shared/image/gif/mark ok.gif';
 import { useRouter } from 'next/navigation';
 import { usersOrder } from '@/shared/types/order/order.type';
 import Edit from '@/Entities/order/Edit';
+import notificationlGlobalStore from '@/app/store/notificationGlobal/notificationlGlobalStore';
+import { v4 as uuidv4 } from 'uuid';
 
 const Process = () => {
     const [warning, setWarning] = useState<string | null>(null);
@@ -45,6 +47,7 @@ const Process = () => {
             setWarning(null);
         }, ms);
     };
+    const idGeneration = uuidv4;
 
     const router = useRouter();
     const toServerAddress = async (data: typeof addresses) => {
@@ -90,7 +93,6 @@ const Process = () => {
         setIsAddress(false);
         notification(2000);
         toServerAddress(addresses);
-
         setAddresses({
             title: '',
             number: '',
@@ -112,6 +114,19 @@ const Process = () => {
     const nextToStages = () => {
         if (selectedAddress) {
             router.push('/order/process/delivery');
+            notificationlGlobalStore.AddToNotification({
+                id: idGeneration(),
+                title: 'Адресс',
+                status: 'right',
+                desc: 'Успешно выполнено',
+            });
+        } else {
+            notificationlGlobalStore.AddToNotification({
+                id: idGeneration(),
+                title: 'Адресс',
+                status: 'error',
+                desc: 'Выберите адресс для следущего этапа',
+            });
         }
     };
 
