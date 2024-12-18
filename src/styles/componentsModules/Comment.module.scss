@@ -19,8 +19,6 @@
     .right {
         width: 100%;
         .head {
-            display: flex;
-            justify-content: space-between;
             .userName {
                 font-weight: 700;
                 font-size: 17px;
@@ -45,6 +43,8 @@
             font-size: 15px;
             line-height: 160%;
             color: #7e7e7e;
+            max-width: 800px;
+            word-wrap: break-word;
         }
         .delete {
             display: flex;
@@ -52,6 +52,9 @@
         }
         .userDel {
             display: none;
+        }
+        .photos {
+            gap: 10px;
         }
     }
     .inner {

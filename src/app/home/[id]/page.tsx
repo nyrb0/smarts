@@ -3,7 +3,7 @@
 import style from '@/styles/PagesModules/HomeItem.module.scss';
 
 // types
-import { Comments, Phone, ReviewCount } from '@/shared/types/Phones/TypePhone.types';
+import { Comments, Phone, Photos, ReviewCount } from '@/shared/types/Phones/TypePhone.types';
 
 // modules
 import Image from 'next/image';
@@ -83,7 +83,7 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
     const [stars, setStars] = useState(0);
     const [nextStart, setNextStars] = useState(false);
     const [commentValue, setCommentValue] = useState('');
-    const [commentPhoto, setCommetPhoto] = useState<{ id: string; img: string }[]>([]);
+    const [commentPhoto, setCommetPhoto] = useState<Photos[]>([]);
     const userAboutData = user.userData;
     const userCookie = localStorage.getItem('userData1') || '';
     const colors = ['black', 'purple', 'red', 'yellow', 'white'];
@@ -141,6 +141,7 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
     const postComment = async (dataCom: { comment: Comments }, starsStatic?: ReviewCount[]) => {
         try {
             if (!data?.comments) throw new Error('Ошибка при получение предыдущих данных');
+
             fetch(`http://localhost:3000/iphone/${id}`, {
                 method: 'PATCH',
                 headers: {
@@ -188,6 +189,7 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
             warningFunc('Пожалуйста поставьте отзыв от 1 до 5', 1000);
             return;
         }
+
         postComment(
             {
                 comment: {
@@ -195,6 +197,7 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
                     user: userAboutData || null,
                     votesStars: stars,
                     comment: commentValue,
+                    photos: commentPhoto,
                     date: {
                         day: date.getDate(),
                         month: date.getMonth(),

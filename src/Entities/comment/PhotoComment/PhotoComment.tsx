@@ -5,16 +5,18 @@ import { DeleteImageCommentStyled, ImageCommentStyled, TextPhotoStyled, WrapperC
 interface PhotoCommentProps {
     data: string;
     alt: string;
-    deleteClick: () => void;
+    deleteClick?: () => void;
+    isVisibleClose?: boolean;
+    isThisPhoto?: boolean;
 }
 
-const PhotoComment: FC<PhotoCommentProps> = ({ data, alt, deleteClick }) => {
+const PhotoComment: FC<PhotoCommentProps> = ({ data, alt, deleteClick, isVisibleClose = true, isThisPhoto = true }) => {
     return (
         <div>
             <WrapperCommentStyled>
                 <ImageCommentStyled src={data} alt={alt} />
-                <DeleteImageCommentStyled onClick={deleteClick}>X</DeleteImageCommentStyled>
-                <TextPhotoStyled className='dfa'>это фото?</TextPhotoStyled>
+                {isVisibleClose && <DeleteImageCommentStyled onClick={deleteClick}>X</DeleteImageCommentStyled>}
+                {isThisPhoto && <TextPhotoStyled className='dfa'>это фото?</TextPhotoStyled>}
             </WrapperCommentStyled>
         </div>
     );

@@ -71,6 +71,12 @@ export interface Comments {
     comment: string;
     votesStars: number;
     date: Date;
+    photos?: Photos[];
+}
+
+export interface Photos {
+    id: string;
+    img: string;
 }
 export interface Date {
     month: number;
