@@ -2,7 +2,7 @@
 import commentS from '@/styles/componentsModules/Comment.module.scss';
 
 // types
-import { Comments } from '@/shared/types/Phones/TypePhone.types';
+import { Comments, Photos } from '@/shared/types/Phones/TypePhone.types';
 
 // UI
 import { Rating } from '@mui/material';
@@ -23,9 +23,11 @@ interface CommentI {
     com: Comments;
     deleteCom: (c: string) => void;
     userCommnent: string | undefined;
+    onClick: (s: Photos[]) => void;
+    onChangePhotos: (index: number) => void;
 }
 
-const Comment: FC<CommentI> = ({ com, deleteCom, userCommnent }) => {
+const Comment: FC<CommentI> = ({ com, deleteCom, userCommnent, onClick, onChangePhotos }) => {
     const deleteComment = (c: string) => {
         console.log(c);
         deleteCom(c);
@@ -52,8 +54,18 @@ const Comment: FC<CommentI> = ({ com, deleteCom, userCommnent }) => {
                     <MdDelete style={{ opacity: 0.4 }} onClick={() => deleteComment(com.id)} />
                 </div>
                 <div className={`${commentS.photos} df`}>
-                    {com.photos?.map(photo => (
-                        <PhotoComment isThisPhoto={false} isVisibleClose={false} data={photo.img} alt={'фото коммента'} key={photo.id} />
+                    {com.photos?.map((photo, i) => (
+                        <div
+                            key={photo.id}
+                            onClick={() => {
+                                if (com.photos) {
+                                    onClick(com.photos);
+                                }
+                                onChangePhotos(i);
+                            }}
+                        >
+                            <PhotoComment isThisPhoto={false} isVisibleClose={false} data={photo.img} alt={'фото коммента'} />
+                        </div>
                     ))}
                 </div>
             </div>

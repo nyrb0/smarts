@@ -36,6 +36,7 @@ import { currencyChoose } from '@/Features/CurrencyChoose';
 import CurrencyContext, { CurrencyCon } from '@/shared/context/currency/CurrencyContext';
 import Channel from './components/Channel/Channel';
 import PhotoComment from '@/Entities/comment/PhotoComment/PhotoComment';
+import SwiperPhotos from '@/shared/UI/swiperPhotos/SwiperPhotos';
 
 interface PageGlobalDinamic {
     params: {
@@ -84,6 +85,8 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
     const [nextStart, setNextStars] = useState(false);
     const [commentValue, setCommentValue] = useState('');
     const [commentPhoto, setCommetPhoto] = useState<Photos[]>([]);
+    const [currentInitialSlide, setCurrentInitialSlide] = useState<number>(0);
+    const [slidePhoto, setSlidePhoto] = useState<{ slides: Photos[]; isOpen: boolean }>({ slides: [], isOpen: false });
     const userAboutData = user.userData;
     const userCookie = localStorage.getItem('userData1') || '';
     const colors = ['black', 'purple', 'red', 'yellow', 'white'];
@@ -257,6 +260,8 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
     const handleDeleteFilePhoto = (id: string) => {
         setCommetPhoto(prev => prev.filter(p => p.id !== id));
     };
+
+    console.log(slidePhoto);
 
     useEffect(() => {
         getDataDinamic();
@@ -498,7 +503,14 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
             </div>
             <div className={`${style.commentItems} container`}>
                 {data.comments?.map((c, i) => (
-                    <Comment com={c} key={i} deleteCom={deleteComent} userCommnent={userCookie} />
+                    <Comment
+                        onChangePhotos={index => setCurrentInitialSlide(index)}
+                        com={c}
+                        key={i}
+                        deleteCom={deleteComent}
+                        userCommnent={userCookie}
+                        onClick={slide => setSlidePhoto({ slides: slide, isOpen: true })}
+                    />
                 ))}
             </div>
             <Modal isOpen={nextStart} visibleX close={closeStars}>
@@ -525,7 +537,14 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
                     </div>
                 </div>
             </Modal>
-
+            {slidePhoto.isOpen && (
+                <SwiperPhotos
+                    initialSlide={currentInitialSlide}
+                    data={slidePhoto.slides}
+                    onClick={() => setSlidePhoto(prev => ({ ...prev, isOpen: false }))}
+                />
+            )}
+            {/* Блогодорения */}
             <Modal isOpen={thank} visibleX={false}>
                 <div className={`${style.thank} dfc`}>
                     <div>
