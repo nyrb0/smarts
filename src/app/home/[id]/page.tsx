@@ -213,6 +213,8 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
             },
             toParseCategory(stars)
         );
+
+        setCommetPhoto([]);
     };
     const deleteComent = async (c: string) => {
         try {
