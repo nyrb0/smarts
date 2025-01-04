@@ -19,6 +19,8 @@ import { MdDelete } from 'react-icons/md';
 import { months } from '@/Features/month';
 import PhotoComment from './PhotoComment/PhotoComment';
 
+import { MdEdit } from 'react-icons/md';
+
 interface CommentI {
     com: Comments;
     deleteCom: (c: string) => void;
@@ -72,5 +74,4 @@ const Comment: FC<CommentI> = ({ com, deleteCom, userCommnent, onClick, onChange
         </div>
     );
 };
-
 export default Comment;

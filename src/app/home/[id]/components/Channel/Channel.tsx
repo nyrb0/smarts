@@ -7,6 +7,7 @@ import axios from 'axios';
 import { ChannelTypes } from '@/shared/types/channel/Channel.types';
 import user from '@/app/store/user/user';
 import { useRouter } from 'next/navigation';
+import { api } from '@/app/api/axios';
 
 interface ChannelProps {
     id: string;
@@ -20,7 +21,7 @@ const Channel: FC<ChannelProps> = observer(({ id }) => {
 
     useEffect(() => {
         (async () => {
-            const data = await axios(`/api/channel/${id}`);
+            const data = await api(`/api/channel/${id}`);
             setData(data.data);
         })();
     }, []);

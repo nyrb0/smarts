@@ -37,26 +37,16 @@ import CurrencyContext, { CurrencyCon } from '@/shared/context/currency/Currency
 import Channel from './components/Channel/Channel';
 import PhotoComment from '@/Entities/comment/PhotoComment/PhotoComment';
 import SwiperPhotos from '@/shared/UI/swiperPhotos/SwiperPhotos';
+import { api } from '@/app/api/axios';
+import BlockCharacteristic from './components/BlockCharacteristic';
+import axios from 'axios';
+import CircleColorsButton from './components/CircleColorsButton';
 
 interface PageGlobalDinamic {
     params: {
         id: string;
     };
 }
-type CircleColorsType = {
-    color: string;
-};
-
-const CircleColors = styled.div<CircleColorsType>`
-    background: ${props => props.color};
-    border-radius: 50%;
-    width: 32px;
-    height: 32px;
-    margin-right: 8px;
-    &:hover {
-        outline: 1.3px solid black;
-    }
-`;
 
 const CurrencyComponent: FC<{ data: Phone }> = ({ data }) => {
     const context = useContext(CurrencyCon);
@@ -89,7 +79,6 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
     const [slidePhoto, setSlidePhoto] = useState<{ slides: Photos[]; isOpen: boolean }>({ slides: [], isOpen: false });
     const userAboutData = user.userData;
     const userCookie = localStorage.getItem('userData1') || '';
-    const colors = ['black', 'purple', 'red', 'yellow', 'white'];
     const storages = ['128', '256', '512', '1024'];
     const date = new Date();
 
@@ -129,8 +118,8 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
     };
     async function getDataDinamic() {
         try {
-            const res = await fetch(`http://localhost:3000/iphone/${id}`);
-            const jsonData = await res.json();
+            const res = await axios(`http://localhost:3000/iphone/${id}`);
+            const jsonData = await res.data;
             setData(jsonData);
         } catch (err) {
             throw new Error('Error server backEnd:');
@@ -144,26 +133,21 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
     const postComment = async (dataCom: { comment: Comments }, starsStatic?: ReviewCount[]) => {
         try {
             if (!data?.comments) throw new Error('Ошибка при получение предыдущих данных');
-
-            fetch(`http://localhost:3000/iphone/${id}`, {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
+            axios
+                .patch(`http://localhost:3000/iphone/${id}`, {
                     comments: [...data?.comments, dataCom.comment],
                     review: starsStatic,
-                }),
-            }).then(res => {
-                if (!res.ok) {
-                    throw new Error(`Ошибка сервера ${res.status}`);
-                } else {
-                    closeStars();
-                    setCommentValue('');
-                    getDataDinamic();
-                    thankUser(1500);
-                }
-            });
+                })
+                .then(res => {
+                    if (res.status !== 200) {
+                        throw new Error(`Ошибка сервера ${res.status}`);
+                    } else {
+                        closeStars();
+                        setCommentValue('');
+                        getDataDinamic();
+                        thankUser(1500);
+                    }
+                });
         } catch (e) {
             throw e;
         }
@@ -219,14 +203,8 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
     const deleteComent = async (c: string) => {
         try {
             const filterComment = await data?.comments.filter(f => f.id !== c);
-            const res = await fetch(`http://localhost:3000/iphone/${id}`, {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ comments: filterComment }),
-            });
-            if (res.ok) {
+            const res = await axios.patch(`http://localhost:3000/iphone/${id}`, { comments: filterComment });
+            if (res.status === 200) {
                 console.log('Успешно выполнено:', res);
                 getDataDinamic();
             }
@@ -329,7 +307,7 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
                             {Object.keys(data.image).map(c => {
                                 return (
                                     c !== 'url' && (
-                                        <CircleColors
+                                        <CircleColorsButton
                                             key={c}
                                             color={c}
                                             onClick={() => {
@@ -360,72 +338,12 @@ const PageGlobalItem: FC<PageGlobalDinamic> = observer(({ params: { id } }) => {
                         </div>
                         <div className={style.moreInformation}>
                             <div className={style.itemInfo}>
-                                <div className={`${style.item} dfca`}>
-                                    <div className={style.img}>
-                                        <Image src={CPUicon} alt='GPU icon' />
-                                    </div>
-                                    <div className={style.charec}>
-                                        <div className={style.chapter}>CPU</div>
-                                        <div className={style.value}>{data.processor}</div>
-                                    </div>
-                                </div>
-                                <div className={`${style.item} dfca`}>
-                                    <div className={style.img}>
-                                        <Image src={CameraIcon} alt='Main camera' />
-                                    </div>
-                                    <div className={style.charec}>
-                                        <div className={style.chapter}>CPU</div>
-                                        <div className={style.value}>{data.camera}</div>
-                                    </div>
-                                </div>
-                                <div className={`${style.item} dfca`}>
-                                    <div className={style.img}>
-                                        <Image src={BatteryIcon} alt='battery icon' />
-                                    </div>
-                                    <div className={style.charec}>
-                                        <div className={style.chapter}>Batter capacity</div>
-                                        <div className={style.value}>
-                                            {data.battery}
-                                            mAh
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className={`${style.item} dfca`}>
-                                    <div className={style.img}>
-                                        <Image src={BatteryIcon} alt='battery icon' />
-                                    </div>
-                                    <div className={style.charec}>
-                                        <div className={style.chapter}>Batter capacity</div>
-                                        <div className={style.value}>
-                                            {data.battery}
-                                            mAh
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className={`${style.item} dfca`}>
-                                    <div className={style.img}>
-                                        <Image src={BatteryIcon} alt='battery icon' />
-                                    </div>
-                                    <div className={style.charec}>
-                                        <div className={style.chapter}>Batter capacity</div>
-                                        <div className={style.value}>
-                                            {data.battery}
-                                            mAh
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className={`${style.item} dfca`}>
-                                    <div className={style.img}>
-                                        <Image src={BatteryIcon} alt='battery icon' />
-                                    </div>
-                                    <div className={style.charec}>
-                                        <div className={style.chapter}>Batter capacity</div>
-                                        <div className={style.value}>
-                                            {data.battery}
-                                            mAh
-                                        </div>
-                                    </div>
-                                </div>
+                                <BlockCharacteristic desc={data.processor} img={CPUicon} title={'CPU'} alt='GPU icon' />
+                                <BlockCharacteristic desc={data.camera} img={CameraIcon} title={'Camera'} alt='Main camera' />
+                                <BlockCharacteristic desc={`${data.battery} mAh`} img={BatteryIcon} title={'v fh'} alt='battery icon' />
+                                <BlockCharacteristic desc={`${data.battery} mAh`} img={BatteryIcon} title={''} alt='battery icon' />
+                                <BlockCharacteristic desc={`${data.battery} mAh`} img={BatteryIcon} title={''} alt='battery icon' />
+                                <BlockCharacteristic desc={`${data.battery} mAh`} img={BatteryIcon} title={''} alt='battery icon' />
                             </div>
                             <div className={style.desc}>
                                 Apple iPhone 16 Pro Max - это новинка, которая безусловно привлечет внимание ценителей высокотехнологичных гаджетов.
